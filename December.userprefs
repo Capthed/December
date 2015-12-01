@@ -1,0 +1,14 @@
+﻿<Properties StartupItem="Abyss\Abyss.csproj">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug|x86" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Debug\Debug.cs">
+    <Files>
+      <File FileName="Debug\Debug.cs" Line="8" Column="81" />
+      <File FileName="Abyss\Abyss.cs" Line="27" Column="31" />
+      <File FileName="Abyss\GameLoop.cs" Line="7" Column="3" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+</Properties>
