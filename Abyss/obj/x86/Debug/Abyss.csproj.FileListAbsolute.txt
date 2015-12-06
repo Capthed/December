@@ -5,3 +5,10 @@ C:\Users\Toni\Desktop\December\Abyss\bin\Debug\Debug.pdb
 C:\Users\Toni\Desktop\December\Abyss\obj\x86\Debug\Abyss.csprojResolveAssemblyReference.cache
 C:\Users\Toni\Desktop\December\Abyss\obj\x86\Debug\Abyss.exe
 C:\Users\Toni\Desktop\December\Abyss\obj\x86\Debug\Abyss.pdb
+C:\Users\Toni\Desktop\Github\December\Abyss\obj\x86\Debug\Abyss.csprojResolveAssemblyReference.cache
+C:\Users\Toni\Desktop\Github\December\Abyss\obj\x86\Debug\Abyss.exe
+C:\Users\Toni\Desktop\Github\December\Abyss\bin\Debug\Abyss.exe
+C:\Users\Toni\Desktop\Github\December\Abyss\bin\Debug\Abyss.pdb
+C:\Users\Toni\Desktop\Github\December\Abyss\bin\Debug\Debug.dll
+C:\Users\Toni\Desktop\Github\December\Abyss\bin\Debug\Debug.pdb
+C:\Users\Toni\Desktop\Github\December\Abyss\obj\x86\Debug\Abyss.pdb

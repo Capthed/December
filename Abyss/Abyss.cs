@@ -13,20 +13,29 @@ namespace Capthed.Abyss {
 
 		public static void Main () {	
 			Debug.DEBUG = true;
+			SetFps (120);
 
 			// init engine non-context stuff
 
 			Start();
 		}
 
-		private static void Start() {
+		public static void Start() {
 			GameLoop.IsAlive = true;
 			MAIN_LOOP.Start ();
 		}
 
-		private static void Stop() {
+		public static void Stop(bool kill) {
 			GameLoop.IsAlive = false;
+
+			if (kill)
+				System.Environment.Exit (0);
 			// close thread?
+		}
+
+		// Temporary set of fps.
+		public static void SetFps(int fps) {
+			GameLoop.Fps = fps;
 		}
 	}
 }

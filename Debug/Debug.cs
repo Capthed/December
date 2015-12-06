@@ -14,7 +14,7 @@ namespace Capthed.Util {
 			if (!DEBUG)
 				return;
 
-			Console.Write (t.ToString() + (newLine ? "\n" : ""));
+			Console.Write (txt + t.ToString() + (newLine ? "\n" : ""));
 		}
 
 		// Prints the txt followed by every element in t with a with/without new line after
