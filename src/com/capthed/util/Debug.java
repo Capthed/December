@@ -12,6 +12,12 @@ public abstract class Debug {
 		System.out.println(t.toString() + txt);
 	}
 	
+	public static <T> void printsl(T t, String txt) {
+		if (!debug) return;
+		
+		System.out.print(t.toString() + txt);
+	}
+	
 	public static <T> void print(ArrayList<T> list, String txt) {
 		if (!debug) return;
 		
