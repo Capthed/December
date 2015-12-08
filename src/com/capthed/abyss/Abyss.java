@@ -17,4 +17,8 @@ public abstract class Abyss {
 		GameLoop.setAlive(true);
 		MAIN_LOOP_THREAD.start();
 	}
+	
+	public static void stop() {
+		GameLoop.setAlive(false);
+	}
 }

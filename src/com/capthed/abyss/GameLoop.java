@@ -1,5 +1,8 @@
 package com.capthed.abyss;
 
+import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.gfx.RenderDebug;
+import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -26,6 +29,9 @@ public class GameLoop implements Runnable {
 		int fpsCount = 0;
 		long timeCount = 0;
 		while(isAlive) {
+			if (Display.isCloseRequested())
+				Abyss.stop(); //TODO:
+			
 			lastTime = startTime;
 			startTime = Timer.getTime ();
 			elapsedTime += (startTime - lastTime);
@@ -69,11 +75,26 @@ public class GameLoop implements Runnable {
 
 	private static void init() {}
 	
-	private static void update() {}
+	private static void update() {
+		Display.wtf(); // TODO: input
+	}
 	
-	private static void render() {}
+	private static void render() {
+		RenderUtil.clearScreen();
+		
+		
+		RenderDebug.church();
+				
+		
+		Display.swap();
+	}
 	
-	private static void initSubsystems() {}
+	private static void initSubsystems() {
+		Display.create(800, 600, "Hello World!");
+		
+		RenderUtil.init2DGL(800, 600);	
+		RenderUtil.setClearColor(0, 0, 0, 1);	
+	}
 
 	public static boolean isAlive() {
 		return isAlive;
