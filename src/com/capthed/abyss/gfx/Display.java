@@ -12,11 +12,13 @@ public abstract class Display {
 	private static long display;
 	private static GLFWKeyCallback keyCallback;
 	
-	public static void create(int w, int h, String title) {
+	public static void create(int w, int h, String title, boolean decorated) {
 		glfwInit();
 		
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
+		
+		glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
 		
 		display = glfwCreateWindow(w, h, title, NULL, NULL);
 		if (display == NULL)

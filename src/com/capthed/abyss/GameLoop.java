@@ -90,7 +90,7 @@ public class GameLoop implements Runnable {
 	}
 	
 	private static void initSubsystems() {
-		Display.create(800, 600, "Hello World!");
+		Display.create(800, 600, "Hello World!", true);
 		
 		RenderUtil.init2DGL(800, 600);	
 		RenderUtil.setClearColor(0, 0, 0, 1);	
