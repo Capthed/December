@@ -3,14 +3,13 @@ package com.capthed.abyss.gfx;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import org.lwjgl.glfw.GLFWKeyCallback;
-
+import com.capthed.abyss.input.Keyboard;
 import com.capthed.util.Debug;
 
 public abstract class Display {
 
 	private static long display;
-	private static GLFWKeyCallback keyCallback;
+	private static boolean showMouse = true;
 	
 	public static void create(int w, int h, String title, boolean decorated) {
 		glfwInit();
@@ -26,17 +25,13 @@ public abstract class Display {
 		
 		
 		// TODO: edit when input is considered
-		glfwSetKeyCallback(display, keyCallback = new GLFWKeyCallback() {
-            @Override
-            public void invoke(long window, int key, int scancode, int action, int mods) {
-                if ( key == GLFW_KEY_ESCAPE && action == GLFW_RELEASE )
-                    glfwSetWindowShouldClose(window, GLFW_TRUE);
-            }
-        });
+		glfwSetKeyCallback(display, new Keyboard());
 		
 		glfwSetWindowPos(display, 200, 200);
 		
 		glfwMakeContextCurrent(display);
+		
+		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
 		
 		glfwShowWindow(display);
 	}
@@ -48,9 +43,16 @@ public abstract class Display {
 	public static boolean isCloseRequested() {
 		return glfwWindowShouldClose(display) == GLFW_TRUE ? true : false;
 	}
-	
-	// TODO:
-	public static void wtf() {
-		glfwPollEvents();
+
+	public static boolean isShowMouse() {
+		return showMouse;
+	}
+
+	public static void setShowMouse(boolean showMouse) {
+		Display.showMouse = showMouse;
+	}
+
+	public static long getDisplay() {
+		return display;
 	}
 }

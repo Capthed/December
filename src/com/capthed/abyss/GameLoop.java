@@ -3,6 +3,10 @@ package com.capthed.abyss;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
+import com.capthed.abyss.input.Input;
+import com.capthed.abyss.input.Keyboard;
+import com.capthed.abyss.input.Keys;
+import com.capthed.abyss.input.Mouse;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -69,14 +73,23 @@ public class GameLoop implements Runnable {
 				Debug.print("Running for " + Timer.getTimeRunning(), " ms");		
 				Debug.print("", "");
 			}
-
 		}
 	}
 
 	private static void init() {}
 	
 	private static void update() {
-		Display.wtf(); // TODO: input
+		Input.pollEvents();
+		
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_SPACE) && Keyboard.isKeyPressed(Keys.GLFW_KEY_A))
+			Debug.print("je", "");
+		
+		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_1))
+			Debug.print(Keys.GLFW_MOUSE_BUTTON_1, " GLFW_MOUSE_BUTTON_1");
+		
+		Debug.print(Mouse.getX(), " x");
+		
+		Input.postProcess();
 	}
 	
 	private static void render() {
@@ -94,6 +107,8 @@ public class GameLoop implements Runnable {
 		
 		RenderUtil.init2DGL(800, 600);	
 		RenderUtil.setClearColor(0, 0, 0, 1);	
+		
+		Input.init();
 	}
 
 	public static boolean isAlive() {
