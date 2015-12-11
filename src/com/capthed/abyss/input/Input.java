@@ -14,6 +14,7 @@ public abstract class Input {
 		Mouse.postProcess();
 	}
 	
+	/** Polls events from GLFW. Called once in the game loop. */
 	public static void pollEvents() {
 		glfwPollEvents();
 	}

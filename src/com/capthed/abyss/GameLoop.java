@@ -19,6 +19,7 @@ public class GameLoop implements Runnable {
 	private static int currFps, currUps;
 	private static int msRenderPerSecond = 1000 / fps;
 	
+	/** The main game loop. */
 	public void run() {
 		Debug.print("", "Main game loop started");
 		
@@ -76,6 +77,7 @@ public class GameLoop implements Runnable {
 		}
 	}
 
+	/** Calls the init methods of GameComponents*/
 	private static void init() {}
 	
 	private static void update() {
@@ -102,6 +104,7 @@ public class GameLoop implements Runnable {
 		Display.swap();
 	}
 	
+	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
 		Display.create(800, 600, "Hello World!", true);
 		
@@ -111,6 +114,7 @@ public class GameLoop implements Runnable {
 		Input.init();
 	}
 
+	/** @return True if the game loop is running. */
 	public static boolean isAlive() {
 		return isAlive;
 	}
@@ -119,6 +123,7 @@ public class GameLoop implements Runnable {
 		GameLoop.isAlive = isAlive;
 	}
 
+	/** @return The preferred FPS. */
 	public static int getFps() {
 		return fps;
 	}
@@ -128,14 +133,17 @@ public class GameLoop implements Runnable {
 		msRenderPerSecond = 1000 / fps;
 	}
 
+	/** @return The actual FPS of the previous second */
 	public static int getCurrFps() {
 		return currFps;
 	}
 
+	/** @return The actual UPS of the previous second */
 	public static int getCurrUps() {
 		return currUps;
 	}
 
+	/**@return The fixed UPS. */
 	public static int getUps() {
 		return UPS;
 	}

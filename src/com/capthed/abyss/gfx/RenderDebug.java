@@ -4,7 +4,7 @@ import static org.lwjgl.opengl.GL11.*;
 
 public abstract class RenderDebug {
 	
-	// The coordinates of the begining + the width and height
+	/** Draws a quad on the screen with the start coordinates and the width and height */
 	public static void quad(float x, float y, float w, float h) {
 		glBegin(GL_QUADS);
 		{
@@ -16,7 +16,7 @@ public abstract class RenderDebug {
 		glEnd();
 	}
 	
-	// The coordiantes of all 3 points
+	/** Draws a triangle on the screen with the coordinates of all the three points. */
 	public static void triangle(float x, float y, float x1, float y1, float x2, float y2) {	
 		glBegin(GL_TRIANGLES);
 		{
@@ -27,7 +27,7 @@ public abstract class RenderDebug {
 		glEnd();
 	}
 	
-	// The coordinates of the two line points and the width of the line
+	/** Draws a line on the screen with the coordinates of the two points and the line width. */
 	public static void line(float x, float y, float x1, float y1, float w) {
 		glBegin(GL_LINES);
 		{
@@ -38,12 +38,12 @@ public abstract class RenderDebug {
 		glEnd();
 	}
 	
-	// Changes the color for ALL OF OPENGL!
+	/** Changes the render color for all of OpenGL. WARNING - set back to (1, 1, 1, 1) after each use. */
 	public static void setColor(float r, float g, float b, float a) {
 		glColor4f(r, g, b, a);
 	}
 	
-	// Fuck you
+	/** Fuck you */
 	public static void church() {
 		RenderDebug.setColor(0.870588f, 0.721569f, 0.529412f, 1);
 		RenderDebug.quad(50, 50, 64, 64);

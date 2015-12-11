@@ -13,11 +13,13 @@ public abstract class Abyss {
 		start();
 	}
 	
+	/** Starts the game thread */
 	private static void start() {
 		GameLoop.setAlive(true);
 		MAIN_LOOP_THREAD.start();
 	}
 	
+	/** Stops the game thread */
 	public static void stop() {
 		GameLoop.setAlive(false);
 	}

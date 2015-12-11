@@ -11,6 +11,7 @@ public abstract class Display {
 	private static long display;
 	private static boolean showMouse = true;
 	
+	/** Creates the display with the position, title and use of borders and decorations. */
 	public static void create(int w, int h, String title, boolean decorated) {
 		glfwInit();
 		
@@ -36,14 +37,17 @@ public abstract class Display {
 		glfwShowWindow(display);
 	}
 	
+	/** Swaps the display buffer. Called once in the game loop. */
 	public static void swap() {
 		 glfwSwapBuffers(display);
 	}
 	
+	/** @return True if the display is closing */
 	public static boolean isCloseRequested() {
 		return glfwWindowShouldClose(display) == GLFW_TRUE ? true : false;
 	}
 
+	/** @return True if the mouse is visible */
 	public static boolean isShowMouse() {
 		return showMouse;
 	}
@@ -52,6 +56,7 @@ public abstract class Display {
 		Display.showMouse = showMouse;
 	}
 
+	/** @return The GLFW Window long. */
 	public static long getDisplay() {
 		return display;
 	}

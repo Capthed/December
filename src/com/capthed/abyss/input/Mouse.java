@@ -33,6 +33,7 @@ public class Mouse {
 		}
 	}
 	
+	/** @return True if the key is held down. */
 	public static boolean isKeyDown(int key) {
 		boolean check = glfwGetMouseButton(Display.getDisplay(), key) == GLFW_PRESS ? true : false;
 		keysDown[key] = check;
@@ -40,6 +41,10 @@ public class Mouse {
 		return check;
 	}
 	
+	/** 
+	 * @return True if the key is pressed. Returns true just the frame that the key was clicked and false until
+	 * it is released and clicked again.
+	 */
 	public static boolean isKeyPressed(int key) {
 		boolean check = glfwGetMouseButton(Display.getDisplay(), key) == GLFW_PRESS ? true : false;
 		
@@ -61,6 +66,7 @@ public class Mouse {
 	
 	// TODO: Vec2 pos
 	
+	/** @return The x position of the mouse on the screen. */
 	public static float getX() {
 		updatePos();
 		x.rewind();
@@ -68,6 +74,7 @@ public class Mouse {
 		return (float)x.get();
 	}
 	
+	/** @return The y position of the mouse on the screen. */
 	public static float getY() {
 		updatePos();
 		y.rewind();

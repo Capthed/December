@@ -10,15 +10,15 @@ public abstract class Timer {
 		startTime = getTime();
 	}
 	
-	// Returns tje current time in ms
+	/** @return The current time in ms */
 	public static long getTime() { return System.currentTimeMillis(); }
 	
-	// Returns the time passed from last frame to this one
+	/** @return The time passed from last frame to this one */
 	public static long getDelta() { return delta; }
 	
 	static void setDelta(long d) { delta = d; }
 
-	// Returns the time passed since the program has been started in ms
+	/** @return The time passed since the program has been started in ms */
 	public static long getTimeRunning() {
 		return getTime() - startTime;
 	}

@@ -31,10 +31,15 @@ public class Keyboard extends GLFWKeyCallback {
 			keysPressed[key] = 0;
 	}
 	
+	/** @return True if the key is held down. */
 	public static boolean isKeyDown(int key) {	
 		return keysDown[key];
 	}
 	
+	/** 
+	 * @return True if the key is pressed. Returns true just the frame that the key was clicked and false until
+	 * it is released and clicked again.
+	 */
 	public static boolean isKeyPressed(int key) {
 		return keysPressed[key] == 1 ? true : false;
 	}

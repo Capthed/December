@@ -6,6 +6,7 @@ import org.lwjgl.opengl.GL;
 
 public abstract class RenderUtil {
 
+	/** Initializes all of OpenGL used for 2D graphics. */
 	public static void init2DGL(int w, int h) {
 		GL.createCapabilities();
 		
@@ -22,10 +23,12 @@ public abstract class RenderUtil {
 		glViewport(0, 0, w, h);
 	}
 	
+	/** Set the clear color of OpenGL. */
 	public static void setClearColor(float r, float g, float b, float a) {
 		glClearColor(r, g, b, a);
 	}
 	
+	/** Clear OpenGL buffers. */
 	public static void clearScreen() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
