@@ -3,6 +3,8 @@ package com.capthed.abyss.gfx;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+import org.lwjgl.glfw.GLFWVidMode;
+
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.util.Debug;
 
@@ -27,12 +29,14 @@ public abstract class Display {
 		display = glfwCreateWindow(w, h, title, NULL, NULL);
 		if (display == NULL)
 			Debug.print("Display not created", "");
-		
-		
-		// TODO: edit when input is considered
+
 		glfwSetKeyCallback(display, new Keyboard());
 		
 		glfwSetWindowPos(display, 200, 200);
+		
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		
+		glfwSetWindowPos (display, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2);
 		
 		glfwMakeContextCurrent(display);
 		

@@ -125,7 +125,7 @@ public class GameLoop implements Runnable {
 	
 	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
-		Display.create(w, h, title, true);
+		Display.create(w, h, title, false);
 		Abyss.getGame().init();
 		Display.show();
 		
