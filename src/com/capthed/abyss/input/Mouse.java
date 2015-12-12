@@ -71,7 +71,7 @@ public class Mouse {
 		updatePos();
 		x.rewind();
 		
-		return (float)x.get();
+		return (float)(x.get());
 	}
 	
 	/** @return The y position of the mouse on the screen. */
@@ -79,7 +79,7 @@ public class Mouse {
 		updatePos();
 		y.rewind();
 		
-		return (float)x.get();
+		return (float)(Display.getHeight() - y.get());
 	}
 	
 	static void postProcess() {

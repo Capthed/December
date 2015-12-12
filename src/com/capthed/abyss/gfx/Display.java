@@ -10,9 +10,13 @@ public abstract class Display {
 
 	private static long display;
 	private static boolean showMouse = true;
+	private static int width, height;
 	
 	/** Creates the display with the position, title and use of borders and decorations. */
 	public static void create(int w, int h, String title, boolean decorated) {
+		width = w;
+		height = h;
+		
 		glfwInit();
 		
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
@@ -33,7 +37,9 @@ public abstract class Display {
 		glfwMakeContextCurrent(display);
 		
 		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
-		
+	}
+	
+	public static void show() {	
 		glfwShowWindow(display);
 	}
 	
@@ -59,5 +65,13 @@ public abstract class Display {
 	/** @return The GLFW Window long. */
 	public static long getDisplay() {
 		return display;
+	}
+
+	public static int getWidth() {
+		return width;
+	}
+
+	public static int getHeight() {
+		return height;
 	}
 }

@@ -1,5 +1,7 @@
 package com.capthed.abyss;
 
+import com.capthed.abyss.component.GameComponent;
+import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
@@ -14,10 +16,18 @@ public class GameLoop implements Runnable {
 	// This cannot be changed or the game logic will break
 	private static final int UPS = 60;
 	
+	private static int w, h;
+	private static String title;
 	private static boolean isAlive = false;
 	private static int fps = 120;
 	private static int currFps, currUps;
 	private static int msRenderPerSecond = 1000 / fps;
+	
+	public GameLoop(int w, int h, String title) {
+		GameLoop.w = w;
+		GameLoop.h = h;
+		GameLoop.title = title;
+	}
 	
 	/** The main game loop. */
 	public void run() {
@@ -71,32 +81,41 @@ public class GameLoop implements Runnable {
 				Debug.print ("FPS: " + currFps, "");
 				Debug.print ("UPS: " + currUps, "");
 				Debug.print(Timer.getDelta(), " delta");
-				Debug.print("Running for " + Timer.getTimeRunning(), " ms");		
+				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
 				Debug.print("", "");
 			}
 		}
 	}
 
 	/** Calls the init methods of GameComponents*/
-	private static void init() {}
+	private static void init() {
+		for (int i = 0; i < GameComponent.gcs.size(); i++) {
+			GameComponent gc = GameComponent.gcs.get(i);
+			
+			if (!gc.isInit()) {
+				gc.init();
+				gc.setInit(true);
+				Debug.print(gc, " initialized");
+			}
+		}
+	}
 	
 	private static void update() {
 		Input.pollEvents();
 		
-		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_SPACE) && Keyboard.isKeyPressed(Keys.GLFW_KEY_A))
-			Debug.print("je", "");
-		
-		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_1))
-			Debug.print(Keys.GLFW_MOUSE_BUTTON_1, " GLFW_MOUSE_BUTTON_1");
-		
-		Debug.print(Mouse.getX(), " x");
+		for (int i = 0; i < GameComponent.gcs.size(); i++) 
+			GameComponent.gcs.get(i).update();	
 		
 		Input.postProcess();
 	}
 	
+	@SuppressWarnings("deprecation")
 	private static void render() {
 		RenderUtil.clearScreen();
 		
+		for (int i = 0; i < GameComponent.gcs.size(); i++) 
+			if (GameComponent.gcs.get(i) instanceof GameObject)
+				GameComponent.gcs.get(i).render();
 		
 		RenderDebug.church();
 				
@@ -106,9 +125,11 @@ public class GameLoop implements Runnable {
 	
 	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
-		Display.create(800, 600, "Hello World!", true);
+		Display.create(w, h, title, true);
+		Abyss.getGame().init();
+		Display.show();
 		
-		RenderUtil.init2DGL(800, 600);	
+		RenderUtil.init2DGL(w, h);	
 		RenderUtil.setClearColor(0, 0, 0, 1);	
 		
 		Input.init();

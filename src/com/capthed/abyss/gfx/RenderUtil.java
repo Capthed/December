@@ -32,4 +32,9 @@ public abstract class RenderUtil {
 	public static void clearScreen() {
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	}
+	
+	/** Changes the render color for all of OpenGL. WARNING - set back to (1, 1, 1, 1) after each use. */
+	public static void setColor(float r, float g, float b, float a) {
+		glColor4f(r, g, b, a);
+	}
 }

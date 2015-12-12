@@ -4,23 +4,35 @@ import com.capthed.util.Debug;
 
 public abstract class Abyss {
 
-	private static final Thread MAIN_LOOP_THREAD = new Thread(new GameLoop());
+	private static Thread mainGameLoop;
+	private static Game game;
+	private static int w, h;
 	
-	public static void main(String[] args) {
+	public static void create(String title, int w, int h, Game game) {
+		Abyss.game = game;
+		Abyss.w = w;
+		Abyss.h = h;
+		
+		mainGameLoop = new Thread(new GameLoop(w, h, title));
+		
 		Debug.setDebug(true);
 		Timer.start();
-		
-		start();
 	}
 	
 	/** Starts the game thread */
-	private static void start() {
+	public static void start() {
+		if (game == null) {
+			Debug.err("Game not created. Call Abyss.create(Game)");
+		}
+		
 		GameLoop.setAlive(true);
-		MAIN_LOOP_THREAD.start();
+		mainGameLoop.start();
 	}
 	
 	/** Stops the game thread */
 	public static void stop() {
 		GameLoop.setAlive(false);
 	}
+	
+	public static Game getGame() { return game; }
 }

@@ -38,19 +38,14 @@ public abstract class RenderDebug {
 		glEnd();
 	}
 	
-	/** Changes the render color for all of OpenGL. WARNING - set back to (1, 1, 1, 1) after each use. */
-	public static void setColor(float r, float g, float b, float a) {
-		glColor4f(r, g, b, a);
-	}
-	
 	/** Fuck you */
 	public static void church() {
-		RenderDebug.setColor(0.870588f, 0.721569f, 0.529412f, 1);
+		RenderUtil.setColor(0.870588f, 0.721569f, 0.529412f, 1);
 		RenderDebug.quad(50, 50, 64, 64);
-		RenderDebug.setColor(1, 0, 0, 1);
+		RenderUtil.setColor(1, 0, 0, 1);
 		RenderDebug.triangle(50, 114, 82, 200, 114, 114);	
 		RenderDebug.line(82, 200, 82, 250, 4);
 		RenderDebug.line(60, 230, 104, 230, 4);
-		RenderDebug.setColor(1, 1, 1, 1);
+		RenderUtil.setColor(1, 1, 1, 1);
 	}
 }
