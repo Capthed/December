@@ -4,14 +4,16 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.GL;
 
+
 public abstract class RenderUtil {
 
 	/** Initializes all of OpenGL used for 2D graphics. */
 	public static void init2DGL(int w, int h) {
 		GL.createCapabilities();
 		
+		glEnable(GL_TEXTURE_2D);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-		
+			
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
 		glOrtho(0, w, 0, h, -100, 100);

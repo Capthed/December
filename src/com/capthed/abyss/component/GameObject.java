@@ -1,12 +1,14 @@
 package com.capthed.abyss.component;
 
 import com.capthed.abyss.gfx.RenderDebug;
+import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
 
 public abstract class GameObject extends GameComponent {
 
 	protected Vec2 pos;
 	protected Vec2 size;
+	protected Texture tex;
 	
 	// TODO: add texture and physics
 	
@@ -15,6 +17,14 @@ public abstract class GameObject extends GameComponent {
 		
 		this.pos = pos;
 		this.size = size;
+	}
+	
+	public GameObject(Vec2 pos, Vec2 size, Texture tex) {
+		super();
+		
+		this.pos = pos;
+		this.size = size;
+		this.tex = tex;
 	}
 	
 	public void render() {
@@ -32,5 +42,13 @@ public abstract class GameObject extends GameComponent {
 
 	public Vec2 getPos() {
 		return pos;
+	}
+
+	public Texture getTex() {
+		return tex;
+	}
+
+	public void setTex(Texture tex) {
+		this.tex = tex;
 	}
 }

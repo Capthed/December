@@ -2,12 +2,15 @@ package com.capthed.game;
 
 import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.Entity;
+import com.capthed.abyss.gfx.Render;
+import com.capthed.abyss.gfx.RenderDebug;
+import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
 
-public class Test1 extends Entity{
+public class Test1 extends Entity {	
 	
-	public Test1(Vec2 pos, Vec2 size) {
-		super(pos, size);
+	public Test1(Vec2 pos, Vec2 size, Texture tex) {
+		super(pos, size, tex);
 	}
 	
 	public void update() {
@@ -18,9 +21,11 @@ public class Test1 extends Entity{
 		double x = A * Math.sin(val * Math.PI);
 		double y = A1 * Math.cos(val * Math.PI);
 		
-		/*Debug.print(x, " sin");
-		Debug.print(val, " val");*/
-		
 		move(new Vec2((float)x, (float)y));
+	}
+	
+	public void render() {
+		Render.quadtTex(this);
+		RenderDebug.church();
 	}
 }

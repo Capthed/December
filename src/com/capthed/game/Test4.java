@@ -2,14 +2,20 @@ package com.capthed.game;
 
 import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.Entity;
+import com.capthed.abyss.gfx.Render;
+import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.math.Vec2;
 
 public class Test4 extends Entity {
 
-	public Test4(Vec2 pos, Vec2 size) {
-		super(pos, size);
+	public Test4(Vec2 pos, Vec2 size, Texture tex) {
+		super(pos, size, tex);
+	}
+	
+	public void render() {
+		Render.quadtTex(this);
 	}
 	
 	public void update() {

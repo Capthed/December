@@ -6,9 +6,6 @@ import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.input.Input;
-import com.capthed.abyss.input.Keyboard;
-import com.capthed.abyss.input.Keys;
-import com.capthed.abyss.input.Mouse;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -125,12 +122,14 @@ public class GameLoop implements Runnable {
 	
 	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
-		Display.create(w, h, title, false);
-		Abyss.getGame().init();
+		Display.create(w, h, title, true);
+		
 		Display.show();
 		
 		RenderUtil.init2DGL(w, h);	
 		RenderUtil.setClearColor(0, 0, 0, 1);	
+		
+		Abyss.getGame().init();
 		
 		Input.init();
 	}
