@@ -1,7 +1,6 @@
 package com.capthed.game;
 
 import com.capthed.abyss.component.GameObject;
-import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.math.Vec2;
 
 public class Test3 extends GameObject {
@@ -18,9 +17,5 @@ public class Test3 extends GameObject {
 		/*r = (float)rand.nextGaussian() + 0.2f;
 		g = (float)rand.nextGaussian() + 0.2f;
 		b = (float)rand.nextGaussian() + 0.2f;*/
-	}
-	
-	public void render() {
-		Render.quadtTex(this);
 	}
 }

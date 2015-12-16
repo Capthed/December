@@ -86,10 +86,11 @@ public class GameLoop implements Runnable {
 
 	/** Calls the init methods of GameComponents*/
 	private static void init() {
-		for (int i = 0; i < GameComponent.gcs.size(); i++) {
-			GameComponent gc = GameComponent.gcs.get(i);
+
+		for (int i = 0; i < GameComponent.getGcs().size(); i++) {
+			GameComponent gc = GameComponent.getGcs().get(i);
 			
-			if (!gc.isInit()) {
+			if (!gc.isInit() && gc.isEnabled() && !gc.isNull()) {
 				gc.init();
 				gc.setInit(true);
 				Debug.print(gc, " initialized");
@@ -100,8 +101,12 @@ public class GameLoop implements Runnable {
 	private static void update() {
 		Input.pollEvents();
 		
-		for (int i = 0; i < GameComponent.gcs.size(); i++) 
-			GameComponent.gcs.get(i).update();	
+		for (int i = 0; i < GameComponent.getGcs().size(); i++) {
+			GameComponent gc = GameComponent.getGcs().get(i);
+			
+			if (gc.isEnabled() && !gc.isNull())
+				gc.update();
+		}
 		
 		Input.postProcess();
 	}
@@ -110,11 +115,14 @@ public class GameLoop implements Runnable {
 	private static void render() {
 		RenderUtil.clearScreen();
 		
-		for (int i = 0; i < GameComponent.gcs.size(); i++) 
-			if (GameComponent.gcs.get(i) instanceof GameObject)
-				GameComponent.gcs.get(i).render();
+		for (int i = 0; i < GameComponent.getGcs().size(); i++)  {
+			GameComponent gc = GameComponent.getGcs().get(i);
+			if (gc instanceof GameObject && gc.isEnabled())
+				gc.render();
+		}
 		
-		RenderDebug.church();
+		if (Debug.isDebug())
+			RenderDebug.church();
 				
 		
 		Display.swap();
@@ -122,12 +130,12 @@ public class GameLoop implements Runnable {
 	
 	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
-		Display.create(w, h, title, true);
+		Display.create(w, h, title, false);
 		
 		Display.show();
 		
 		RenderUtil.init2DGL(w, h);	
-		RenderUtil.setClearColor(0, 0, 0, 1);	
+		RenderUtil.setClearColor(0.1f, 0.3f, 0.2f, 1);	
 		
 		Abyss.getGame().init();
 		

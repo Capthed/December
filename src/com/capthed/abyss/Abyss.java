@@ -8,6 +8,7 @@ public abstract class Abyss {
 	private static Game game;
 	private static int w, h;
 	
+	/** Creates the engine (temporary). */
 	public static void create(String title, int w, int h, Game game) {
 		Abyss.game = game;
 		Abyss.w = w;

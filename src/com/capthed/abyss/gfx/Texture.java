@@ -29,6 +29,7 @@ public class Texture {
 		this.path = path;
 	}
 	
+	/** Loads the texture into the memory. */
 	public Texture loadTex() {	
 		ByteBuffer imageBuffer;
 		try {
@@ -61,20 +62,21 @@ public class Texture {
 		return this;
 	}
 	
+	/** Binds the texture to OpenGL. */
 	public void bind() {
 		glBindTexture(GL_TEXTURE_2D, texID);
 		
-		if ( this.comp == 3 )
+		if ( this.comp == 3 ){
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this.w, this.h, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-		else {
+		} else {
 			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.w, this.h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
 		}
 
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	}
 	
-	public static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
+	private static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
 		ByteBuffer buffer;
 		Debug.print("Called", "");
 
@@ -126,6 +128,7 @@ public class Texture {
 
 	public int getTexID() { return texID; }
 	
+	/** Binds a 0 texture to OpenGL. */
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}

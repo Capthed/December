@@ -14,10 +14,6 @@ public class Test4 extends Entity {
 		super(pos, size, tex);
 	}
 	
-	public void render() {
-		Render.quadtTex(this);
-	}
-	
 	public void update() {
 		float speed = (float) (32 * Timer.getDelta());
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_D))

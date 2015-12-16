@@ -6,27 +6,29 @@ import static org.lwjgl.opengl.GL11.*;
 
 public class Render {
 	
+	/** Renders a quaternion texture. */
 	public static void quadtTex(GameObject go) {
 		float x = go.getPos().getX();
 		float y = go.getPos().getY();
 		float w = go.getSize().getX();
 		float h = go.getSize().getY();
+		float l = go.getLayer();
 		
 		go.getTex().bind();
 		glBegin(GL_QUADS);
 		
 		{
 			glTexCoord2f(0, 1);
-	        glVertex2f(x, y);
+	        glVertex3f(x, y, l);
 	 
 	        glTexCoord2f(1, 1);
-	        glVertex2f(x + w, y);
+	        glVertex3f(x + w, y, l);
 	 
 	        glTexCoord2f(1, 0);
-	        glVertex2f(x + w, y + h);
+	        glVertex3f(x + w, y + h, l);
 	 
 	        glTexCoord2f(0, 0);
-	        glVertex2f(x, y + h);
+	        glVertex3f(x, y + h, l);
 		}
 		
 		glEnd();

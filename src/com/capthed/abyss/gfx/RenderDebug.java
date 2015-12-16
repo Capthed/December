@@ -4,15 +4,17 @@ import static org.lwjgl.opengl.GL11.*;
 
 public abstract class RenderDebug {
 	
+	private static int layer = RenderUtil.layerLimit();
+	
 	/** Draws a quad on the screen with the start coordinates and the width and height */
 	public static void quad(float x, float y, float w, float h) {
 		glDisable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
 		{
-			glVertex3f(x, y, 0);
-	        glVertex3f(x + w, y, 0);
-	        glVertex3f(x + w, y + h, 0);
-	        glVertex3f(x, y + h, 0);	
+			glVertex3f(x, y, layer);
+	        glVertex3f(x + w, y, layer);
+	        glVertex3f(x + w, y + h, layer);
+	        glVertex3f(x, y + h, layer);	
 		}
 		glEnd();
 		glEnable(GL_TEXTURE_2D);
@@ -23,9 +25,9 @@ public abstract class RenderDebug {
 		glDisable(GL_TEXTURE_2D);
 		glBegin(GL_TRIANGLES);
 		{
-			glVertex3f(x, y, 0);
-	        glVertex3f(x1, y1, 0);
-	        glVertex3f(x2, y2, 0);
+			glVertex3f(x, y, layer);
+	        glVertex3f(x1, y1, layer);
+	        glVertex3f(x2, y2, layer);
 		}
 		glEnd();
 		glEnable(GL_TEXTURE_2D);
@@ -37,11 +39,16 @@ public abstract class RenderDebug {
 		glBegin(GL_LINES);
 		{
 			glLineWidth(w);
-			glVertex3f(x, y, 0);
-	        glVertex3f(x1, y1, 0);;
+			glVertex3f(x, y, layer);
+	        glVertex3f(x1, y1, layer);;
 		}
 		glEnd();
 		glEnable(GL_TEXTURE_2D);
+	}
+	
+	/** Sets the layer for this class. Default is highest. */
+	public static void setLayer(int l) {
+		layer = l;
 	}
 	
 	/** Fuck you */

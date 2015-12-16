@@ -17,6 +17,7 @@ public abstract class Entity extends GameObject {
 		this.tex = tex;
 	}
 	
+	/** Moves the entity regardless of physics for delta. */
 	public void move(Vec2 delta) {
 		float x = this.pos.getX();
 		float y = this.pos.getY();

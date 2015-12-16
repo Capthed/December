@@ -1,5 +1,6 @@
 package com.capthed.abyss.component;
 
+import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
@@ -9,8 +10,9 @@ public abstract class GameObject extends GameComponent {
 	protected Vec2 pos;
 	protected Vec2 size;
 	protected Texture tex;
+	protected int layer = 0;
 	
-	// TODO: add texture and physics
+	// TODO: add animation and physics
 	
 	public GameObject(Vec2 pos, Vec2 size) {
 		super();
@@ -28,8 +30,10 @@ public abstract class GameObject extends GameComponent {
 	}
 	
 	public void render() {
-		//TODO: remove
-		RenderDebug.quad(pos.getX(), pos.getY(), size.getX(), size.getY());
+		if (tex == null)
+			RenderDebug.quad(pos.getX(), pos.getY(), size.getX(), size.getY());
+		else
+			Render.quadtTex(this);
 	}
 
 	public Vec2 getSize() {
@@ -50,5 +54,20 @@ public abstract class GameObject extends GameComponent {
 
 	public void setTex(Texture tex) {
 		this.tex = tex;
+	}
+
+	/** @return The render priority layer. */
+	public int getLayer() {
+		return layer;
+	}
+
+	/** 
+	 * The layer to be rendered to. Higher number = higher render priority. 
+	 * RenderUtil.layerLimit() >= layer >= -RenderUtil.layerLimit()
+	 */
+	public GameObject setLayer(int layer) {
+		this.layer = layer;
+		
+		return this;
 	}
 }

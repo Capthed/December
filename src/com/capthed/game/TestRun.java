@@ -24,8 +24,8 @@ public class TestRun implements Game{
 		tex.loadTex();
 		tex2.loadTex();
 		
-		new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex);
 		new Test2();
-		new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2);
+		new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2); // kocka koja se mice
+		new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex).setLayer(1); // kurac stase vrti
 	}
 }
