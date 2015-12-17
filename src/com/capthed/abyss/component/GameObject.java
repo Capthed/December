@@ -14,6 +14,11 @@ public abstract class GameObject extends GameComponent {
 	
 	// TODO: add animation and physics
 	
+	/** Used only with Tile prototypes. */
+	public GameObject() {
+		// doesn't call the super() because it needs no id
+	}
+	
 	public GameObject(Vec2 pos, Vec2 size) {
 		super();
 		

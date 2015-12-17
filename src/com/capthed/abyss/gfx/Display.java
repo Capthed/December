@@ -3,6 +3,7 @@ package com.capthed.abyss.gfx;
 import static org.lwjgl.glfw.GLFW.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
+import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFWVidMode;
 
 import com.capthed.abyss.input.Keyboard;
@@ -34,9 +35,23 @@ public abstract class Display {
 		
 		glfwSetWindowPos(display, 200, 200);
 		
-		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		
-		glfwSetWindowPos (display, (vidmode.width() - width) / 2, (vidmode.height() - height) / 2);
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		int w1 = vidmode.width();
+		int h1 = vidmode.height();
+		
+		int tempx = 0, tempy = 0;
+		if (Debug.isDebug()) {
+			PointerBuffer b = glfwGetMonitors();
+			GLFWVidMode vidmodeTemp = glfwGetVideoMode(b.get(1));
+			
+			tempy = vidmodeTemp.height();
+			tempx = vidmodeTemp.width();
+			
+			h1 = tempy;
+		}
+			
+		glfwSetWindowPos (display, tempx + (w1 - width) / 2, (h1 - height) / 2);
 		
 		glfwMakeContextCurrent(display);
 		

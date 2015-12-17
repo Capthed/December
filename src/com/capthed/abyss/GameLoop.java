@@ -14,16 +14,14 @@ public class GameLoop implements Runnable {
 	private static final int UPS = 60;
 	
 	private static int w, h;
-	private static String title;
 	private static boolean isAlive = false;
 	private static int fps = 120;
 	private static int currFps, currUps;
 	private static int msRenderPerSecond = 1000 / fps;
 	
-	public GameLoop(int w, int h, String title) {
+	public GameLoop(int w, int h) {
 		GameLoop.w = w;
 		GameLoop.h = h;
-		GameLoop.title = title;
 	}
 	
 	/** The main game loop. */
@@ -130,12 +128,12 @@ public class GameLoop implements Runnable {
 	
 	/** Initializes all the systems in the game thread before running the loop. */
 	private static void initSubsystems() {
-		Display.create(w, h, title, false);
+		Abyss.getGame().initDisplay();
 		
 		Display.show();
 		
 		RenderUtil.init2DGL(w, h);	
-		RenderUtil.setClearColor(0.1f, 0.3f, 0.2f, 1);	
+		RenderUtil.setClearColor(0f, 0f, 0f, 1);	
 		
 		Abyss.getGame().init();
 		

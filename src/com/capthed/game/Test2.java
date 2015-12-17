@@ -27,10 +27,5 @@ public class Test2 extends GameComponent{
 		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_ESCAPE)) {
 			Abyss.stop();
 		}
-		
-		if (Timer.getTimeRunning() >= 3 && des) {
-			des = false;
-			destroy(2);
-		}
 	}
 }

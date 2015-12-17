@@ -26,7 +26,6 @@ public abstract class GameComponent {
 	
 	public void update() {}
 	
-	
 	@Deprecated
 	/** Only here for the loop logic. Render is actually a method of GameObject. */
 	public void render() {}
