@@ -8,6 +8,7 @@ import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.util.Debug;
 
 public class TestRun implements Game{
 
@@ -37,15 +38,16 @@ public class TestRun implements Game{
 		
 		lvl1.load("res/lvl1.png");
 		
-		/*scene = new Scene("First");
+		scene = new Scene("First");
 		
-		scene.add(new Test2());*/
+		scene.add(new Test2());
 		/*scene.add(new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2)); // kocka koja se mice
 		scene.add(new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex).setLayer(1)); // kurac stase vrti*/
 	}
 
 	@Override
 	public void initDisplay() {
-		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
+		Debug.setDebug(false);
+		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
 	}
 }
