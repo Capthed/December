@@ -4,6 +4,8 @@ import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.Texture;
+import com.capthed.abyss.map.Map;
+import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
 import com.capthed.abyss.math.Vec2;
 
@@ -26,13 +28,20 @@ public class TestRun implements Game{
 		tex.loadTex();
 		tex2.loadTex();
 		
-		new ExtInput();
+		//new ExtInput();
+		TileTest1 tt1 = new TileTest1(0xffFFD2C4, tex);
+		TileTest2 tt2 = new TileTest2(0xff6E51FF, tex2);
 		
-		scene = new Scene("First");
+		Map lvl1 = new Map("Level 1");
+		MapManager.setCurrent(lvl1);
 		
-		scene.add(new Test2());
-		scene.add(new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2)); // kocka koja se mice
-		scene.add(new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex).setLayer(1)); // kurac stase vrti
+		lvl1.load("res/lvl1.png");
+		
+		/*scene = new Scene("First");
+		
+		scene.add(new Test2());*/
+		/*scene.add(new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2)); // kocka koja se mice
+		scene.add(new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex).setLayer(1)); // kurac stase vrti*/
 	}
 
 	@Override

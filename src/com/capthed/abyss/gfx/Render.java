@@ -4,7 +4,7 @@ import com.capthed.abyss.component.GameObject;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Render {
+public abstract class Render {
 	
 	/** Renders a quaternion texture. */
 	public static void quadtTex(GameObject go) {

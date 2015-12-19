@@ -17,7 +17,6 @@ public abstract class GameComponent {
 	
 	public GameComponent() {
 		id = currId++;
-		
 		gcs.add(this);
 	}
 	
@@ -25,7 +24,11 @@ public abstract class GameComponent {
 	public void init() {}
 	
 	public void update() {}
-	
+
+	static void setCurrID(int currId) {
+		GameComponent.currId = currId;
+	}
+
 	@Deprecated
 	/** Only here for the loop logic. Render is actually a method of GameObject. */
 	public void render() {}

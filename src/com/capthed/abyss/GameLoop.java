@@ -119,8 +119,8 @@ public class GameLoop implements Runnable {
 				gc.render();
 		}
 		
-		if (Debug.isDebug())
-			RenderDebug.church();
+		/*if (Debug.isDebug())
+			RenderDebug.church();*/
 				
 		
 		Display.swap();

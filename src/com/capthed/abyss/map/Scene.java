@@ -61,5 +61,5 @@ public class Scene {
 	
 	public int getSize() { return gcs.size(); }
 	
-	public String toString () { return "Scene " + name; }
+	public String toString () { return "Scene: " + name; }
 }
