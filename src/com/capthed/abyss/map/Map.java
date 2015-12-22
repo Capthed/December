@@ -13,6 +13,11 @@ public class Map {
 	private int tileSize;
 	private boolean current = false;
 	
+	/** The possible tile sizes for a map. */
+	public enum TILE_SIZE {
+		T_16, T_32, T_64;
+	}
+	
 	public Map(String name) {
 		scenes.add(new Scene(name + " map misc"));
 		
@@ -20,21 +25,44 @@ public class Map {
 		this.tileSize = TILE_SIZE_DEF;
 	}
 	
-	public Map(String name, int tileSize) {
+	public Map(String name, TILE_SIZE t) {
 		scenes.add(new Scene(name + " map misc"));
 		
 		this.name = name;
-		this.tileSize = tileSize;
+
+		if (t == TILE_SIZE.T_16)
+			tileSize = 16;
+		else if (t == TILE_SIZE.T_32)
+			tileSize = 32;
+		else if (t == TILE_SIZE.T_64)
+			tileSize = 64;
+	}
+	
+	public void init() {
+		for(Scene s : scenes)
+			s.init();
+	}
+	
+	public void update() {
+		for(Scene s : scenes)
+			s.update();
+	}
+	
+	public void render() {
+		for(Scene s : scenes)
+			s.render();
 	}
 	
 	public void add(Scene s) {
 		scenes.add(s);
+		s.setActive(true);
 	}
 	
 	public void add(GameComponent gc) {
 		scenes.get(0).add(gc);
 	}
 	
+	/** Loads the map from a file. Shoul be called after it has been set to the current map in the MapManager. */
 	public void load(String path) {
 		MapLoader.loadMap(this, path);
 	}

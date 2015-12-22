@@ -12,6 +12,7 @@ public abstract class Tile extends GameObject {
 	protected Vec2 mapPos;
 	protected int color;
 	
+	/** The prototype constructor. Called only once in the code. */
 	public Tile(int color, Texture tex) {
 		super();
 		this.tex = tex;
@@ -31,11 +32,8 @@ public abstract class Tile extends GameObject {
 		
 		MapManager.getCurrent().add(this);
 	}
-	
-	public Vec2 getMapPosition() {
-		return mapPos;
-	}
 
+	/** @return The tile based position of the tile. */
 	public Vec2 getMapPos() {
 		return mapPos;
 	}

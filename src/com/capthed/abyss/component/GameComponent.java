@@ -75,6 +75,7 @@ public abstract class GameComponent {
 		return gcs;
 	}
 	
+	/** @return The GameObject with the requested id. */
 	public static GameComponent getByID(int var0) {
 		return gcs.get(var0);
 	}

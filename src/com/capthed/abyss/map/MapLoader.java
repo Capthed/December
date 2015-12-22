@@ -16,7 +16,7 @@ public abstract class MapLoader {
 
 	private static int r = 0, g = 0, b = 0;
 	
-	public static void loadMap(Map map, String path) {
+	static void loadMap(Map map, String path) {
 		BufferedImage mapImg = null;
 		try {
 			mapImg = ImageIO.read(new File(path));
@@ -58,8 +58,6 @@ public abstract class MapLoader {
 		ArrayList<Integer> colors = new ArrayList<Integer>();
 		colors.addAll(Tile.getTiles().keySet());
 		
-		flipImage();
-		
 		for (int i = 0; i < pixels.length; i++) {
 			for (int i2 = 0; i2 < colors.size(); i2++) {
 				if (pixels[i] == colors.get(i2)) {
@@ -73,10 +71,6 @@ public abstract class MapLoader {
 				} 
 			}
 		}
-	}
-	
-	private static void flipImage() {
-		
 	}
 	
 	private static void convertRGB() {

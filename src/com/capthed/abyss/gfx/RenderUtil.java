@@ -20,7 +20,7 @@ public abstract class RenderUtil {
 		glOrtho(0, w, 0, h, -LAYER, LAYER);
 		
 		glMatrixMode(GL_MODELVIEW);
-		glEnable(GL_DEPTH_TEST); // Because we use depth as priority rendering... or not
+		glEnable(GL_DEPTH_TEST); // Because we use depth as priority rendering
 	//	glDepthFunc(GL_LEQUAL);
 		
 		glEnable(GL_BLEND);

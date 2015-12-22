@@ -1,11 +1,9 @@
 package com.capthed.abyss;
 
-import com.capthed.abyss.component.GameComponent;
-import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.Display;
-import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.input.Input;
+import com.capthed.abyss.map.MapManager;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -84,45 +82,28 @@ public class GameLoop implements Runnable {
 
 	/** Calls the init methods of GameComponents*/
 	private static void init() {
-
-		for (int i = 0; i < GameComponent.getGcs().size(); i++) {
-			GameComponent gc = GameComponent.getGcs().get(i);
-			
-			if (!gc.isInit() && gc.isEnabled() && !gc.isNull()) {
-				gc.init();
-				gc.setInit(true);
-				Debug.print(gc, " initialized");
-			}
-		}
+		MapManager.getCurrent().init();
+		
+		Abyss.getGame().constInit();
 	}
 	
 	private static void update() {
 		Input.pollEvents();
 		
-		for (int i = 0; i < GameComponent.getGcs().size(); i++) {
-			GameComponent gc = GameComponent.getGcs().get(i);
-			
-			if (gc.isEnabled() && !gc.isNull())
-				gc.update();
-		}
+		MapManager.getCurrent().update();
+		
+		Abyss.getGame().constUpdate();
 		
 		Input.postProcess();
 	}
 	
-	@SuppressWarnings("deprecation")
 	private static void render() {
 		RenderUtil.clearScreen();
 		
-		for (int i = 0; i < GameComponent.getGcs().size(); i++)  {
-			GameComponent gc = GameComponent.getGcs().get(i);
-			if (gc instanceof GameObject && gc.isEnabled())
-				gc.render();
-		}
+		MapManager.getCurrent().render();
 		
-		/*if (Debug.isDebug())
-			RenderDebug.church();*/
+		Abyss.getGame().constRender();
 				
-		
 		Display.swap();
 	}
 	

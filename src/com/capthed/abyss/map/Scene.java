@@ -3,6 +3,7 @@ package com.capthed.abyss.map;
 import java.util.ArrayList;
 
 import com.capthed.abyss.component.GameComponent;
+import com.capthed.abyss.component.GameObject;
 import com.capthed.util.Debug;
 
 public class Scene {
@@ -52,11 +53,41 @@ public class Scene {
 		}
 	}
 	
-	public Scene setActive(boolean b) { 
+	public void init() {
+		for (int i = 0; i < gcs.size(); i++) {
+			GameComponent gc = GameComponent.getByID(gcs.get(i));
+			
+			if (!gc.isInit() && gc.isEnabled() && !gc.isNull()) {
+				gc.init();
+				gc.setInit(true);
+			}
+		}
+	}
+	
+	public void update() {
+		for (int i = 0; i <gcs.size(); i++) {
+			GameComponent gc = GameComponent.getByID(gcs.get(i));
+			
+			if (gc.isEnabled() && !gc.isNull())
+				gc.update();
+		}
+	}
+	
+	@SuppressWarnings("deprecation")
+	public void render() {
+		for (int i = 0; i < gcs.size(); i++)  {
+			GameComponent gc = GameComponent.getByID(gcs.get(i));
+			if (gc instanceof GameObject && gc.isEnabled())
+				gc.render();
+		}
+	}
+	
+	Scene setActive(boolean b) { 
 		this.active = b; 
 		return this;
 	}
 	
+	/** @return True if the scene belongs to the currently active map. */
 	public boolean isActive() { return active; }
 	
 	public int getSize() { return gcs.size(); }
