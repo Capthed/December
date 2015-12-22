@@ -67,8 +67,6 @@ public abstract class GameComponent {
 		nc.setEnabled(false);
 		
 		gcs.set(exid, nc);
-		
-		Debug.print(getByID(exid), " destroyed");
 	}
 	
 	public static ArrayList<GameComponent> getGcs() {

@@ -4,7 +4,6 @@ import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
-import com.capthed.util.Debug;
 
 public abstract class GameObject extends GameComponent {
 
@@ -18,7 +17,6 @@ public abstract class GameObject extends GameComponent {
 	/** Used only with Tile prototypes. */
 	public GameObject() {
 		super();
-		Debug.print("Prototype GO", "");
 		
 		GameComponent.getGcs().remove(id);
 		setCurrID(getCurrID() - 1);

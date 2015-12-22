@@ -28,6 +28,10 @@ public abstract class Abyss {
 		Display.create(w, h, title, decorated);
 	}
 	
+	public static void setFullscreen(boolean b) {
+		Display.fulscreen(b);
+	}
+	
 	/** Starts the game thread */
 	public static void start() {
 		if (game == null) {

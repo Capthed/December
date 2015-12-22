@@ -7,7 +7,6 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
-import com.capthed.abyss.math.Vec2;
 import com.capthed.util.Debug;
 
 public class TestRun implements Game{
@@ -31,22 +30,21 @@ public class TestRun implements Game{
 		tex2.loadTex();
 		
 		//new ExtInput();
-		TileTest1 tt1 = new TileTest1(0xffFFD2C4, tex);
-		TileTest2 tt2 = new TileTest2(0xff6E51FF, tex2);
+		new TileTest1(0xffFFD2C4, tex);
+		new TileTest2(0xff6E51FF, tex2);
 		
-		Map lvl1 = new Map("Level 1");
+		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_64);
 		MapManager.setCurrent(lvl1);
 		
 		lvl1.load("res/lvl1.png");
 		
 		t2 = new Test2();
-		
-		/*scene.add(new Test4(new Vec2(200, 200), new Vec2(64, 64), tex2)); // kocka koja se mice
-		scene.add(new Test1(new Vec2(Display.getWidth() / 2, Display.getHeight() / 2), new Vec2(32, 32), tex).setLayer(1)); // kurac stase vrti*/
 	}
 
 	@Override
 	public void initDisplay() {
+		Debug.setDebug(true);
+		Display.fulscreen(false);
 		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
 	}
 

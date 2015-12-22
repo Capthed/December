@@ -13,6 +13,7 @@ public abstract class Display {
 
 	private static long display;
 	private static boolean showMouse = true;
+	private static boolean fullscreen = false;
 	private static int width, height;
 	
 	/** Creates the display with the position, title and use of borders and decorations. */
@@ -25,6 +26,14 @@ public abstract class Display {
 		glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
 		glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE);
 		
+		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+		
+		if (fullscreen) {
+			decorated = false;
+			width = w = vidmode.width();
+			height = h = vidmode.height();
+		}
+		
 		glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
 		
 		display = glfwCreateWindow(w, h, title, NULL, NULL);
@@ -35,28 +44,38 @@ public abstract class Display {
 		
 		glfwSetWindowPos(display, 200, 200);
 		
-		
-		GLFWVidMode vidmode = glfwGetVideoMode(glfwGetPrimaryMonitor());
 		int w1 = vidmode.width();
 		int h1 = vidmode.height();
 		
 		int tempx = 0, tempy = 0;
 		if (Debug.isDebug()) {
 			PointerBuffer b = glfwGetMonitors();
-			GLFWVidMode vidmodeTemp = glfwGetVideoMode(b.get(1));
+			GLFWVidMode vidmodeTemp = null;
 			
-			tempy = vidmodeTemp.height();
-			tempx = vidmodeTemp.width();
-			
-			h1 = tempy;
+			try {
+				
+				vidmodeTemp = glfwGetVideoMode(b.get(1));
+				tempy = vidmodeTemp.height();
+				tempx = vidmodeTemp.width();
+				h1 = tempy;
+				
+			} catch(IndexOutOfBoundsException e) {
+				Debug.err("Javore picko imas samo jedan monitor, vidi kod za display");
+				vidmodeTemp = glfwGetVideoMode(b.get(0));
+			}
 		}
+		
+		int posW =  tempx + (w1 - width) / 2;
+		int posH = (h1 - height) / 2;
 			
-		glfwSetWindowPos (display, tempx + (w1 - width) / 2, (h1 - height) / 2);
+		glfwSetWindowPos (display, posW, posH);
 		
 		glfwMakeContextCurrent(display);
 		
 		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
 	}
+	
+	public static void fulscreen(boolean fs) { fullscreen = fs; }
 	
 	public static void show() {	
 		glfwShowWindow(display);

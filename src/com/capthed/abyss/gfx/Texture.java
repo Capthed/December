@@ -13,8 +13,6 @@ import java.nio.channels.ReadableByteChannel;
 
 import org.lwjgl.BufferUtils;
 
-import com.capthed.util.Debug;
-
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -78,7 +76,6 @@ public class Texture {
 	
 	private static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {
 		ByteBuffer buffer;
-		Debug.print("Called", "");
 
 		File file = new File(resource);
 		if ( file.isFile() ) {

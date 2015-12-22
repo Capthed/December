@@ -50,6 +50,11 @@ public abstract class Debug {
 			System.out.print(list[i] + txt);
 	}
 	
+	/**
+	 * Prints out an error.
+	 * 
+	 * @param err The error to be printed out.
+	 */
 	public static void err (String txt) {
 		if (!debug) return;
 		

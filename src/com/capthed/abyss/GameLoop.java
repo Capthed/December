@@ -24,7 +24,10 @@ public class GameLoop implements Runnable {
 	
 	/** The main game loop. */
 	public void run() {
+		Debug.print("**********************", "");
 		Debug.print("", "Main game loop started");
+		Debug.print("FPS " + fps, "\t\tUPS " + UPS);
+		Debug.print("**********************", "");
 		
 		initSubsystems();
 		

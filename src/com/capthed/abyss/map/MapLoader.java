@@ -29,8 +29,6 @@ public abstract class MapLoader {
 		if (map != null)
 			pixelsB = ((DataBufferByte) mapImg.getRaster().getDataBuffer()).getData();
 		
-		Debug.print(pixelsB.length, " length");
-		
 		int var0 = 0;
 		int[] pixels = new int[mapImg.getHeight() * mapImg.getWidth()];
 		int iter = 0;
@@ -44,11 +42,8 @@ public abstract class MapLoader {
 				
 				convertRGB();
 				
-				Debug.print(r + "r " + g + "g " + b, "b ");
-				
 				pixels[iter] = (0xff << 24) | ((r&0xff) << 16) | ((g&0xff) << 8) | (b&0xff);
 				
-				Debug.print(Integer.toHexString(pixels[iter]), "");
 				iter++;
 			}
 		}
@@ -66,7 +61,6 @@ public abstract class MapLoader {
 					
 					Tile.getTiles().get(colors.get(i2)).build(pos, new Vec2(map.getTileSize(), map.getTileSize())).setMapPos(mapPos);
 					
-					Debug.print("ide", "");
 					continue;
 				} 
 			}

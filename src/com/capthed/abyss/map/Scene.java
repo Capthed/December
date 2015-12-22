@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.GameObject;
-import com.capthed.util.Debug;
 
 public class Scene {
 
@@ -14,8 +13,6 @@ public class Scene {
 	
 	public Scene(String name) {
 		this.name = name;
-		
-		Debug.print("Initialized ", this.toString());
 	}
 	
 	public void add(ArrayList<GameComponent> gc) {
@@ -28,7 +25,6 @@ public class Scene {
 	}
 	
 	public void add(int id) {
-		Debug.print("added " + id, "");
 		gcs.add(id);
 	}
 	
@@ -42,7 +38,6 @@ public class Scene {
 	
 	public void setEnabled(boolean b) {
 		for (int i = 0; i < gcs.size(); i++) {
-			Debug.print("\t " + i, " is " + b);
 			GameComponent.getByID(gcs.get(i)).setEnabled(b);
 		}
 	}
