@@ -2,8 +2,6 @@ package com.capthed.abyss.component;
 
 import java.util.ArrayList;
 
-import com.capthed.util.Debug;
-
 public abstract class GameComponent {
 
 	private static int currId = 0;

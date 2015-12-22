@@ -42,8 +42,6 @@ public abstract class Display {
 
 		glfwSetKeyCallback(display, new Keyboard());
 		
-		glfwSetWindowPos(display, 200, 200);
-		
 		int w1 = vidmode.width();
 		int h1 = vidmode.height();
 		
@@ -53,7 +51,8 @@ public abstract class Display {
 			GLFWVidMode vidmodeTemp = null;
 			
 			try {
-				
+				// ovdi mi otvara na drugon monitoru ako je u debug modu
+				// samo iskomentiraj cili ovaj if pa ti nece vise javljat nista
 				vidmodeTemp = glfwGetVideoMode(b.get(1));
 				tempy = vidmodeTemp.height();
 				tempx = vidmodeTemp.width();
