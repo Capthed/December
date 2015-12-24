@@ -19,10 +19,11 @@ public abstract class Entity extends GameObject {
 	
 	/** Moves the entity regardless of physics for delta. */
 	public void move(Vec2 delta) {
-		float x = this.pos.getX();
-		float y = this.pos.getY();
+		this.pos.add(delta);
 		
-		pos.setX(x + delta.getX());
-		pos.setY(y + delta.getY());
+		if (collider != null) {
+			collider.move(delta);
+		}
+		
 	}
 }

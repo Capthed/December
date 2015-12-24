@@ -4,6 +4,7 @@ import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.abyss.physics.Collider;
 
 public abstract class GameObject extends GameComponent {
 
@@ -11,8 +12,7 @@ public abstract class GameObject extends GameComponent {
 	protected Vec2 size;
 	protected Texture tex;
 	protected int layer = 0;
-	
-	// TODO: add animation and physics
+	protected Collider collider = null;
 	
 	/** Used only with Tile prototypes. */
 	public GameObject() {
@@ -37,9 +37,16 @@ public abstract class GameObject extends GameComponent {
 		this.tex = tex;
 	}
 	
+	public GameObject setCollider(Collider c) {
+		this.collider = c;
+		return this;
+	}
+	
+	public Collider getCollider() { return collider; }
+	
 	public void render() {
 		if (tex == null)
-			RenderDebug.quad(pos.getX(), pos.getY(), size.getX(), size.getY());
+			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());
 		else
 			Render.quadtTex(this);
 	}
@@ -55,7 +62,7 @@ public abstract class GameObject extends GameComponent {
 	public Vec2 getPos() {
 		return pos;
 	}
-
+	
 	public Texture getTex() {
 		return tex;
 	}

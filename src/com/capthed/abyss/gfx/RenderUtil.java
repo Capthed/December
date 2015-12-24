@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 import org.lwjgl.opengl.GL;
 
-
 public abstract class RenderUtil {
 
 	private static final int LAYER = 100;

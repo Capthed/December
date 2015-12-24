@@ -8,10 +8,10 @@ public abstract class Render {
 	
 	/** Renders a quaternion texture. */
 	public static void quadtTex(GameObject go) {
-		float x = go.getPos().getX();
-		float y = go.getPos().getY();
-		float w = go.getSize().getX();
-		float h = go.getSize().getY();
+		float x = go.getPos().x();
+		float y = go.getPos().y();
+		float w = go.getSize().x();
+		float h = go.getSize().y();
 		float l = go.getLayer();
 		
 		go.getTex().bind();

@@ -5,6 +5,7 @@ import java.nio.DoubleBuffer;
 import org.lwjgl.BufferUtils;
 
 import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.math.Vec2;
 
 import static org.lwjgl.glfw.GLFW.*;
 
@@ -64,7 +65,9 @@ public class Mouse {
 		glfwGetCursorPos(Display.getDisplay(), x, y);	
 	}
 	
-	// TODO: Vec2 pos
+	public static Vec2 getPos() {
+		return new Vec2(getX(), getY());
+	}
 	
 	/** @return The x position of the mouse on the screen. */
 	public static float getX() {
