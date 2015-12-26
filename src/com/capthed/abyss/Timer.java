@@ -2,7 +2,7 @@ package com.capthed.abyss;
 
 public abstract class Timer {
 
-	public static final double SECOND = 1000.0f;
+	public static final float SECOND = 1000.0f;
 	private static long startTime = 0;
 	private static long delta;
 	

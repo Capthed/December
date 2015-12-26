@@ -7,6 +7,7 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
+import com.capthed.abyss.math.Tween;
 import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.CircleCollider;
 import com.capthed.abyss.physics.QuadCollider;
@@ -22,6 +23,7 @@ public class TestRun implements Game{
 	public static Scene scene;
 	private static Test2 t2;
 	public static TestCollider2 other;
+	private static Tween tw;
 
 	public static void main(String[] args) {
 		run = new TestRun();
@@ -46,6 +48,8 @@ public class TestRun implements Game{
 		//0, 96
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
+		
+		tw = new Tween(0, 500, 2000, Tween.Type.EXPONENTIAL_DOWN);
 		
 		other = new TestCollider2(pos, size, texColl);
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
@@ -83,6 +87,9 @@ public class TestRun implements Game{
 	@Override
 	public void constUpdate() {
 		t2.update();
+		
+		tw.update();
+		Debug.print(tw.value(), "");
 	}
 
 	@Override
