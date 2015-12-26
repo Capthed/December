@@ -67,6 +67,7 @@ public abstract class GameComponent {
 		gcs.set(exid, nc);
 	}
 	
+	/** @return All The GameComponents created. */
 	public static ArrayList<GameComponent> getGcs() {
 		return gcs;
 	}

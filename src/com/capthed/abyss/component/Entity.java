@@ -27,6 +27,10 @@ public abstract class Entity extends GameObject {
 		}
 	}
 	
+	/** 
+	 * Moves the entity for delta if there are no collisions. Otherwise it calls the <code>collided(Collider)</code>
+	 * method on both colliding GameObjects.
+	 */
 	public void tryMove(Vec2 delta) {
 		boolean col = false;
 		

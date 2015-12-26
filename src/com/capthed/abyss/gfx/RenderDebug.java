@@ -51,6 +51,7 @@ public abstract class RenderDebug {
 		glEnable(GL_TEXTURE_2D);
 	}
 	
+	/** Same as the other line but with Vec2. */
 	public static void line(Vec2 v1, Vec2 v2, float w) {
 		line(v1.x(), v1.y(), v2.x(), v2.y(), w);
 	}
@@ -60,6 +61,7 @@ public abstract class RenderDebug {
 		layer = l;
 	}
 	
+	/** Renders the collider boundaries. */
 	public static void collider(Collider c) {
 		RenderUtil.setColor(0, 1, 0, 1);
 		glDisable(GL_TEXTURE_2D);

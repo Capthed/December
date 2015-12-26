@@ -53,9 +53,10 @@ public abstract class GameObject extends GameComponent {
 		if (tex == null)
 			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());
 		else
-			Render.quadtTex(this);
+			Render.quadTex(this);
 	}
 	
+	/** Called when the object has collided. */
 	public void collided(GameObject go) {
 		
 	}

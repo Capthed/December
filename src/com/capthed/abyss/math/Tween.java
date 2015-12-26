@@ -15,6 +15,7 @@ public class Tween {
 		LINEAR, EXPONENTIAL_UP, EXPONENTIAL_DOWN;
 	}
 	
+	/** The start and end values, the time of iteration and the type of iteration. */
 	public Tween(float start, float end, float time, Type t) {
 		this.start = start;
 		this.end = end;
@@ -22,6 +23,7 @@ public class Tween {
 		this.t = t;
 	}
 	
+	/** Must be called to update the tween. */
 	public void update() {
 		if (finished) return;
 		
@@ -58,6 +60,7 @@ public class Tween {
 		value = (end - start) * timePassed / time + start;
 	}
 	
+	/** @return The value of the current iteration. */
 	public float value() { return value; }
 	
 	public boolean isFinished() { return finished; }

@@ -64,6 +64,7 @@ public class CircleCollider implements Collider {
 		this.pos.add(delta);
 	}
 	
+	/** Calculates the center for the given GameObject's position and size. */
 	public static Vec2 calcCenter(GameObject go) {
 		Vec2 v1 = go.getPos();
 		Vec2 v2 = go.getSize();

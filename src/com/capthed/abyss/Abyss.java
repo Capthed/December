@@ -28,6 +28,7 @@ public abstract class Abyss {
 		Display.create(w, h, title, decorated);
 	}
 	
+	/** Called before createDisplay. */
 	public static void setFullscreen(boolean b) {
 		Display.fulscreen(b);
 	}

@@ -7,7 +7,7 @@ import static org.lwjgl.opengl.GL11.*;
 public abstract class Render {
 	
 	/** Renders a quaternion texture. */
-	public static void quadtTex(GameObject go) {
+	public static void quadTex(GameObject go) {
 		float x = go.getPos().x();
 		float y = go.getPos().y();
 		float w = go.getSize().x();
