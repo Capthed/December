@@ -43,7 +43,12 @@ public class QuadCollider implements Collider {
 	public boolean intersects(Collider c) {
 		boolean colliding = false;
 		
-		Vec2[] vertices = { pos, new Vec2(pos.x(), pos.y() + size.y()), Vec2.add(pos, size), new Vec2(pos.x() + size.x(), pos.y())};
+		if (c.getLayer() != layer) return false;
+		
+		Vec2[] vertices = { pos, 
+							Vec2.add(pos, new Vec2(0, size.y())), 
+							Vec2.add(pos, size), 
+							Vec2.add(pos, new Vec2(size.x(), 0))};
 		
 		if (c instanceof QuadCollider) {
 			QuadCollider qc = (QuadCollider) c;
@@ -52,7 +57,7 @@ public class QuadCollider implements Collider {
 				float x = vertices[i].x();
 				float y = vertices[i].y();
 				
-				if (x >= qc.bottomLeft().x() && x <= qc.topRight().x() && y <= qc.topRight().y() && y >= bottomLeft().y()) {
+				if (x >= qc.bottomLeft().x() && x <= qc.topRight().x() && y <= qc.topRight().y() && y >= qc.bottomLeft().y()) {
 					colliding = true;
 					break;
 				}

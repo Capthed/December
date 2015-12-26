@@ -34,6 +34,8 @@ public class CircleCollider implements Collider {
 	public boolean intersects(Collider c) {
 		boolean colliding = false;
 		
+		if (c.getLayer() != layer) return false;
+		
 		if (c instanceof CircleCollider) {
 			CircleCollider cc = (CircleCollider)c;
 			

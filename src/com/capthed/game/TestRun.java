@@ -45,16 +45,22 @@ public class TestRun implements Game{
 		Vec2 size = new Vec2(64, 64);
 		//0, 96
 		Vec2 delta = new Vec2(0, -100);
+		Vec2 delta2 = new Vec2(100, 100);
 		
 		other = new TestCollider2(pos, size, texColl);
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
 		
 		TestCollider t = new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2);
-		t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
+		//t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
+		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(size)));
 		
-		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_64);
+		TestCollider2 t1 = new TestCollider2(Vec2.add(pos, delta2), new Vec2(size));
+		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32));
+		
+		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
 		lvl1.add(other);
 		lvl1.add(t);
+		lvl1.add(t1);
 		MapManager.setCurrent(lvl1);
 		
 		lvl1.load("res/lvl1.png");

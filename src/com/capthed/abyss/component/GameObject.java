@@ -10,9 +10,10 @@ public abstract class GameObject extends GameComponent {
 
 	protected Vec2 pos;
 	protected Vec2 size;
-	protected Texture tex;
+	protected Texture tex = null;
 	protected int layer = 0;
 	protected Collider collider = null;
+	protected boolean collidable = false;
 	
 	/** Used only with Tile prototypes. */
 	public GameObject() {
@@ -39,6 +40,10 @@ public abstract class GameObject extends GameComponent {
 	
 	public GameObject setCollider(Collider c) {
 		this.collider = c;
+		if (c != null)
+			collidable = true;
+		else
+			collidable = false;
 		return this;
 	}
 	
@@ -49,6 +54,10 @@ public abstract class GameObject extends GameComponent {
 			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());
 		else
 			Render.quadtTex(this);
+	}
+	
+	public void collided(GameObject go) {
+		
 	}
 
 	public Vec2 getSize() {
@@ -84,5 +93,9 @@ public abstract class GameObject extends GameComponent {
 		this.layer = layer;
 		
 		return this;
+	}
+
+	public boolean isCollidable() {
+		return collidable;
 	}
 }

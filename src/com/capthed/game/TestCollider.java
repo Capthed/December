@@ -2,6 +2,7 @@ package com.capthed.game;
 
 import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.Entity;
+import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Keyboard;
@@ -19,15 +20,15 @@ public class TestCollider extends Entity {
 	public void update() {
 		float speed = (float) (64 * Timer.getDelta());
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_LEFT_SHIFT))
-			speed = (float) (128 * Timer.getDelta());
+			speed = (float) (400 * Timer.getDelta());
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_D))
-			move (new Vec2(speed, 0));
+			tryMove (new Vec2(speed, 0));
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_A))
-			move (new Vec2(-speed, 0));
+			tryMove (new Vec2(-speed, 0));
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_W))
-			move (new Vec2(0, speed));
+			tryMove (new Vec2(0, speed));
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_S))
-			move (new Vec2(speed, -speed));
+			tryMove (new Vec2(0, -speed));
 		
 		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_1)) {
 			TestCollider2 t = TestRun.other;
@@ -38,11 +39,12 @@ public class TestCollider extends Entity {
 		}
 	}
 	
+	public void collided(GameObject go) {
+		Debug.print(go, "");
+	}
+	
 	public void render() {
 		super.render();
-
-		if (collider.intersects(TestRun.other.getCollider()))
-			Debug.print("Colliding", "");
 		
 		RenderDebug.collider(collider);
 	}

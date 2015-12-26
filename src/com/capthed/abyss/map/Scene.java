@@ -87,5 +87,9 @@ public class Scene {
 	
 	public int getSize() { return gcs.size(); }
 	
+	public ArrayList<Integer> getGcs() {
+		return gcs;
+	}
+
 	public String toString () { return "Scene: " + name; }
 }
