@@ -1,5 +1,6 @@
 package com.capthed.abyss.component;
 
+import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
@@ -14,6 +15,7 @@ public abstract class GameObject extends GameComponent {
 	protected int layer = 0;
 	protected Collider collider = null;
 	protected boolean collidable = false;
+	protected Animation animation;
 	
 	/** Used only with Tile prototypes. */
 	public GameObject() {
@@ -38,6 +40,14 @@ public abstract class GameObject extends GameComponent {
 		this.tex = tex;
 	}
 	
+	public GameObject(Vec2 pos, Vec2 size, Animation anim) {
+		super();
+		
+		this.pos = pos;
+		this.size = size;
+		this.animation = anim;
+	}
+	
 	public GameObject setCollider(Collider c) {
 		this.collider = c;
 		if (c != null)
@@ -50,10 +60,16 @@ public abstract class GameObject extends GameComponent {
 	public Collider getCollider() { return collider; }
 	
 	public void render() {
-		if (tex == null)
-			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());
-		else
+		if (animation != null) {
+			tex = animation.getTexure();
 			Render.quadTex(this);
+		} 
+		else if (tex != null) {
+			Render.quadTex(this);
+		}
+		else {
+			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());
+		}
 	}
 	
 	/** Called when the object has collided. */
@@ -98,5 +114,13 @@ public abstract class GameObject extends GameComponent {
 
 	public boolean isCollidable() {
 		return collidable;
+	}
+
+	public Animation getAnimation() {
+		return animation;
+	}
+
+	public void setAnimation(Animation animation) {
+		this.animation = animation;
 	}
 }

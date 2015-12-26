@@ -2,6 +2,7 @@ package com.capthed.game;
 
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
+import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
@@ -24,6 +25,7 @@ public class TestRun implements Game{
 	private static Test2 t2;
 	public static TestCollider2 other;
 	private static Tween tw;
+	private Animation anim;
 
 	public static void main(String[] args) {
 		run = new TestRun();
@@ -39,6 +41,10 @@ public class TestRun implements Game{
 		texColl.loadTex();
 		texColl2.loadTex();
 		
+		anim = new Animation(new Texture[] {tex, tex2, texColl, texColl2}, 1000, Animation.Type.BOUNCE_LOOP);
+		
+		AnimTest at = new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim);
+		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
 		new TileTest2(0xff6E51FF, tex2);
@@ -49,8 +55,6 @@ public class TestRun implements Game{
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
 		
-		tw = new Tween(0, 500, 2000, Tween.Type.EXPONENTIAL_DOWN);
-		
 		other = new TestCollider2(pos, size, texColl);
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
 		
@@ -58,13 +62,14 @@ public class TestRun implements Game{
 		//t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(size)));
 		
-		TestCollider2 t1 = new TestCollider2(Vec2.add(pos, delta2), new Vec2(size));
+		TestCollider2 t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size)).setLayer(2);
 		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32));
 		
 		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
 		lvl1.add(other);
 		lvl1.add(t);
 		lvl1.add(t1);
+		lvl1.add(at);
 		MapManager.setCurrent(lvl1);
 		
 		lvl1.load("res/lvl1.png");
@@ -87,9 +92,6 @@ public class TestRun implements Game{
 	@Override
 	public void constUpdate() {
 		t2.update();
-		
-		tw.update();
-		Debug.print(tw.value(), "");
 	}
 
 	@Override

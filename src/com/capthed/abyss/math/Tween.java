@@ -4,7 +4,8 @@ import com.capthed.abyss.Timer;
 
 public class Tween {
 
-	private float start, end, time;
+	private float start, end;
+	private long time;
 	private Type t;
 	private long timePassed = 0;
 	private long timeStart = -1;
@@ -15,8 +16,8 @@ public class Tween {
 		LINEAR, EXPONENTIAL_UP, EXPONENTIAL_DOWN;
 	}
 	
-	/** The start and end values, the time of iteration and the type of iteration. */
-	public Tween(float start, float end, float time, Type t) {
+	/** The start and end values, the time in ms of iteration and the type of iteration. */
+	public Tween(float start, float end, long time, Type t) {
 		this.start = start;
 		this.end = end;
 		this.time = time;
@@ -64,4 +65,20 @@ public class Tween {
 	public float value() { return value; }
 	
 	public boolean isFinished() { return finished; }
+
+	public float getStart() {
+		return start;
+	}
+
+	public float getEnd() {
+		return end;
+	}
+
+	public float getTime() {
+		return time;
+	}
+
+	public long getTimePassed() {
+		return timePassed;
+	}
 }

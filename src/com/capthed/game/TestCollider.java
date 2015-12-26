@@ -4,6 +4,7 @@ import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.Entity;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.RenderDebug;
+import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
@@ -15,6 +16,10 @@ public class TestCollider extends Entity {
 
 	public TestCollider(Vec2 pos, Vec2 size, Texture tex) {
 		super(pos, size, tex);
+	}
+	
+	public void init () {
+		layer = 5;
 	}
 	
 	public void update() {
@@ -44,7 +49,9 @@ public class TestCollider extends Entity {
 	}
 	
 	public void render() {
+		RenderUtil.setColor(1, 1, 1, 0.1f);
 		super.render();
+		RenderUtil.setColor(1, 1, 1, 1);
 		
 		RenderDebug.collider(collider);
 	}
