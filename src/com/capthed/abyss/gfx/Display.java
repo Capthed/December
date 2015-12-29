@@ -6,6 +6,7 @@ import static org.lwjgl.system.MemoryUtil.*;
 import org.lwjgl.PointerBuffer;
 import org.lwjgl.glfw.GLFWVidMode;
 
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.util.Debug;
 
@@ -32,6 +33,9 @@ public abstract class Display {
 			decorated = false;
 			width = w = vidmode.width();
 			height = h = vidmode.height();
+			
+			GameLoop.setW(width);
+			GameLoop.setH(height);
 		}
 		
 		glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
@@ -74,7 +78,7 @@ public abstract class Display {
 		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
 	}
 	
-	public static void fulscreen(boolean fs) { fullscreen = fs; }
+	public static void fullscreen(boolean fs) { fullscreen = fs; }
 	
 	public static void show() {	
 		glfwShowWindow(display);

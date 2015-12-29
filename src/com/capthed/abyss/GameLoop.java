@@ -157,4 +157,12 @@ public class GameLoop implements Runnable {
 	public static int getUps() {
 		return UPS;
 	}
+
+	public static void setW(int w) {
+		GameLoop.w = w;
+	}
+
+	public static void setH(int h) {
+		GameLoop.h = h;
+	}
 }

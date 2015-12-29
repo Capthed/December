@@ -30,7 +30,7 @@ public abstract class Abyss {
 	
 	/** Called before createDisplay. */
 	public static void setFullscreen(boolean b) {
-		Display.fulscreen(b);
+		Display.fullscreen(b);
 	}
 	
 	/** Starts the game thread */

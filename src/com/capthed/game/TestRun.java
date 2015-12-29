@@ -32,7 +32,7 @@ public class TestRun implements Game{
 	public static void main(String[] args) {
 		run = new TestRun();
 		
-		Abyss.create(1200, 720, run);
+		Abyss.create(1000, 720, run);
 		Abyss.start();
 	}
 
@@ -67,26 +67,26 @@ public class TestRun implements Game{
 		//t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(size)));
 		
-		TestCollider2 t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size)).setLayer(2);
+		TestCollider2 t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(2);
 		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32));
 		
-		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
+		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_64);
 		lvl1.add(other);
 		lvl1.add(t);
-		//lvl1.add(t1);
+		lvl1.add(t1);
 		lvl1.add(at);
 		MapManager.setCurrent(lvl1);
 		
-		lvl1.load("res/lvl1.png");
+		lvl1.load("res/lvl2.png");
 		
 		t2 = new Test2();
 	}
 
 	@Override
 	public void initDisplay() {
-		Debug.setDebug(true);
-		Display.fulscreen(false);
-		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
+		Debug.setDebug(false);
+		Abyss.setFullscreen(false);
+		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
 	}
 	
 	@Override
