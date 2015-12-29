@@ -8,7 +8,6 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
-import com.capthed.abyss.math.Tween;
 import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.CircleCollider;
 import com.capthed.abyss.physics.QuadCollider;
@@ -21,10 +20,13 @@ public class TestRun implements Game{
 	public static final Texture tex2 = new Texture("res/tile_test.png");
 	public static final Texture texColl = new Texture("res/coll1.png");
 	public static final Texture texColl2 = new Texture("res/coll2.png");
+	public static final Texture run1 = new Texture("res/run1.png");
+	public static final Texture run2 = new Texture("res/run2.png");
+	public static final Texture run3 = new Texture("res/run3.png");
+	private static TestCollider t;
 	public static Scene scene;
 	private static Test2 t2;
 	public static TestCollider2 other;
-	private static Tween tw;
 	private Animation anim;
 
 	public static void main(String[] args) {
@@ -40,10 +42,13 @@ public class TestRun implements Game{
 		tex2.loadTex();
 		texColl.loadTex();
 		texColl2.loadTex();
+		run1.loadTex();
+		run2.loadTex();
+		run3.loadTex();
 		
-		anim = new Animation(new Texture[] {tex, tex2, texColl, texColl2}, 1000, Animation.Type.BOUNCE_LOOP);
+		anim = new Animation(new Texture[] {run2, run3}, 200, Animation.Type.BOUNCE_LOOP);
 		
-		AnimTest at = new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim);
+		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim).setLayer(10);
 		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
@@ -58,7 +63,7 @@ public class TestRun implements Game{
 		other = new TestCollider2(pos, size, texColl);
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
 		
-		TestCollider t = new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2);
+		t = new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2);
 		//t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(size)));
 		
@@ -68,7 +73,7 @@ public class TestRun implements Game{
 		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
 		lvl1.add(other);
 		lvl1.add(t);
-		lvl1.add(t1);
+		//lvl1.add(t1);
 		lvl1.add(at);
 		MapManager.setCurrent(lvl1);
 		
@@ -92,10 +97,12 @@ public class TestRun implements Game{
 	@Override
 	public void constUpdate() {
 		t2.update();
+		t.update();
 	}
 
 	@Override
 	public void constRender() {
 		
+		t.render();
 	}
 }

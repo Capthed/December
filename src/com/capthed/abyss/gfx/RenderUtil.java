@@ -21,8 +21,8 @@ public abstract class RenderUtil {
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_DEPTH_TEST); // Because we use depth as priority rendering
 		
-		glEnable(GL_BLEND);
-		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glEnable(GL_ALPHA_TEST);
+		glAlphaFunc(GL_GREATER, 0);
 		
 		glViewport(0, 0, w, h);
 	}
