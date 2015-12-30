@@ -20,6 +20,6 @@ public class TileTest1 extends Tile {
 
 	@Override
 	public Tile build(Vec2 pos, Vec2 size) {
-		return new TileTest1(pos, size, tex);
+		return (Tile) new TileTest1(pos, size, tex);
 	}
 }

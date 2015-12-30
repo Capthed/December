@@ -85,7 +85,7 @@ public class TestRun implements Game{
 	@Override
 	public void initDisplay() {
 		Debug.setDebug(false);
-		Abyss.setFullscreen(false);
+		Abyss.setFullscreen(true);
 		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
 	}
 	

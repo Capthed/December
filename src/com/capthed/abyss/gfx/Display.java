@@ -16,6 +16,7 @@ public abstract class Display {
 	private static boolean showMouse = true;
 	private static boolean fullscreen = false;
 	private static int width, height;
+	private static Keyboard keyboard;
 	
 	/** Creates the display with the position, title and use of borders and decorations. */
 	public static void create(int w, int h, String title, boolean decorated) {
@@ -44,7 +45,8 @@ public abstract class Display {
 		if (display == NULL)
 			Debug.print("Display not created", "");
 
-		glfwSetKeyCallback(display, new Keyboard());
+		keyboard = new Keyboard();
+		glfwSetKeyCallback(display, keyboard);
 		
 		int w1 = vidmode.width();
 		int h1 = vidmode.height();

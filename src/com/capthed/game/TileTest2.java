@@ -3,6 +3,7 @@ package com.capthed.game;
 import com.capthed.abyss.component.Tile;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.abyss.physics.QuadCollider;
 
 public class TileTest2 extends Tile {
 
@@ -20,7 +21,7 @@ public class TileTest2 extends Tile {
 
 	@Override
 	public Tile build(Vec2 pos, Vec2 size) {
-		return new TileTest2(pos, size, tex);
+		return (Tile) new TileTest2(pos, size, tex).setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
 	}
 
 }

@@ -24,12 +24,12 @@ public class GameLoop implements Runnable {
 	
 	/** The main game loop. */
 	public void run() {
+		initSubsystems();
+		
 		Debug.print("**********************", "");
 		Debug.print("", "Main game loop started");
 		Debug.print("FPS " + fps, "\t\tUPS " + UPS);
 		Debug.print("**********************", "");
-		
-		initSubsystems();
 		
 		long lastTime = Timer.getTime ();
 		long startTime = Timer.getTime ();
