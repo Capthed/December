@@ -21,7 +21,7 @@ public class TileTest2 extends Tile {
 
 	@Override
 	public Tile build(Vec2 pos, Vec2 size) {
-		return (Tile) new TileTest2(pos, size, tex).setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
+		return (Tile) new TileTest2(pos, size, tex)/*.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)))*/;
 	}
 
 }

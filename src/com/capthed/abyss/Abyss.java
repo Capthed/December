@@ -8,7 +8,7 @@ public abstract class Abyss {
 	private static final String VERSION = "v1.0d";
 	
 	private static Thread mainGameLoop;
-	private static Game game;
+	private static Game game = null;
 	private static int w, h;
 	
 	/** Creates the engine (temporary). */
@@ -18,8 +18,7 @@ public abstract class Abyss {
 		Abyss.h = h;
 		
 		mainGameLoop = new Thread(new GameLoop(w, h));
-		
-		Debug.setDebug(true);
+
 		Timer.start();
 	}
 	
@@ -47,7 +46,11 @@ public abstract class Abyss {
 	public static void stop() {
 		game.closing();
 		GameLoop.setAlive(false);
+		Debug.print("Closed", "");
 	}
+	
+	/** Must be called before Abyss.start(). */
+	public static void setFPS(int fps) { GameLoop.setFps(fps); }
 	
 	public static Game getGame() { return game; }
 	

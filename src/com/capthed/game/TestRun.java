@@ -23,6 +23,7 @@ public class TestRun implements Game{
 	public static final Texture run1 = new Texture("res/run1.png");
 	public static final Texture run2 = new Texture("res/run2.png");
 	public static final Texture run3 = new Texture("res/run3.png");
+	public static final Texture tex3 = new Texture("res/tile3.png");
 	private static TestCollider t;
 	private static TestCollider2 t1;
 	public static Scene scene;
@@ -33,7 +34,10 @@ public class TestRun implements Game{
 	public static void main(String[] args) {
 		run = new TestRun();
 		
+		Debug.setDebug(true);
+		
 		Abyss.create(1000, 720, run);
+		Abyss.setFPS(120);
 		Abyss.start();
 	}
 
@@ -41,19 +45,21 @@ public class TestRun implements Game{
 	public void init() {
 		tex.loadTex();
 		tex2.loadTex();
+		tex3.loadTex();
 		texColl.loadTex();
 		texColl2.loadTex();
 		run1.loadTex();
 		run2.loadTex();
 		run3.loadTex();
 		
-		anim = new Animation(new Texture[] {run2, run3}, 10000, Animation.Type.BOUNCE_LOOP);
+		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
 		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim).setLayer(10);
 		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
 		new TileTest2(0xff6E51FF, tex2);
+		new TileTest3(0xffFF2857, tex3);
 		
 		Vec2 pos = new Vec2(500, 250);
 		Vec2 size = new Vec2(64, 64);
@@ -86,7 +92,6 @@ public class TestRun implements Game{
 
 	@Override
 	public void initDisplay() {
-		Debug.setDebug(true);
 		Abyss.setFullscreen(false);
 		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
 	}

@@ -13,8 +13,6 @@ import java.nio.channels.ReadableByteChannel;
 
 import org.lwjgl.BufferUtils;
 
-import com.capthed.util.Debug;
-
 import static org.lwjgl.stb.STBImage.*;
 import static org.lwjgl.opengl.GL11.*;
 
@@ -49,15 +47,6 @@ public class Texture {
 		this.comp = comp.get(0);
 		
 		texID = glGenTextures();
-
-		/*if ( this.comp == 3 )
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, this.w, this.h, 0, GL_RGB, GL_UNSIGNED_BYTE, image);
-		else {
-			glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, this.w, this.h, 0, GL_RGBA, GL_UNSIGNED_BYTE, image);
-		}
-
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);*/
 		
 		return this;
 	}

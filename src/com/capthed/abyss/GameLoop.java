@@ -114,10 +114,10 @@ public class GameLoop implements Runnable {
 	private static void initSubsystems() {
 		Abyss.getGame().initDisplay();
 		
-		Display.show();
-		
 		RenderUtil.init2DGL(w, h);	
 		RenderUtil.setClearColor(0f, 0f, 0f, 1);	
+		
+		Display.show();
 		
 		Abyss.getGame().init();
 		
