@@ -41,7 +41,7 @@ public class GameLoop implements Runnable {
 		long timeCount = 0;
 		while(isAlive) {
 			if (Display.isCloseRequested())
-				Abyss.stop(); //TODO:
+				Abyss.stop();
 			
 			lastTime = startTime;
 			startTime = Timer.getTime ();

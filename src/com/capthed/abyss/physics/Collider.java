@@ -7,7 +7,7 @@ public interface Collider {
 	/** The collision layer. Not the same as the render layer. */
 	public float getLayer();
 	
-	public void setLayer(float l);
+	public Collider setLayer(float l);
 	
 	/** @return True if it is intersecting with the given collider. */
 	public boolean intersects(Collider c);

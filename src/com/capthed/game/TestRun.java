@@ -3,7 +3,7 @@ package com.capthed.game;
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
 import com.capthed.abyss.gfx.Animation;
-import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
@@ -24,6 +24,7 @@ public class TestRun implements Game{
 	public static final Texture run2 = new Texture("res/run2.png");
 	public static final Texture run3 = new Texture("res/run3.png");
 	private static TestCollider t;
+	private static TestCollider2 t1;
 	public static Scene scene;
 	private static Test2 t2;
 	public static TestCollider2 other;
@@ -46,7 +47,7 @@ public class TestRun implements Game{
 		run2.loadTex();
 		run3.loadTex();
 		
-		anim = new Animation(new Texture[] {run2, run3}, 200, Animation.Type.BOUNCE_LOOP);
+		anim = new Animation(new Texture[] {run2, run3}, 10000, Animation.Type.BOUNCE_LOOP);
 		
 		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim).setLayer(10);
 		
@@ -56,37 +57,38 @@ public class TestRun implements Game{
 		
 		Vec2 pos = new Vec2(500, 250);
 		Vec2 size = new Vec2(64, 64);
-		//0, 96
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
 		
-		other = new TestCollider2(pos, size, texColl);
-		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size)));
+		other = (TestCollider2) new TestCollider2(pos, size, texColl).setLayer(20);
+		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size))); // MIS
 		
-		t = new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2);
-		//t.setCollider(new CircleCollider(CircleCollider.calcCenter(t), 64));
-		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(size)));
+		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2).setLayer(30);
+		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(64, 64)))); // WASD
 		
-		TestCollider2 t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(2);
-		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32));
+		t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(19);
+		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32)); // ONI S KRUGON
 		
 		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_64);
+	
 		lvl1.add(other);
-		lvl1.add(t);
+		
 		lvl1.add(t1);
 		lvl1.add(at);
+		lvl1.add(t);
+		
 		MapManager.setCurrent(lvl1);
 		
 		lvl1.load("res/lvl2.png");
 		
-		t2 = new Test2();
+		t2 = new Test2(); // ZA GASIT
 	}
 
 	@Override
 	public void initDisplay() {
-		Debug.setDebug(false);
-		Abyss.setFullscreen(true);
-		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
+		Debug.setDebug(true);
+		Abyss.setFullscreen(false);
+		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
 	}
 	
 	@Override
@@ -97,12 +99,15 @@ public class TestRun implements Game{
 	@Override
 	public void constUpdate() {
 		t2.update();
-		t.update();
 	}
 
 	@Override
 	public void constRender() {
-		
-		t.render();
+		RenderDebug.church();
+	}
+
+	@Override
+	public void closing() {
+		Debug.print("Closing game", "");
 	}
 }

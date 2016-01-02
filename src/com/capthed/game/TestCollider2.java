@@ -33,7 +33,7 @@ public class TestCollider2 extends Entity {
 		double x = A * Math.sin(val * Math.PI);
 		double y = A1 * Math.cos(val * Math.PI);
 		
-		tryMove(new Vec2((float)x,(float) y));
+		//tryMove(new Vec2((float)x,(float) y));
 	}
 	
 	public void render() {

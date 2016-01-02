@@ -41,6 +41,10 @@ public class QuadCollider implements Collider {
 
 	@Override
 	public boolean intersects(Collider c) {
+		return intersects(c, false);
+	}
+	
+	public boolean intersects(Collider c, boolean flag) {
 		boolean colliding = false;
 		
 		if (c.getLayer() != layer) return false;
@@ -52,6 +56,8 @@ public class QuadCollider implements Collider {
 		
 		if (c instanceof QuadCollider) {
 			QuadCollider qc = (QuadCollider) c;
+			
+			if (!flag && qc.intersects(this, true)) return true;
 			
 			for (int i = 0; i < vertices.length; i++) {
 				float x = vertices[i].x();
@@ -97,8 +103,10 @@ public class QuadCollider implements Collider {
 	}
 
 	@Override
-	public void setLayer(float l) {
+	public Collider setLayer(float l) {
 		this.layer = l;
+		
+		return this;
 	}
 
 	@Override

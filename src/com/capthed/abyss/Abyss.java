@@ -45,6 +45,7 @@ public abstract class Abyss {
 	
 	/** Stops the game thread */
 	public static void stop() {
+		game.closing();
 		GameLoop.setAlive(false);
 	}
 	

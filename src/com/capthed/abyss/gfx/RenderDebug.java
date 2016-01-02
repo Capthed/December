@@ -61,7 +61,7 @@ public abstract class RenderDebug {
 		layer = l;
 	}
 	
-	/** Renders the collider boundaries. */
+	/** Renders the collider boundaries. Uses the phyisics layer as the render layer. */
 	public static void collider(Collider c) {
 		RenderUtil.setColor(0, 1, 0, 1);
 		glDisable(GL_TEXTURE_2D);

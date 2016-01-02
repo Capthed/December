@@ -3,6 +3,12 @@ package com.capthed.abyss.physics;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.math.Vec2;
 
+/**
+ * <b>WARNING</b><br>
+ * 
+ * This collider is not very stable or accurate (especially when colliding with (x, y) quads where x != y)
+ * so it is better to use it as rarely as possible or in contained situations. 
+ */
 public class CircleCollider implements Collider {
 
 	private Vec2 pos;
@@ -55,8 +61,10 @@ public class CircleCollider implements Collider {
 	}
 
 	@Override
-	public void setLayer(float l) {
+	public Collider setLayer(float l) {
 		this.layer = l;
+		
+		return this;
 	}
 
 	@Override
