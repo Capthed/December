@@ -20,6 +20,9 @@ public class TestRun implements Game{
 	public static final Texture tex2 = new Texture("res/tile_test.png");
 	public static final Texture texColl = new Texture("res/coll1.png");
 	public static final Texture texColl2 = new Texture("res/coll2.png");
+	public static final Texture tex4 = new Texture("res/tile4.jpg");
+	public static final Texture tex5 = new Texture("res/tile5.gif");
+	public static final Texture tex6 = new Texture("res/tile6.png");
 	public static final Texture run1 = new Texture("res/run1.png");
 	public static final Texture run2 = new Texture("res/run2.png");
 	public static final Texture run3 = new Texture("res/run3.png");
@@ -46,6 +49,9 @@ public class TestRun implements Game{
 		tex.loadTex();
 		tex2.loadTex();
 		tex3.loadTex();
+		tex4.loadTex();
+		tex5.loadTex();
+		tex6.loadTex();
 		texColl.loadTex();
 		texColl2.loadTex();
 		run1.loadTex();
@@ -60,9 +66,12 @@ public class TestRun implements Game{
 		new TileTest1(0xffFFD2C4, tex);
 		new TileTest2(0xff6E51FF, tex2);
 		new TileTest3(0xffFF2857, tex3);
+		new TileTest3(0xff282CFF, tex4);
+		new TileTest3(0xff3AFF1C, tex5);
+		new TileTest4(0xffFFBE3D, tex6);
 		
 		Vec2 pos = new Vec2(500, 250);
-		Vec2 size = new Vec2(64, 64);
+		Vec2 size = new Vec2(32, 32);
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
 		
@@ -70,12 +79,12 @@ public class TestRun implements Game{
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size))); // MIS
 		
 		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), anim).setLayer(30);
-		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(64, 64)))); // WASD
+		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(size)))); // WASD
 		
 		t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(19);
-		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), 32)); // ONI S KRUGON
+		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), size.x() / 2)); // ONI S KRUGON
 		
-		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_64);
+		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
 	
 		lvl1.add(other);
 		
@@ -85,7 +94,7 @@ public class TestRun implements Game{
 		
 		MapManager.setCurrent(lvl1);
 		
-		lvl1.load("res/lvl2.png");
+		lvl1.load("res/lvl3.png");
 		
 		t2 = new Test2(); // ZA GASIT
 	}
