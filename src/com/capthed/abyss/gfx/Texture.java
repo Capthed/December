@@ -48,11 +48,6 @@ public class Texture {
 		
 		texID = glGenTextures();
 		
-		return this;
-	}
-	
-	/** Binds the texture to OpenGL. */
-	public void bind() {
 		glBindTexture(GL_TEXTURE_2D, texID);
 		
 		if ( this.comp == 3 ){
@@ -63,6 +58,13 @@ public class Texture {
 
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		
+		return this;
+	}
+	
+	/** Binds the texture to OpenGL. */
+	public void bind() {
+		glBindTexture(GL_TEXTURE_2D, texID);
 	}
 	
 	private static ByteBuffer ioResourceToByteBuffer(String resource, int bufferSize) throws IOException {

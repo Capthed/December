@@ -3,7 +3,6 @@ package com.capthed.game;
 import com.capthed.abyss.component.Tile;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
-import com.capthed.abyss.physics.QuadCollider;
 
 public class TileTest2 extends Tile {
 

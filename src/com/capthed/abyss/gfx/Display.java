@@ -117,4 +117,8 @@ public abstract class Display {
 	public static int getHeight() {
 		return height;
 	}
+	
+	public static void destroy() {
+		glfwDestroyWindow(display);
+	}
 }

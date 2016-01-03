@@ -1,5 +1,6 @@
 package com.capthed.abyss;
 
+import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.input.Input;
@@ -26,6 +27,7 @@ public class GameLoop implements Runnable {
 	public void run() {
 		initSubsystems();
 		
+		Debug.print(Abyss.getInfo(), "");
 		Debug.print("**********************", "");
 		Debug.print("", "Main game loop started");
 		Debug.print("FPS " + fps, "\t\tUPS " + UPS);
@@ -42,6 +44,8 @@ public class GameLoop implements Runnable {
 		while(isAlive) {
 			if (Display.isCloseRequested())
 				Abyss.stop();
+			
+			if (fps == -1) msRenderPerSecond = 0;
 			
 			lastTime = startTime;
 			startTime = Timer.getTime ();
@@ -78,6 +82,7 @@ public class GameLoop implements Runnable {
 				Debug.print ("UPS: " + currUps, "");
 				Debug.print(Timer.getDelta(), " delta");
 				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
+				Debug.print("GameComponents created: ", GameComponent.getCurrID() + "");
 				Debug.print("", "");
 			}
 		}

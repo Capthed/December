@@ -37,7 +37,7 @@ public class TestRun implements Game{
 		Debug.setDebug(true);
 		
 		Abyss.create(1000, 720, run);
-		Abyss.setFPS(120);
+		Abyss.setFPS(60);
 		Abyss.start();
 	}
 

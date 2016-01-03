@@ -47,12 +47,19 @@ public abstract class Abyss {
 		game.closing();
 		GameLoop.setAlive(false);
 		Debug.print("Closed", "");
+		Display.destroy();
 	}
 	
-	/** Must be called before Abyss.start(). */
+	/** Must be called before Abyss.start(). Set to -1 for unlimited fps. */
 	public static void setFPS(int fps) { GameLoop.setFps(fps); }
 	
 	public static Game getGame() { return game; }
 	
 	public static String getVersion() { return VERSION; }
+	
+	/** @return Information about this version if the engine. */
+	public static String getInfo() {
+		return "Developmental version of Abyss designed for top-down 2D games. \nCurrently supporting around 2,500 textured components "
+				+ "\nand 300,000 non-textured components at 60 FPS.";
+	}
 }
