@@ -1,5 +1,6 @@
 package com.capthed.abyss.gfx;
 
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.GameObject;
 
 import static org.lwjgl.opengl.GL11.*;
@@ -8,6 +9,8 @@ public abstract class Render {
 	
 	/** Renders a quaternion texture. */
 	public static void quadTex(GameObject go) {
+		if (!checkBoundaries(go)) return;
+		
 		float x = go.getPos().x();
 		float y = go.getPos().y();
 		float w = go.getSize().x();
@@ -33,5 +36,21 @@ public abstract class Render {
 		
 		glEnd();
 		Texture.unbind();
+		
+		GameLoop.addTex();
+	}
+	
+	private static boolean checkBoundaries(GameObject go) {
+		boolean b = true;
+		
+		float x = go.getPos().x();
+		float y = go.getPos().y();
+		float w = go.getSize().x();
+		float h = go.getSize().y();
+		
+		if (y > Display.getHeight() || (y + h) < 0 || x > Display.getWidth() || (x + w) < 0)
+			b = false;
+		
+		return b;
 	}
 }

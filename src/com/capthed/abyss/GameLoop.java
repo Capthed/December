@@ -13,6 +13,8 @@ public class GameLoop implements Runnable {
 	private static final int UPS = 60;
 	
 	private static int w, h;
+	private static int texNum = 0;
+	private static int colNum = 0;
 	private static boolean isAlive = false;
 	private static int fps = 120;
 	private static int currFps, currUps;
@@ -82,7 +84,9 @@ public class GameLoop implements Runnable {
 				Debug.print ("UPS: " + currUps, "");
 				Debug.print(Timer.getDelta(), " delta");
 				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
-				Debug.print("GameComponents created: ", GameComponent.getCurrID() + "");
+				Debug.print("GameComponents created: ", GameComponent.getCurrID() + 1 + "");
+				Debug.print("Textures active: ", texNum + "");
+				Debug.print("Colliders active: ", colNum + "");
 				Debug.print("", "");
 			}
 		}
@@ -106,6 +110,8 @@ public class GameLoop implements Runnable {
 	}
 	
 	private static void render() {
+		texNum = 0;
+		
 		RenderUtil.clearScreen();
 		
 		MapManager.getCurrent().render();
@@ -170,4 +176,14 @@ public class GameLoop implements Runnable {
 	public static void setH(int h) {
 		GameLoop.h = h;
 	}
+	
+	// true to add, false to subtract
+	public static void addCollider(boolean b) { 
+		if (b) colNum++;
+		else colNum--;
+	}
+	
+	public static void addTex() { texNum++; }
+	
+	public static int getRenderedTextures() { return texNum; }
 }

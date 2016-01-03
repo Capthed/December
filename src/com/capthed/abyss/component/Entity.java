@@ -1,8 +1,10 @@
 package com.capthed.abyss.component;
 
+import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.util.Debug;
 
 public abstract class Entity extends GameObject {
 
@@ -16,6 +18,14 @@ public abstract class Entity extends GameObject {
 		this.pos = pos;
 		this.size = size;
 		this.tex = tex;
+	}
+	
+	public Entity(Vec2 pos, Vec2 size, Animation anim) {
+		super(pos, size, anim);
+		
+		this.pos = pos;
+		this.size = size;
+		this.animation = anim;
 	}
 	
 	/** Moves the entity regardless of physics for delta. */
@@ -32,6 +42,12 @@ public abstract class Entity extends GameObject {
 	 * method on both colliding GameObjects.
 	 */
 	public void tryMove(Vec2 delta) {
+		if (collider == null) {
+			move (delta);
+			Debug.err(this + " does not have a collider and should use move(Vec2) instead of tryMove(Vec2)");
+			return;
+		}
+		
 		boolean col = false;
 		
 		move(delta);

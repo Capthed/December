@@ -15,7 +15,7 @@ public class Map {
 	
 	/** The possible tile sizes for a map. */
 	public enum TILE_SIZE {
-		T_16, T_32, T_64;
+		T_16, T_32, T_64, T_128;
 	}
 	
 	public Map(String name) {
@@ -36,6 +36,8 @@ public class Map {
 			tileSize = 32;
 		else if (t == TILE_SIZE.T_64)
 			tileSize = 64;
+		else if (t == TILE_SIZE.T_128)
+			tileSize = 128;
 	}
 	
 	public void init() {

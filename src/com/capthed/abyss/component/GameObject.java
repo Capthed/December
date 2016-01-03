@@ -1,5 +1,6 @@
 package com.capthed.abyss.component;
 
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
@@ -54,6 +55,10 @@ public abstract class GameObject extends GameComponent {
 			collidable = true;
 		else
 			collidable = false;
+		
+		if (enabled)
+			GameLoop.addCollider(true);
+		
 		return this;
 	}
 	
@@ -112,6 +117,13 @@ public abstract class GameObject extends GameComponent {
 		return this;
 	}
 
+	public void setEnabled(boolean b) {
+		this.enabled = b;
+		
+		if (!enabled && collider != null)
+			GameLoop.addCollider(false);
+	}
+	
 	public boolean isCollidable() {
 		return collidable;
 	}

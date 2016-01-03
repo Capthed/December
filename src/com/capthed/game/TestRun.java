@@ -29,7 +29,7 @@ public class TestRun implements Game{
 	public static Scene scene;
 	private static Test2 t2;
 	public static TestCollider2 other;
-	private Animation anim;
+	public static Animation anim;
 
 	public static void main(String[] args) {
 		run = new TestRun();
@@ -37,7 +37,7 @@ public class TestRun implements Game{
 		Debug.setDebug(true);
 		
 		Abyss.create(1000, 720, run);
-		Abyss.setFPS(60);
+		Abyss.setFPS(120);
 		Abyss.start();
 	}
 
@@ -69,7 +69,7 @@ public class TestRun implements Game{
 		other = (TestCollider2) new TestCollider2(pos, size, texColl).setLayer(20);
 		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size))); // MIS
 		
-		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), texColl2).setLayer(30);
+		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), anim).setLayer(30);
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(64, 64)))); // WASD
 		
 		t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(19);

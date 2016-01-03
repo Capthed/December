@@ -55,6 +55,14 @@ public abstract class GameComponent {
 	/** Calls GameComponent.destroy(int) with thw current id. */
 	public void destroy() {
 		GameComponent.destroy(id);
+		
+		if (this instanceof GameObject) {
+			GameObject go = (GameObject)this;
+			go.setEnabled(false);
+		}
+		else
+			this.setEnabled(false);
+			
 	}
 	
 	/** Destroys the component with the set id and replaces it with a NullComponent. */

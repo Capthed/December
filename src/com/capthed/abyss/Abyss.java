@@ -58,11 +58,11 @@ public abstract class Abyss {
 	
 	public static String getVersion() { return VERSION; }
 	
-	/** @return Information about this version if the engine. */
+	/** @return Information about this version of the engine. */
 	public static String getInfo() {
 		return "Developmental version of Abyss designed for top-down 2D games."
 				+ "\nUsing OpenGL " + RenderUtil.getGLVersionUse() 
-				+ "\nCurrently supporting around 2,500 textured components "
+				+ "\nCurrently supporting around 2,500 textured components on screen"
 				+ "\nand 300,000 non-textured components at 60 FPS.";
 	}
 }

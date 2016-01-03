@@ -119,5 +119,12 @@ public class Vec2 {
 		return new Vec2(Math.abs(v.x()), Math.abs(v.y()));
 	}
 	
+	public boolean equals(Vec2 v) {
+		if (this.x == v.x() && this.y == v.y())
+			return true;
+		
+		return false;
+	}
+	
 	public String toString() { return "x: " + x + ", y: " + y; }
 }
