@@ -1,12 +1,13 @@
 package com.capthed.abyss;
 
 import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.util.Debug;
 
 public abstract class Abyss {
 
 	private static final String VERSION = "v1.0d";
-	
+
 	private static Thread mainGameLoop;
 	private static Game game = null;
 	private static int w, h;
@@ -59,7 +60,9 @@ public abstract class Abyss {
 	
 	/** @return Information about this version if the engine. */
 	public static String getInfo() {
-		return "Developmental version of Abyss designed for top-down 2D games. \nCurrently supporting around 2,500 textured components "
+		return "Developmental version of Abyss designed for top-down 2D games."
+				+ "\nUsing OpenGL " + RenderUtil.getGLVersionUse() 
+				+ "\nCurrently supporting around 2,500 textured components "
 				+ "\nand 300,000 non-textured components at 60 FPS.";
 	}
 }

@@ -44,4 +44,6 @@ public abstract class RenderUtil {
 	
 	/** @return The highest (and lowest - negative) value of a layer. */
 	public static int layerLimit() { return LAYER; }
+	
+	public static String getGLVersionUse() { return "1.0"; }
 }
