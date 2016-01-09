@@ -18,7 +18,7 @@ public class GameLoop implements Runnable {
 	private static boolean isAlive = false;
 	private static int fps = 120;
 	private static int currFps, currUps;
-	private static int msRenderPerSecond = 1000 / fps;
+	private static long msRenderPerSecond = 1000 / fps;
 	
 	public GameLoop(int w, int h) {
 		GameLoop.w = w;
@@ -29,6 +29,8 @@ public class GameLoop implements Runnable {
 	public void run() {
 		initSubsystems();
 		
+		Debug.print("", "");
+		Debug.print("Using Abyss ", Abyss.getVersion() + "");
 		Debug.print(Abyss.getInfo(), "");
 		Debug.print("**********************", "");
 		Debug.print("", "Main game loop started");
@@ -37,7 +39,7 @@ public class GameLoop implements Runnable {
 		
 		long lastTime = Timer.getTime ();
 		long startTime = Timer.getTime ();
-		int msPerSecond = 1000 / UPS;
+		long msPerSecond = (1000 / UPS);
 		long elapsedTime = 0;
 		long elapsedRenderTime = 0;
 		int ups = 0;

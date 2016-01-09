@@ -7,5 +7,7 @@
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="December/libs/native"/>
 		</attributes>
 	</classpathentry>
+	<classpathentry kind="lib" path="res"/>
+	<classpathentry kind="lib" path="libs/debug.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

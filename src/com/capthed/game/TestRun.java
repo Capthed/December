@@ -30,17 +30,41 @@ public class TestRun implements Game{
 	private static TestCollider t;
 	private static TestCollider2 t1;
 	public static Scene scene;
+	public static Map lvl1;
 	private static Test2 t2;
 	public static TestCollider2 other;
 	public static Animation anim;
+	private static Map.TILE_SIZE tSize; 
+	private static int var0; // command line arg size
 
 	public static void main(String[] args) {
+		try {
+			var0 = Integer.valueOf(args[0]);
+		} catch(Exception e) {
+			var0 = 64;
+		}
+		
+		switch(var0) {
+		case 16:
+			tSize = Map.TILE_SIZE.T_16;
+			break;
+		case 32:
+			tSize = Map.TILE_SIZE.T_32;
+			break;
+		case 64:
+			tSize = Map.TILE_SIZE.T_64;
+			break;
+		case 128:
+			tSize = Map.TILE_SIZE.T_128;
+			break;
+		}
+		
 		run = new TestRun();
 		
 		Debug.setDebug(true);
 		
-		Abyss.create(1000, 720, run);
-		Abyss.setFPS(120);
+		Abyss.create(1200, 720, run);
+		Abyss.setFPS(-1);
 		Abyss.start();
 	}
 
@@ -60,7 +84,7 @@ public class TestRun implements Game{
 		
 		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
-		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(64, 64), anim).setLayer(10);
+		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(var0, var0), anim).setLayer(10);
 		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
@@ -71,7 +95,7 @@ public class TestRun implements Game{
 		new TileTest4(0xffFFBE3D, tex6);
 		
 		Vec2 pos = new Vec2(500, 250);
-		Vec2 size = new Vec2(32, 32);
+		Vec2 size = new Vec2(var0, var0);
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
 		
@@ -84,7 +108,7 @@ public class TestRun implements Game{
 		t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(19);
 		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), size.x() / 2)); // ONI S KRUGON
 		
-		Map lvl1 = new Map("Level 1", Map.TILE_SIZE.T_32);
+		lvl1 = new Map("Level 1", tSize);
 	
 		lvl1.add(other);
 		

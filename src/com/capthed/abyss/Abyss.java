@@ -1,5 +1,7 @@
 package com.capthed.abyss;
 
+import java.io.File;
+
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.util.Debug;
@@ -17,6 +19,9 @@ public abstract class Abyss {
 		Abyss.game = game;
 		Abyss.w = w;
 		Abyss.h = h;
+		
+		// for exporting purpouses
+		System.setProperty("org.lwjgl.librarypath", new File("native").getAbsolutePath());
 		
 		mainGameLoop = new Thread(new GameLoop(w, h));
 
