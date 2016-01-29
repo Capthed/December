@@ -7,7 +7,7 @@ public abstract class GameComponent {
 	private static int currId = 0;
 	protected boolean nullised = false; // boli me kurac za glupo ime
 	
-	private static ArrayList<GameComponent> gcs = new ArrayList<GameComponent>();
+	protected static ArrayList<GameComponent> gcs = new ArrayList<GameComponent>();
 	
 	protected int id;
 	private boolean initialized = false;
@@ -75,7 +75,6 @@ public abstract class GameComponent {
 		
 		nc.setEnabled(false);
 		
-		gcs.remove(exid);
 		gcs.set(exid, nc);
 	}
 	

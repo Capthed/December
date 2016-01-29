@@ -51,6 +51,11 @@ public class GUIButton extends GameObject {
 		}
 	}
 	
+	public void render() {
+		super.render();
+		renderCollisionBox();
+	}
+	
 	public void renderCollisionBox() {
 		RenderDebug.box(pos, size, this.layer);
 	}

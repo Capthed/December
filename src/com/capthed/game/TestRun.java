@@ -1,5 +1,7 @@
 package com.capthed.game;
 
+import javax.swing.JOptionPane;
+
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
 import com.capthed.abyss.component.gui.GUIButton;
@@ -33,6 +35,8 @@ public class TestRun implements Game{
 	public static final Texture run3 = new Texture("res/run3.png");
 	public static final Texture tex3 = new Texture("res/tile3.png");
 	public static final Texture texSlider = new Texture("res/slider.jpg");
+	public static final Texture texSlider2 = new Texture("res/slider2.png");
+	public static final Texture texbut = new Texture("res/button.png");
 	public static GUIButton button;
 	private static GUICheckBox cb;
 	private static TestCollider t;
@@ -90,7 +94,9 @@ public class TestRun implements Game{
 		run1.loadTex();
 		run2.loadTex();
 		run3.loadTex();
+		texSlider2.loadTex();
 		texSlider.loadTex();
+		texbut.loadTex();
 		
 		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
@@ -132,9 +138,9 @@ public class TestRun implements Game{
 		
 		t2 = new Test2(); // ZA GASIT
 		
-		button = (GUIButton) new GUIButton(new Vec2(500, 600), new Vec2(64, 64), anim, new GUIButtonListener() {
+		button = (GUIButton) new GUIButton(new Vec2(500, 600), new Vec2(64, 64), texbut, new GUIButtonListener() {
 			public void clicked() {
-				Debug.print("radi", "");
+				JOptionPane.showMessageDialog(null, "Toni je najveci isus ikad");
 			}
 			
 			public void onLoseFocus() {
@@ -142,7 +148,7 @@ public class TestRun implements Game{
 			}
 		}).setLayer(10);
 		
-		cb = (GUICheckBox) new GUICheckBox(new Vec2(200, 200), new Vec2(64, 64), texColl, texColl2, false, new GUICheckBoxListener() {
+		cb = (GUICheckBox) new GUICheckBox(new Vec2(200, 200), new Vec2(32, 32), texColl, texColl2, false, new GUICheckBoxListener() {
 			public void onChangeState(boolean b) {
 				Debug.print(b,"");
 			}
@@ -151,7 +157,7 @@ public class TestRun implements Game{
 			}
 		}).setLayer(10);
 		
-		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(32, 32), texSlider, texColl2, 10, 100).setLayer(10);
+		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(25, 32), texSlider, texSlider2, 10, 100).setLayer(10);
 		lvl1.add(slider);
 		
 		MapManager.getCurrent().add(cb);
@@ -161,7 +167,7 @@ public class TestRun implements Game{
 	@Override
 	public void initDisplay() {
 		Abyss.setFullscreen(false);
-		Abyss.createDisplay("Abyss " + Abyss.getVersion(), true);
+		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
 	}
 	
 	@Override
@@ -177,8 +183,6 @@ public class TestRun implements Game{
 	@Override
 	public void constRender() {
 		RenderDebug.church();
-		button.renderCollisionBox();
-		cb.renderCollisionBox();
 	}
 
 	@Override

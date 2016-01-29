@@ -7,6 +7,7 @@ public class NullComponent extends GameComponent {
 	public NullComponent() {
 		super();
 		numNulls++;
+		gcs.remove(gcs.size() - 1);
 	}
 	
 	public boolean isNull() { return true; }

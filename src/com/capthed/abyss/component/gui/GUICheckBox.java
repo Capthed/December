@@ -54,6 +54,11 @@ public class GUICheckBox extends GameObject{
 		}
 	}
 	
+	public void render() {
+		super.render();
+		renderCollisionBox();
+	}
+	
 	public void renderCollisionBox() {
 		RenderDebug.box(pos, size, layer);
 	}
