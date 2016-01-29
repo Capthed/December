@@ -98,6 +98,26 @@ public abstract class RenderDebug {
 		RenderUtil.setColor(1, 1, 1, 1);
 	}
 	
+	public static void box(Vec2 pos, Vec2 size, float layer) {
+		RenderUtil.setColor(0, 0, 1, 1);
+		glDisable(GL_TEXTURE_2D);
+		glLineWidth(2);
+		
+		Vec2 add = Vec2.add(pos, size);
+		
+		glBegin(GL_LINE_LOOP);
+		{
+			glVertex3f(pos.x(), pos.y(), layer);
+			glVertex3f(pos.x(), add.y(), layer);
+			glVertex3f(add.x(), add.y(), layer);
+			glVertex3f(add.x(), pos.y(), layer);
+		}
+		glEnd();
+		
+		glEnable(GL_TEXTURE_2D);
+		RenderUtil.setColor(1, 1, 1, 1);
+	}
+	
 	/** Fuck you */
 	public static void church() {
 		RenderUtil.setColor(0.870588f, 0.721569f, 0.529412f, 1);

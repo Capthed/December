@@ -126,5 +126,17 @@ public class Vec2 {
 		return false;
 	}
 	
+	public boolean intersects(Vec2 pos, Vec2 size) {
+		return Vec2.intersects(this, pos, size);
+	}
+	
+	public static boolean intersects(Vec2 point, Vec2 pos, Vec2 size) {
+		Vec2 add = Vec2.add(pos, size);
+		if (point.x >= pos.x() && point.x <= add.x() && point.y >= pos.y() && point.y <= add.y())
+			return true;
+		else 
+			return false;
+	}
+	
 	public String toString() { return "x: " + x + ", y: " + y; }
 }

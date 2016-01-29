@@ -94,6 +94,10 @@ public abstract class GameObject extends GameComponent {
 		return pos;
 	}
 	
+	public void setPos(Vec2 pos) {
+		this.pos = pos;
+	}
+	
 	public Texture getTex() {
 		return tex;
 	}

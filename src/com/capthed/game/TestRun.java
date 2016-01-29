@@ -2,6 +2,11 @@ package com.capthed.game;
 
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
+import com.capthed.abyss.component.gui.GUIButton;
+import com.capthed.abyss.component.gui.GUIButtonListener;
+import com.capthed.abyss.component.gui.GUICheckBox;
+import com.capthed.abyss.component.gui.GUICheckBoxListener;
+import com.capthed.abyss.component.gui.GUISlider;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
@@ -27,6 +32,9 @@ public class TestRun implements Game{
 	public static final Texture run2 = new Texture("res/run2.png");
 	public static final Texture run3 = new Texture("res/run3.png");
 	public static final Texture tex3 = new Texture("res/tile3.png");
+	public static final Texture texSlider = new Texture("res/slider.jpg");
+	private static GUIButton button;
+	private static GUICheckBox cb;
 	private static TestCollider t;
 	private static TestCollider2 t1;
 	public static Scene scene;
@@ -81,6 +89,7 @@ public class TestRun implements Game{
 		run1.loadTex();
 		run2.loadTex();
 		run3.loadTex();
+		texSlider.loadTex();
 		
 		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
@@ -121,6 +130,31 @@ public class TestRun implements Game{
 		lvl1.load("res/lvl3.png");
 		
 		t2 = new Test2(); // ZA GASIT
+		
+		button = (GUIButton) new GUIButton(new Vec2(500, 600), new Vec2(64, 64), anim, new GUIButtonListener() {
+			public void clicked() {
+				Debug.print("radi", "");
+			}
+			
+			public void onLoseFocus() {
+				Debug.print("valja", "");
+			}
+		}).setLayer(10);
+		
+		cb = (GUICheckBox) new GUICheckBox(new Vec2(200, 200), new Vec2(64, 64), texColl, texColl2, false, new GUICheckBoxListener() {
+			public void onChangeState(boolean b) {
+				Debug.print(b,"");
+			}
+			public void onGainFocus() {
+				Debug.print("valja", "");
+			}
+		}).setLayer(10);
+		
+		GUISlider slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(32, 32), texSlider, texColl2, 10, 100).setLayer(10);
+		lvl1.add(slider);
+		
+		MapManager.getCurrent().add(cb);
+		lvl1.add(button);
 	}
 
 	@Override
@@ -142,6 +176,8 @@ public class TestRun implements Game{
 	@Override
 	public void constRender() {
 		RenderDebug.church();
+		button.renderCollisionBox();
+		cb.renderCollisionBox();
 	}
 
 	@Override
