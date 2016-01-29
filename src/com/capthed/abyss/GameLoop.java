@@ -1,6 +1,7 @@
 package com.capthed.abyss;
 
 import com.capthed.abyss.component.GameComponent;
+import com.capthed.abyss.component.NullComponent;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.input.Input;
@@ -86,7 +87,8 @@ public class GameLoop implements Runnable {
 				Debug.print ("UPS: " + currUps, "");
 				Debug.print(Timer.getDelta(), " delta");
 				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
-				Debug.print("GameComponents created: ", GameComponent.getCurrID() + 1 + "");
+				Debug.print("GameComponents created: ", GameComponent.getGcs().size() + 1 + "");
+				Debug.print("NullComponents: ", NullComponent.numNulls+ "");
 				Debug.print("Textures active: ", texNum + "");
 				Debug.print("Colliders active: ", colNum + "");
 				Debug.print("", "");

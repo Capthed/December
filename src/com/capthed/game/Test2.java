@@ -25,6 +25,11 @@ public class Test2 extends GameComponent{
 			Abyss.stop();
 		}
 		
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_G)) {
+			if (!TestRun.slider.isNull())
+			TestRun.slider.destroy();
+		}
+		
 		if (Timer.getTimeRunning() >= 5 && des) {
 			des = false;
 			

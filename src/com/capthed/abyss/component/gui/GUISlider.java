@@ -50,7 +50,11 @@ public class GUISlider extends GameObject {
 				
 				slider.move(new Vec2(x, 0));
 			}
-		
+	}
+	
+	public void destroy() {
+		super.destroy();
+		slider.destroy();
 	}
 	
 	public Vec2 getSliderSize() {

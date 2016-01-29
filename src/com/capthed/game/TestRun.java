@@ -33,7 +33,7 @@ public class TestRun implements Game{
 	public static final Texture run3 = new Texture("res/run3.png");
 	public static final Texture tex3 = new Texture("res/tile3.png");
 	public static final Texture texSlider = new Texture("res/slider.jpg");
-	private static GUIButton button;
+	public static GUIButton button;
 	private static GUICheckBox cb;
 	private static TestCollider t;
 	private static TestCollider2 t1;
@@ -42,6 +42,7 @@ public class TestRun implements Game{
 	private static Test2 t2;
 	public static TestCollider2 other;
 	public static Animation anim;
+	public static GUISlider slider;
 	private static Map.TILE_SIZE tSize; 
 	private static int var0; // command line arg size
 
@@ -150,7 +151,7 @@ public class TestRun implements Game{
 			}
 		}).setLayer(10);
 		
-		GUISlider slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(32, 32), texSlider, texColl2, 10, 100).setLayer(10);
+		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(32, 32), texSlider, texColl2, 10, 100).setLayer(10);
 		lvl1.add(slider);
 		
 		MapManager.getCurrent().add(cb);
