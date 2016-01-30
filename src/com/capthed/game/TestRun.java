@@ -4,11 +4,13 @@ import javax.swing.JOptionPane;
 
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
+import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.gui.GUIButton;
 import com.capthed.abyss.component.gui.GUIButtonListener;
 import com.capthed.abyss.component.gui.GUICheckBox;
 import com.capthed.abyss.component.gui.GUICheckBoxListener;
 import com.capthed.abyss.component.gui.GUISlider;
+import com.capthed.abyss.component.gui.GUISliderListener;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
@@ -74,7 +76,7 @@ public class TestRun implements Game{
 		
 		run = new TestRun();
 		
-		Debug.setDebug(true);
+		Debug.setDebug(false);
 		
 		Abyss.create(1200, 720, run);
 		Abyss.setFPS(-1);
@@ -157,7 +159,24 @@ public class TestRun implements Game{
 			}
 		}).setLayer(10);
 		
-		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(25, 32), texSlider, texSlider2, 10, 100).setLayer(10);
+		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(25, 32), texSlider, texSlider2, 10, 100, new GUISliderListener() {
+			public void slidding() {
+				Debug.print(slider.getValue(), "");
+			}
+			
+			public void onGainFocus() {
+				Debug.print("focus");
+			}
+			
+			public void onLoseFocus() {
+				Debug.print("defocus");
+			}
+			
+			public void hover() {
+				if (Timer.getTimeRunning() <= 2)
+					Debug.print("kurac");
+			}
+		}).setLayer(10);
 		lvl1.add(slider);
 		
 		MapManager.getCurrent().add(cb);

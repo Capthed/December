@@ -94,10 +94,6 @@ public abstract class GameObject extends GameComponent {
 		return pos;
 	}
 	
-	public void setPos(Vec2 pos) {
-		this.pos = pos;
-	}
-	
 	public Texture getTex() {
 		return tex;
 	}
@@ -130,6 +126,10 @@ public abstract class GameObject extends GameComponent {
 	
 	public boolean isCollidable() {
 		return collidable;
+	}
+	
+	public Vec2 getCenter() {
+		return new Vec2(pos.x() + size.x() / 2, pos.y() + size.y() / 2);
 	}
 
 	public Animation getAnimation() {

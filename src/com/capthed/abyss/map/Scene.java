@@ -63,17 +63,21 @@ public class Scene {
 		for (int i = 0; i <gcs.size(); i++) {
 			GameComponent gc = GameComponent.getByID(gcs.get(i));
 			
-			if (gc.isEnabled() && !gc.isNull())
+			if (gc.isEnabled() && !gc.isNull() && gc.isInit())
 				gc.update();
 		}
 	}
 	
-	@SuppressWarnings("deprecation")
 	public void render() {
 		for (int i = 0; i < gcs.size(); i++)  {
 			GameComponent gc = GameComponent.getByID(gcs.get(i));
-			if (gc instanceof GameObject && gc.isEnabled())
-				gc.render();
+			if (gc instanceof GameObject && gc.isEnabled()) {
+				GameObject go = (GameObject)gc;
+				
+				if (go.isInit() && !go.isNull())
+					go.render();
+			}
+				
 		}
 	}
 	

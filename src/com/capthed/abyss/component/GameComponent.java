@@ -28,10 +28,6 @@ public abstract class GameComponent {
 		GameComponent.currId = currId;
 	}
 
-	@Deprecated
-	/** Only here for the loop logic. Render is actually a method of GameObject. */
-	public void render() {}
-	
 	public void setInit(boolean b) { initialized = b; }
 	
 	public boolean isInit() { return initialized; }
