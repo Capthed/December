@@ -1,5 +1,18 @@
 package com.capthed.abyss.gfx;
 
+import static org.lwjgl.opengl.GL11.GL_NEAREST;
+import static org.lwjgl.opengl.GL11.GL_RGB;
+import static org.lwjgl.opengl.GL11.GL_RGBA;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_2D;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MAG_FILTER;
+import static org.lwjgl.opengl.GL11.GL_TEXTURE_MIN_FILTER;
+import static org.lwjgl.opengl.GL11.GL_UNSIGNED_BYTE;
+import static org.lwjgl.opengl.GL11.glBindTexture;
+import static org.lwjgl.opengl.GL11.glGenTextures;
+import static org.lwjgl.opengl.GL11.glTexImage2D;
+import static org.lwjgl.opengl.GL11.glTexParameteri;
+import static org.lwjgl.stb.STBImage.stbi_load_from_memory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -10,18 +23,21 @@ import java.nio.IntBuffer;
 import java.nio.channels.Channels;
 import java.nio.channels.FileChannel;
 import java.nio.channels.ReadableByteChannel;
+import java.util.ArrayList;
 
 import org.lwjgl.BufferUtils;
 
-import static org.lwjgl.stb.STBImage.*;
-import static org.lwjgl.opengl.GL11.*;
-
 public class Texture {
+	
+	private static ArrayList<Texture> ids = new ArrayList<Texture>();
+	
+	private static int currId = 0;
 	
 	private ByteBuffer image;
 	private String path;
 	private int w, h, comp;
 	private int texID;
+	private int id;
 
 	public Texture(String path) {
 		this.path = path;
@@ -60,6 +76,9 @@ public class Texture {
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 		
 		unbind();
+		
+		id = currId++;
+		ids.add(this);
 		
 		return this;
 	}
@@ -110,6 +129,10 @@ public class Texture {
 		buffer.flip();
 		return buffer;
 	}
+	
+	public static Texture getByID(int id) {
+		return ids.get(id);
+	}
 
 	private static ByteBuffer resizeBuffer(ByteBuffer buffer, int newCapacity) {
 		ByteBuffer newBuffer = BufferUtils.createByteBuffer(newCapacity);
@@ -123,5 +146,9 @@ public class Texture {
 	/** Binds a 0 texture to OpenGL. */
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
+	}
+
+	public int getId() {
+		return id;
 	}
 }

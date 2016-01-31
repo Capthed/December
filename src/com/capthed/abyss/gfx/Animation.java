@@ -1,9 +1,15 @@
 package com.capthed.abyss.gfx;
 
+import java.util.ArrayList;
+
 import com.capthed.abyss.Timer;
 
 public class Animation {
 
+	private static ArrayList<Animation> ids = new ArrayList<Animation>();
+	
+	private static int currId = 0;
+	
 	private Texture[] texs;
 	private Type t;
 	private long dTime;
@@ -11,6 +17,7 @@ public class Animation {
 	private int currTex = 0;
 	private int maxTex;
 	private boolean var0 = false;
+	private int id;
 	
 	public enum Type {
 		ONCE, LOOP, BOUNCE_LOOP;
@@ -21,6 +28,9 @@ public class Animation {
 		this.t = t;
 		this.texs = texs;
 		this.dTime = dTime;
+		
+		id = currId++;
+		ids.add(this);
 		
 		maxTex = texs.length;
 	}
@@ -64,7 +74,15 @@ public class Animation {
 		this.t = t;
 	}
 
+	public int getId() {
+		return id;
+	}
+
 	public Texture[] getTexs() {
 		return texs;
+	}
+	
+	public static Animation getByID(int id) {
+		return ids.get(id);
 	}
 }

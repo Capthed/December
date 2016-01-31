@@ -1,2 +1,2 @@
 @echo off
-java -jar abyss.jar 64
+java -jar abyss.jar 64 1

@@ -1,7 +1,5 @@
 package com.capthed.game;
 
-import javax.swing.JOptionPane;
-
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
 import com.capthed.abyss.Timer;
@@ -20,6 +18,7 @@ import com.capthed.abyss.map.Scene;
 import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.CircleCollider;
 import com.capthed.abyss.physics.QuadCollider;
+import com.capthed.abyss.util.Util;
 import com.capthed.util.Debug;
 
 public class TestRun implements Game{
@@ -45,18 +44,24 @@ public class TestRun implements Game{
 	private static TestCollider2 t1;
 	public static Scene scene;
 	public static Map lvl1;
-	private static Test2 t2;
 	public static TestCollider2 other;
 	public static Animation anim;
 	public static GUISlider slider;
 	private static Map.TILE_SIZE tSize; 
 	private static int var0; // command line arg size
+	private static boolean debug; // command line arg
 
 	public static void main(String[] args) {
 		try {
 			var0 = Integer.valueOf(args[0]);
 		} catch(Exception e) {
 			var0 = 64;
+		}
+		
+		try {
+			debug = Integer.valueOf(args[1]) == 1 ? true : false;
+		} catch(Exception e) {
+			debug = true;
 		}
 		
 		switch(var0) {
@@ -76,7 +81,8 @@ public class TestRun implements Game{
 		
 		run = new TestRun();
 		
-		Debug.setDebug(false);
+		Debug.setDebug(debug);
+		Util.setLAFNimbus();
 		
 		Abyss.create(1200, 720, run);
 		Abyss.setFPS(-1);
@@ -138,11 +144,9 @@ public class TestRun implements Game{
 		
 		lvl1.load("res/lvl3.png");
 		
-		t2 = new Test2(); // ZA GASIT
-		
 		button = (GUIButton) new GUIButton(new Vec2(500, 600), new Vec2(64, 64), texbut, new GUIButtonListener() {
 			public void clicked() {
-				JOptionPane.showMessageDialog(null, "Toni je najveci isus ikad");
+				Util.info();
 			}
 			
 			public void onLoseFocus() {
@@ -191,12 +195,11 @@ public class TestRun implements Game{
 	
 	@Override
 	public void constInit() {
-		t2.init();
 	}
 
 	@Override
 	public void constUpdate() {
-		t2.update();
+		Util.check();
 	}
 
 	@Override

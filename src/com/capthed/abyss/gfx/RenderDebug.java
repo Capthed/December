@@ -6,6 +6,7 @@ import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.CircleCollider;
 import com.capthed.abyss.physics.Collider;
 import com.capthed.abyss.physics.QuadCollider;
+import com.capthed.util.Debug;
 
 public abstract class RenderDebug {
 	
@@ -13,6 +14,8 @@ public abstract class RenderDebug {
 	
 	/** Draws a quad on the screen with the start coordinates and the width and height */
 	public static void quad(float x, float y, float w, float h) {
+		if (!Debug.isDebug()) return;
+		
 		glDisable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
 		{
@@ -27,6 +30,8 @@ public abstract class RenderDebug {
 	
 	/** Draws a triangle on the screen with the coordinates of all the three points. */
 	public static void triangle(float x, float y, float x1, float y1, float x2, float y2) {	
+		if (!Debug.isDebug()) return;
+		
 		glDisable(GL_TEXTURE_2D);
 		glBegin(GL_TRIANGLES);
 		{
@@ -40,6 +45,8 @@ public abstract class RenderDebug {
 	
 	/** Draws a line on the screen with the coordinates of the two points and the line width. */
 	public static void line(float x, float y, float x1, float y1, float w) {
+		if (!Debug.isDebug()) return;
+		
 		glDisable(GL_TEXTURE_2D);
 		glBegin(GL_LINES);
 		{
@@ -53,6 +60,8 @@ public abstract class RenderDebug {
 	
 	/** Same as the other line but with Vec2. */
 	public static void line(Vec2 v1, Vec2 v2, float w) {
+		if (!Debug.isDebug()) return;
+		
 		line(v1.x(), v1.y(), v2.x(), v2.y(), w);
 	}
 	
@@ -63,6 +72,8 @@ public abstract class RenderDebug {
 	
 	/** Renders the collider boundaries. Uses the phyisics layer as the render layer. */
 	public static void collider(Collider c) {
+		if (!Debug.isDebug()) return;
+		
 		RenderUtil.setColor(0, 1, 0, 1);
 		glDisable(GL_TEXTURE_2D);
 		glLineWidth(2);
@@ -99,6 +110,8 @@ public abstract class RenderDebug {
 	}
 	
 	public static void box(Vec2 pos, Vec2 size, float layer) {
+		if (!Debug.isDebug()) return;
+		
 		RenderUtil.setColor(0, 0, 1, 1);
 		glDisable(GL_TEXTURE_2D);
 		glLineWidth(2);
@@ -120,6 +133,8 @@ public abstract class RenderDebug {
 	
 	/** Fuck you */
 	public static void church() {
+		if (!Debug.isDebug()) return;
+		
 		RenderUtil.setColor(0.870588f, 0.721569f, 0.529412f, 1);
 		RenderDebug.quad(50, 50, 64, 64);
 		RenderUtil.setColor(1, 0, 0, 1);

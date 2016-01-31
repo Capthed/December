@@ -1,37 +1,47 @@
-package com.capthed.game;
+package com.capthed.abyss.util;
 
 import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.capthed.abyss.Abyss;
-import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.input.Mouse;
-import com.capthed.abyss.map.Map;
-import com.capthed.abyss.map.MapManager;
+import com.capthed.util.Debug;
 
-public class Test2 extends GameComponent{
+public abstract class Util {
 
-	private boolean des = false;
-	
-	public Test2() {
-		super();
+	public static void setLAFNimbus() {
+		try {
+		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
+		        if ("Nimbus".equals(info.getName())) {
+		            UIManager.setLookAndFeel(info.getClassName());
+		            break;
+		        }
+		    }
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
-	public void update() {
-		check();
+	public static void showMsg(String txt) {
+		JOptionPane.showMessageDialog(null, txt);
 	}
 	
-	private void check() {
+	public static void check() {
 		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_ESCAPE)) {
 			Abyss.stop();
 		}
 		
 		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_G)) {
-			if (!TestRun.slider.isNull())
-			TestRun.slider.destroy();
+			CommandLine.get().createObject();
+		}
+		
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_T)) {
+			Debug.setDebug(!Debug.isDebug());
 		}
 		
 		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_2)) {
@@ -53,20 +63,19 @@ public class Test2 extends GameComponent{
 					GameObject go = (GameObject)GameComponent.getGcs().get(i);
 					
 					if (Mouse.getPos().intersects(go.getPos(), go.getSize())) {
-						JOptionPane.showMessageDialog(null, "ID: " + go.getID());
+						Util.showMsg( "ID: " + go.getID());
 						break;
 					}
 				}
 			}
 		}
-		
-		if (Timer.getTimeRunning() >= 5 && des) {
-			des = false;
-			
-			Map lvl2 = new Map("Level 2", Map.TILE_SIZE.T_64);
-			
-			MapManager.setCurrent(lvl2);
-			lvl2.load("res/lvl2.png");
-		}
+	}
+	
+	public static void info() {
+		showMsg("Esc - Close the game\n"
+				   + "G - Command line for creating objects\n"
+				   + "T - Toggle debug mode\n"
+				   + "Left Click - Destroy the selected object\n"
+				   + "Middle click - Show the selected object's id\n");
 	}
 }
