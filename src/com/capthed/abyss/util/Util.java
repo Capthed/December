@@ -44,6 +44,10 @@ public abstract class Util {
 			Debug.setDebug(!Debug.isDebug());
 		}
 		
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_V)) {
+			CommandLine.get().remove();
+		}
+		
 		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_2)) {
 			for (int i = 0; i < GameComponent.getGcs().size(); i++) {
 				if (GameComponent.getGcs().get(i).isEnabled() && GameComponent.getGcs().get(i) instanceof GameObject) {
@@ -74,6 +78,7 @@ public abstract class Util {
 	public static void info() {
 		showMsg("Esc - Close the game\n"
 				   + "G - Command line for creating objects\n"
+				   + "V - Command line for destroying objects\n"
 				   + "T - Toggle debug mode\n"
 				   + "Left Click - Destroy the selected object\n"
 				   + "Middle click - Show the selected object's id\n");

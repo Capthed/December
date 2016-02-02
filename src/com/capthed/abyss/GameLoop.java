@@ -2,6 +2,7 @@ package com.capthed.abyss;
 
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.NullComponent;
+import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.input.Input;
@@ -51,6 +52,10 @@ public class GameLoop implements Runnable {
 				Abyss.stop();
 			
 			if (fps == -1) msRenderPerSecond = 0;
+			
+			if (Camera.getCurrent() == null) {
+				Debug.err("Camera not initialized");
+			}
 			
 			lastTime = startTime;
 			startTime = Timer.getTime ();

@@ -10,6 +10,8 @@ import com.capthed.abyss.component.gui.GUICheckBoxListener;
 import com.capthed.abyss.component.gui.GUISlider;
 import com.capthed.abyss.component.gui.GUISliderListener;
 import com.capthed.abyss.gfx.Animation;
+import com.capthed.abyss.gfx.Camera;
+import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.Map;
@@ -50,6 +52,7 @@ public class TestRun implements Game{
 	private static Map.TILE_SIZE tSize; 
 	private static int var0; // command line arg size
 	private static boolean debug; // command line arg
+	public static Camera cam;
 
 	public static void main(String[] args) {
 		try {
@@ -118,7 +121,7 @@ public class TestRun implements Game{
 		new TileTest3(0xff3AFF1C, tex5);
 		new TileTest4(0xffFFBE3D, tex6);
 		
-		Vec2 pos = new Vec2(500, 250);
+		Vec2 pos = new Vec2(Display.getWidth() / 2 - var0 / 2, Display.getHeight() / 2 + var0 / 2);
 		Vec2 size = new Vec2(var0, var0);
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
@@ -128,6 +131,9 @@ public class TestRun implements Game{
 		
 		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), anim).setLayer(30);
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(size)))); // WASD
+		
+		cam = new Camera(new Vec2(0, 0));
+		Camera.setCurrent(cam.init());
 		
 		t1 = (TestCollider2) new TestCollider2(Vec2.add(pos, delta2), new Vec2(size), run1).setLayer(19);
 		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), size.x() / 2)); // ONI S KRUGON

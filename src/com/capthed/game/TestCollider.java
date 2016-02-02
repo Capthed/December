@@ -36,12 +36,15 @@ public class TestCollider extends Entity {
 			tryMove (new Vec2(0, -speed));
 		
 		
+		
 		if (!v.equals(pos)) {
 			animation = TestRun.anim;
+			TestRun.cam.move(Vec2.sub(pos, v));
 		} else {
 			animation = null;
 			tex = TestRun.run1;
 		}
+		
 		
 		/*if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_1)) {
 			TestCollider2 t = TestRun.other;

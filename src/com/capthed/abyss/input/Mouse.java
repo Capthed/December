@@ -4,6 +4,7 @@ import java.nio.DoubleBuffer;
 
 import org.lwjgl.BufferUtils;
 
+import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.math.Vec2;
 
@@ -73,8 +74,11 @@ public class Mouse {
 	public static float getX() {
 		updatePos();
 		x.rewind();
+	
+		float fx = (float)(x.get());
+		fx += Camera.getCurrent().getPos().x();
 		
-		return (float)(x.get());
+		return fx;
 	}
 	
 	/** @return The y position of the mouse on the screen. */
@@ -82,7 +86,10 @@ public class Mouse {
 		updatePos();
 		y.rewind();
 		
-		return (float)(Display.getHeight() - y.get());
+		float fy = (float)y.get();
+		fy -= Camera.getCurrent().getPos().y();
+		
+		return Display.getHeight() - fy;
 	}
 	
 	static void postProcess() {

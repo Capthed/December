@@ -41,16 +41,6 @@ public abstract class Render {
 	}
 	
 	private static boolean checkBoundaries(GameObject go) {
-		boolean b = true;
-		
-		float x = go.getPos().x();
-		float y = go.getPos().y();
-		float w = go.getSize().x();
-		float h = go.getSize().y();
-		
-		if (y > Display.getHeight() || (y + h) < 0 || x > Display.getWidth() || (x + w) < 0)
-			b = false;
-		
-		return b;
+		return Camera.getCurrent().checkBoundaries(go.getPos(), go.getSize());
 	}
 }

@@ -4,6 +4,7 @@ import java.util.StringTokenizer;
 
 import javax.swing.JOptionPane;
 
+import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Texture;
@@ -54,6 +55,17 @@ public class CommandLine {
 		} catch(Exception e) {
 			Util.showMsg("Invalid input");
 		}
+	}
+	
+	public void remove() {
+		String info = JOptionPane.showInputDialog(null, "ID of object to remove: ");
+		if (info == null || info.trim() == "") return;
+		
+		int id = Integer.valueOf(info);
+		if (id < GameComponent.getGcs().size())
+			GameComponent.getByID(id).destroy();
+		else
+			Util.showMsg("ID non-existant");
 	}
 	
 	public static CommandLine get() { return cmd; }
