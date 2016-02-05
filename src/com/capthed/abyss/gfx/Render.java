@@ -53,7 +53,7 @@ public abstract class Render {
 		float eu = ce.getUVSize().x();
 		float ev = ce.getUVSize().y();
 		
-		float l = 20; // TODO:
+		float l = RenderUtil.layerLimit(); // TODO:
 		
 		ce.getFont().getTex().bind();
 		glBegin(GL_QUADS);

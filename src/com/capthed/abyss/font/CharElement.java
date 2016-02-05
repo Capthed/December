@@ -3,7 +3,7 @@ package com.capthed.abyss.font;
 import com.capthed.abyss.math.Vec2;
 
 public class CharElement {
-
+	
 	private Font font;
 	private Vec2 pos;
 	private char sign;

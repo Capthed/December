@@ -47,7 +47,7 @@ public class TestRun implements Game{
 	public static final Texture texbut = new Texture("res/button.png");
 	public static final Texture fontTex = new Texture("res/font.gif");
 	public static Font font;
-	private static HashMap<Character, CharElement> lex;
+	public static HashMap<Character, CharElement> lex;
 	private static Text txt;
 	public static GUIButton button;
 	private static GUICheckBox cb;
@@ -120,22 +120,14 @@ public class TestRun implements Game{
 		fontTex.loadTex();
 		
 		font = new Font(fontTex, .062f, .15f, 0, .045f);
-		CharElement A = new CharElement(font, new Vec2(0, 0), 'A');
-		CharElement B = new CharElement(font, new Vec2(1, 0), 'B');
-		CharElement C = new CharElement(font, new Vec2(2, 0), 'C');
-		CharElement c5 = new CharElement(font, new Vec2(1, 4), '5');
 		
 		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
 		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(var0, var0), anim).setLayer(10);
 		
-		lex = new HashMap<Character, CharElement>();
-		lex.put('A', A);
-		lex.put('B', B);
-		lex.put('C', C);
-		lex.put('5', c5);
+		lex = font.loadLex(new String[]{"ABCDEFGHIJKLMNOP", "QRSTUVWXYZ", "abcdefghijklmnop", "qrstuvwxyz..&123", "4567890"});
 		
-		txt = new Text(new Vec2(100, 100), new Vec2(32, 32), "ABBC5A", lex);
+		txt = new Text(new Vec2(650, 350), new Vec2(16, 32), "60fps", lex);
 		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
@@ -235,7 +227,6 @@ public class TestRun implements Game{
 	@Override
 	public void constRender() {
 		RenderDebug.church();
-		txt.render();
 	}
 
 	@Override

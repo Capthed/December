@@ -1,7 +1,8 @@
 package com.capthed.abyss.gfx;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.glTranslatef;
 
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.math.Vec2;
 
 public class Camera {
@@ -23,6 +24,8 @@ public class Camera {
 	public void move(Vec2 delta) {
 		if (current == this)
 			glTranslatef(-delta.x(), -delta.y(), 0);
+		
+		GameLoop.moveDebug(delta);
 		
 		pos.add(delta);
 	}

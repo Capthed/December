@@ -32,4 +32,24 @@ public class Text {
 				Render.charTex(Vec2.add(pos, new Vec2(charSize.x() * i, charSize.y())), charSize, ce);
 		}
 	}
+	
+	public Vec2 getPos() {
+		return pos;
+	}
+
+	public Vec2 getCharSize() {
+		return charSize;
+	}
+
+	public void setCharSize(Vec2 charSize) {
+		this.charSize = charSize;
+	}
+
+	public void setPos(Vec2 pos) {
+		this.pos = pos;
+	}
+
+	public String getText() { return txt; }
+	
+	public void setText(String txt) { this.txt = txt; }
 }

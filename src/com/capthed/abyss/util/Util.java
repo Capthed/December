@@ -5,6 +5,7 @@ import javax.swing.UIManager;
 import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.capthed.abyss.Abyss;
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.input.Keyboard;
@@ -48,6 +49,10 @@ public abstract class Util {
 			CommandLine.get().remove();
 		}
 		
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_F1)) {
+			GameLoop.setDebugRender(!GameLoop.isDebugRender());
+		}
+		
 		if (Mouse.isKeyPressed(Keys.GLFW_MOUSE_BUTTON_2)) {
 			for (int i = 0; i < GameComponent.getGcs().size(); i++) {
 				if (GameComponent.getGcs().get(i).isEnabled() && GameComponent.getGcs().get(i) instanceof GameObject) {
@@ -77,6 +82,7 @@ public abstract class Util {
 	
 	public static void info() {
 		showMsg("Esc - Close the game\n"
+				   + "F1 - Render debug info\n" 
 				   + "G - Command line for creating objects\n"
 				   + "V - Command line for destroying objects\n"
 				   + "T - Toggle debug mode\n"
