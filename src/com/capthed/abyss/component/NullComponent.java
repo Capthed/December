@@ -7,6 +7,7 @@ public class NullComponent extends GameComponent {
 	public NullComponent() {
 		super();
 		numNulls++;
+		setCurrID(getCurrID() - 1);
 		gcs.remove(gcs.size() - 1);
 	}
 	

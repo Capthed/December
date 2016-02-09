@@ -4,16 +4,12 @@ import java.util.HashMap;
 
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
-import com.capthed.abyss.Timer;
+import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.gui.GUIButton;
-import com.capthed.abyss.component.gui.GUIButtonListener;
-import com.capthed.abyss.component.gui.GUICheckBox;
-import com.capthed.abyss.component.gui.GUICheckBoxListener;
+import com.capthed.abyss.component.gui.GUILabel;
 import com.capthed.abyss.component.gui.GUISlider;
-import com.capthed.abyss.component.gui.GUISliderListener;
 import com.capthed.abyss.font.CharElement;
 import com.capthed.abyss.font.Font;
-import com.capthed.abyss.font.Text;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Display;
@@ -48,9 +44,7 @@ public class TestRun implements Game{
 	public static final Texture fontTex = new Texture("res/font.gif");
 	public static Font font;
 	public static HashMap<Character, CharElement> lex;
-	private static Text txt;
 	public static GUIButton button;
-	private static GUICheckBox cb;
 	private static TestCollider t;
 	private static TestCollider2 t1;
 	public static Scene scene;
@@ -62,6 +56,8 @@ public class TestRun implements Game{
 	private static int var0; // command line arg size
 	private static boolean debug; // command line arg
 	public static Camera cam;
+	private static int w, h;
+	private static boolean fs, decorated;
 
 	public static void main(String[] args) {
 		try {
@@ -74,6 +70,18 @@ public class TestRun implements Game{
 			debug = Integer.valueOf(args[1]) == 1 ? true : false;
 		} catch(Exception e) {
 			debug = true;
+		}
+		
+		try {
+			w = Integer.valueOf(args[2]);
+			h = Integer.valueOf(args[3]);
+			fs = Integer.valueOf(args[4]) == 1 ? true : false;
+			decorated = Integer.valueOf(args[5]) == 1 ? true : false;
+		} catch(Exception e) {
+			w = 1200;
+			h = 720;
+			fs = false;
+			decorated = true;
 		}
 		
 		switch(var0) {
@@ -94,9 +102,8 @@ public class TestRun implements Game{
 		run = new TestRun();
 		
 		Debug.setDebug(debug);
-		Util.setLAFNimbus();
 		
-		Abyss.create(1200, 720, run);
+		Abyss.create(w, h, run);
 		Abyss.setFPS(-1);
 		Abyss.start();
 	}
@@ -123,11 +130,7 @@ public class TestRun implements Game{
 		
 		anim = new Animation(new Texture[] {run2, run3}, 100, Animation.Type.BOUNCE_LOOP);
 		
-		AnimTest at = (AnimTest) new AnimTest(new Vec2(500, 500), new Vec2(var0, var0), anim).setLayer(10);
-		
 		lex = font.loadLex(new String[]{"ABCDEFGHIJKLMNOP", "QRSTUVWXYZ", "abcdefghijklmnop", "qrstuvwxyz..&123", "4567890"});
-		
-		txt = new Text(new Vec2(650, 350), new Vec2(16, 32), "60fps", lex);
 		
 		//new ExtInput();
 		new TileTest1(0xffFFD2C4, tex);
@@ -142,9 +145,6 @@ public class TestRun implements Game{
 		Vec2 delta = new Vec2(0, -100);
 		Vec2 delta2 = new Vec2(100, 100);
 		
-		other = (TestCollider2) new TestCollider2(pos, size, texColl).setLayer(20);
-		other.setCollider(new QuadCollider(new Vec2(pos), new Vec2(size))); // MIS
-		
 		t = (TestCollider) new TestCollider(Vec2.add(pos, delta), new Vec2(size), anim).setLayer(30);
 		t.setCollider(new QuadCollider(Vec2.add(pos, delta), new Vec2(new Vec2(size)))); // WASD
 		
@@ -155,64 +155,22 @@ public class TestRun implements Game{
 		t1.setCollider(new CircleCollider(CircleCollider.calcCenter(t1), size.x() / 2)); // ONI S KRUGON
 		
 		lvl1 = new Map("Level 1", tSize);
-	
-		lvl1.add(other);
 		
 		lvl1.add(t1);
-		lvl1.add(at);
 		lvl1.add(t);
 		
 		MapManager.setCurrent(lvl1);
 		
 		lvl1.load("res/lvl3.png");
 		
-		button = (GUIButton) new GUIButton(new Vec2(500, 600), new Vec2(64, 64), texbut, new GUIButtonListener() {
-			public void clicked() {
-				Util.info();
-			}
-			
-			public void onLoseFocus() {
-				Debug.print("valja", "");
-			}
-		}).setLayer(10);
-		
-		cb = (GUICheckBox) new GUICheckBox(new Vec2(200, 200), new Vec2(32, 32), texColl, texColl2, false, new GUICheckBoxListener() {
-			public void onChangeState(boolean b) {
-				Debug.print(b,"");
-			}
-			public void onGainFocus() {
-				Debug.print("valja", "");
-			}
-		}).setLayer(10);
-		
-		slider = (GUISlider) new GUISlider(new Vec2(300, 300), new Vec2(128, 16), new Vec2(25, 32), texSlider, texSlider2, 10, 100, new GUISliderListener() {
-			public void slidding() {
-				Debug.print(slider.getValue(), "");
-			}
-			
-			public void onGainFocus() {
-				Debug.print("focus");
-			}
-			
-			public void onLoseFocus() {
-				Debug.print("defocus");
-			}
-			
-			public void hover() {
-				if (Timer.getTimeRunning() <= 2)
-					Debug.print("kurac");
-			}
-		}).setLayer(10);
-		lvl1.add(slider);
-		
-		MapManager.getCurrent().add(cb);
-		lvl1.add(button);
+		GUILabel l = (GUILabel) new GUILabel(new Vec2(200, 200), new Vec2(128, 128), texSlider, "toni je  glavna   manga", new Vec2(16, 32), GameLoop.getDebugFont()).setLayer(80);
+		lvl1.add(l);
 	}
 
 	@Override
 	public void initDisplay() {
-		Abyss.setFullscreen(false);
-		Abyss.createDisplay("Abyss " + Abyss.getVersion(), false);
+		Abyss.setFullscreen(fs);
+		Abyss.createDisplay("Abyss " + Abyss.getVersion(), decorated);
 	}
 	
 	@Override

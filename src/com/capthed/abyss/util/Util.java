@@ -1,8 +1,6 @@
 package com.capthed.abyss.util;
 
 import javax.swing.JOptionPane;
-import javax.swing.UIManager;
-import javax.swing.UIManager.LookAndFeelInfo;
 
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.GameLoop;
@@ -15,18 +13,7 @@ import com.capthed.util.Debug;
 
 public abstract class Util {
 
-	public static void setLAFNimbus() {
-		try {
-		    for (LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-		        if ("Nimbus".equals(info.getName())) {
-		            UIManager.setLookAndFeel(info.getClassName());
-		            break;
-		        }
-		    }
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	private static boolean var0 = false;
 	
 	public static void showMsg(String txt) {
 		JOptionPane.showMessageDialog(null, txt);
@@ -37,16 +24,12 @@ public abstract class Util {
 			Abyss.stop();
 		}
 		
-		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_G)) {
-			CommandLine.get().createObject();
-		}
-		
-		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_T)) {
-			Debug.setDebug(!Debug.isDebug());
-		}
-		
-		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_V)) {
-			CommandLine.get().remove();
+		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_F2)) {
+			if (!var0) {
+				DebugPrompt.get().openPrompt();
+				var0 = true;
+			} else
+				DebugPrompt.get().openAgain();
 		}
 		
 		if (Keyboard.isKeyPressed(Keys.GLFW_KEY_F1)) {
@@ -83,9 +66,7 @@ public abstract class Util {
 	public static void info() {
 		showMsg("Esc - Close the game\n"
 				   + "F1 - Render debug info\n" 
-				   + "G - Command line for creating objects\n"
-				   + "V - Command line for destroying objects\n"
-				   + "T - Toggle debug mode\n"
+				   + "F2 - Debug prompt\n"
 				   + "Left Click - Destroy the selected object\n"
 				   + "Middle click - Show the selected object's id\n");
 	}

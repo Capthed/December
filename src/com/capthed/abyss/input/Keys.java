@@ -8,6 +8,18 @@ import org.lwjgl.glfw.GLFW;
  */
 public class Keys extends GLFW {
 
-		// TODO: temporary
+	public static int getKey(char c) {
+		int key = -1;
+		
+		if (c >= 'A' && c <= 'Z')
+			key = (int)c;
+		else if (c >= 'a' && c <= 'z')
+			key = (int)(c - 32);
+		
+		return key;
+	}
 	
+	public static char getSign(int key) {
+		return (char)key;
+	}
 }

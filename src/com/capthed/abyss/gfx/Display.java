@@ -103,6 +103,7 @@ public abstract class Display {
 
 	public static void setShowMouse(boolean showMouse) {
 		Display.showMouse = showMouse;
+		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
 	}
 
 	/** @return The GLFW Window long. */

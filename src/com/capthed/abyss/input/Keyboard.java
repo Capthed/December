@@ -1,8 +1,9 @@
 package com.capthed.abyss.input;
 
-import org.lwjgl.glfw.GLFWKeyCallback;
+import static org.lwjgl.glfw.GLFW.GLFW_PRESS;
+import static org.lwjgl.glfw.GLFW.GLFW_RELEASE;
 
-import static org.lwjgl.glfw.GLFW.*;
+import org.lwjgl.glfw.GLFWKeyCallback;
 
 public class Keyboard extends GLFWKeyCallback {
 	
@@ -10,6 +11,7 @@ public class Keyboard extends GLFWKeyCallback {
 	
 	public static boolean[] keysDown;
 	public static int[] keysPressed;
+	public static boolean listening = true;
 	
 	static void init() {	
 		keysDown = new boolean[size];	
@@ -23,16 +25,20 @@ public class Keyboard extends GLFWKeyCallback {
 	
 	@Override
 	public void invoke(long window, int key, int scancode, int action, int mods) {
-		keysDown[key] = action == GLFW_RELEASE ? false : true;
-		
+		if (action == GLFW_RELEASE)
+			keysDown[key] = false;
+		else
+			keysDown[key] = true;
+			
 		if (action == GLFW_PRESS && keysPressed[key] == 0)
 			keysPressed[key] = 1;
-		else if (action == GLFW_RELEASE)
+		else if (action == GLFW_RELEASE || listening == false)
 			keysPressed[key] = 0;
 	}
 	
 	/** @return True if the key is held down. */
-	public static boolean isKeyDown(int key) {	
+	public static boolean isKeyDown(int key) {
+		if (!listening) return false;
 		return keysDown[key];
 	}
 	
@@ -41,6 +47,7 @@ public class Keyboard extends GLFWKeyCallback {
 	 * it is released and clicked again.
 	 */
 	public static boolean isKeyPressed(int key) {
+		if (!listening) return false;
 		return keysPressed[key] == 1 ? true : false;
 	}
 	
@@ -49,5 +56,13 @@ public class Keyboard extends GLFWKeyCallback {
 			if (keysPressed[i] == 1)
 				keysPressed[i] = 2;
 		}
+	}
+
+	public static boolean isListening() {
+		return listening;
+	}
+
+	public static void setListening(boolean listening) {
+		Keyboard.listening = listening;
 	}
 }

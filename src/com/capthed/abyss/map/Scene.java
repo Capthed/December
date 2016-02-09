@@ -60,7 +60,7 @@ public class Scene {
 	}
 	
 	public void update() {
-		for (int i = 0; i <gcs.size(); i++) {
+		for (int i = 0; i < gcs.size(); i++) {
 			GameComponent gc = GameComponent.getByID(gcs.get(i));
 			
 			if (gc.isEnabled() && !gc.isNull() && gc.isInit())

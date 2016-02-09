@@ -14,6 +14,7 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Input;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.abyss.util.DebugPrompt;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -48,6 +49,7 @@ public class GameLoop implements Runnable {
 	
 	/** The main game loop. */
 	public void run() {
+		
 		initSubsystems();
 		
 		debugRender = Debug.isDebug();
@@ -59,8 +61,6 @@ public class GameLoop implements Runnable {
 		Debug.print("", "Main game loop started");
 		Debug.print("FPS " + fps, "\t\tUPS " + UPS);
 		Debug.print("**********************", "");
-		
-		initDebug();
 		
 		long lastTime = Timer.getTime ();
 		long startTime = Timer.getTime ();
@@ -144,15 +144,16 @@ public class GameLoop implements Runnable {
 		Vec2 pos = new Vec2(30, 700);
 		Vec2 size = new Vec2(16, 16);
 		
-		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "a", lex);
-		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60)), size, "b", lex);
-		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90)), size, "b", lex);
-		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120)), size, "b", lex);
-		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150)), size, "c", lex);
-		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180)), size, "c", lex);
-		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210)), size, "b", lex);
-		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240)), size, "b", lex);
+		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "Loading...", lex);
+		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60)), size, "Loading...", lex);
+		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90)), size, "Loading...", lex);
+		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120)), size, "Loading...", lex);
+		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150)), size, "Loading...", lex);
+		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180)), size, "Loading...", lex);
+		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210)), size, "Loading...", lex);
+		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240)), size, "Loading...", lex);
 		
+		DebugPrompt.get().initPrompt();
 	}
 	
 	public static void moveDebug(Vec2 delta) {
@@ -164,6 +165,8 @@ public class GameLoop implements Runnable {
 		nullTxt.setPos(Vec2.add(nullTxt.getPos(), delta));
 		texTxt.setPos(Vec2.add(texTxt.getPos(), delta));
 		collTxt.setPos(Vec2.add(collTxt.getPos(), delta));
+		
+		DebugPrompt.get().move(delta);
 	}
 	
 	private static void debugRender() {
@@ -222,6 +225,8 @@ public class GameLoop implements Runnable {
 		RenderUtil.setClearColor(0f, 0f, 0f, 1);	
 		
 		Display.show();
+		
+		initDebug();
 		
 		Abyss.getGame().init();
 		
@@ -286,5 +291,9 @@ public class GameLoop implements Runnable {
 
 	public static void setDebugRender(boolean debugRender) {
 		GameLoop.debugRender = debugRender;
+	}
+
+	public static Font getDebugFont() {
+		return debugFont;
 	}
 }

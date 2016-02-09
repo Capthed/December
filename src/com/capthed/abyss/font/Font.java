@@ -11,6 +11,7 @@ public class Font {
 	private float letterW, letterH;
 	private float deltaX, deltaY;
 	private CharElement space;
+	private HashMap<Character, CharElement> lex;
 	
 	public Font(Texture tex, float letterW, float letterH, float deltaX, float deltaY) {
 		this.tex = tex;
@@ -25,7 +26,7 @@ public class Font {
 	}
 	
 	public HashMap<Character, CharElement> loadLex(String[] chars) {
-		HashMap<Character, CharElement> lex = new HashMap<Character, CharElement>();
+		lex = new HashMap<Character, CharElement>();
 		
 		for (int i = 0; i < chars.length; i++) {
 			for (int i2 = 0; i2 < chars[i].length(); i2++) {
@@ -35,6 +36,10 @@ public class Font {
 		
 		lex.put(' ', space);
 		
+		return lex;
+	}
+	
+	public HashMap<Character, CharElement> getLex() {
 		return lex;
 	}
 
