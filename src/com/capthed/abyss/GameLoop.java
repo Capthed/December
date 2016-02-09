@@ -141,7 +141,7 @@ public class GameLoop implements Runnable {
 		lex = debugFont.loadLex(new String[] {"", "", "!\"#$%&'()*+,-./0", "123456789:;<=>?@", "ABCDEFGHIJKLMNOP", 
 				"QRSTUVWXYZ[\\]{_", "{abcdefghijklmno", "pqrstuvwxyz"});
 		
-		Vec2 pos = new Vec2(30, 700);
+		Vec2 pos = new Vec2(30, Display.getHeight() - 30);
 		Vec2 size = new Vec2(16, 16);
 		
 		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "Loading...", lex);

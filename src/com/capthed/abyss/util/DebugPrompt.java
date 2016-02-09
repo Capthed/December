@@ -34,6 +34,8 @@ public class DebugPrompt {
 		Texture tex = new Texture("res/debugPrompt.png");
 		tex.loadTex();
 		
+		System.out.println(Display.getHeight());
+		
 		Font font = GameLoop.getDebugFont();
 		Text txt = new Text(new Vec2(0, Display.getHeight() - 35), new Vec2(20, 32), ">:", font.getLex());
 		txt.setColor(0.83f, 0.88f, 0.23f, 1);
