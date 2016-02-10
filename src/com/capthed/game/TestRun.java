@@ -5,6 +5,7 @@ import java.util.HashMap;
 import com.capthed.abyss.Abyss;
 import com.capthed.abyss.Game;
 import com.capthed.abyss.GameLoop;
+import com.capthed.abyss.Timer;
 import com.capthed.abyss.component.gui.GUIButton;
 import com.capthed.abyss.component.gui.GUILabel;
 import com.capthed.abyss.component.gui.GUISlider;
@@ -15,6 +16,8 @@ import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
+import com.capthed.abyss.input.Controller;
+import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.map.Map;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.map.Scene;
@@ -180,6 +183,26 @@ public class TestRun implements Game{
 	@Override
 	public void constUpdate() {
 		Util.check();
+		
+		float speed = (float) (64 * Timer.getDelta());
+		
+		if (Controller.isButtonDown(Keys.BUTTON_RIGHTANALOG))
+			speed = (float) (400 * Timer.getDelta());
+		if (Controller.getAxis(Keys.RA_L_R) >= 0.2f)
+			Camera.getCurrent().move (new Vec2(speed, 0));
+		if (Controller.getAxis(Keys.RA_L_R) <= -0.2f)
+			Camera.getCurrent().move (new Vec2(-speed, 0));
+		if (Controller.getAxis(Keys.RA_U_D) >= 0.2f)
+			Camera.getCurrent().move (new Vec2(0, -speed));
+		if (Controller.getAxis(Keys.RA_U_D) <= -0.2f)
+			Camera.getCurrent().move (new Vec2(0, speed));
+		
+		if (Controller.isButtonPressed(Keys.BUTTON_Y)) {
+			Vec2 var0 = Vec2.sub(Vec2.sub(t.getCenter(), new Vec2(Display.getWidth() / 2, Display.getHeight() / 2)), cam.getPos());
+			
+			if (!Camera.getCurrent().getPos().equals(var0))
+				Camera.getCurrent().move(var0);
+		}
 	}
 
 	@Override

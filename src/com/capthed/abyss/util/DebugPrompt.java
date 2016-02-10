@@ -2,6 +2,7 @@ package com.capthed.abyss.util;
 
 import java.util.StringTokenizer;
 
+import com.capthed.abyss.Abyss;
 import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.GameObject;
@@ -13,6 +14,7 @@ import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
+import com.capthed.abyss.input.Controller;
 import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.math.Vec2;
@@ -33,8 +35,6 @@ public class DebugPrompt {
 	public void initPrompt() {
 		Texture tex = new Texture("res/debugPrompt.png");
 		tex.loadTex();
-		
-		System.out.println(Display.getHeight());
 		
 		Font font = GameLoop.getDebugFont();
 		Text txt = new Text(new Vec2(0, Display.getHeight() - 35), new Vec2(20, 32), ">:", font.getLex());
@@ -59,7 +59,10 @@ public class DebugPrompt {
 		
 		String first = token.nextToken();
 		
-		if(first.equals("debug")) {
+		if (first.equals("exit")) {
+			Abyss.stop();
+		}
+		else if(first.equals("debug")) {
 			String var0 = token.nextToken();
 			if (var0.equals("on"))
 				Debug.setDebug(true);
@@ -110,6 +113,14 @@ public class DebugPrompt {
 				Display.setShowMouse(true);
 			else if (var0.equals("off"))
 				Display.setShowMouse(false);
+		}
+		else if (first.equals("controller")) {
+			String var0 = token.nextToken();
+			if (var0.equals("on")) {
+				Controller.init();
+			}
+			else if (var0.equals("off"))
+				Controller.setHas(false);
 		}
 	}
 	

@@ -14,7 +14,7 @@ public abstract class Render {
 		if (!checkBoundaries(go)) return;
 		
 		float x = go.getPos().x();
-		float y = go.getPos().y();
+		float y = go.getPos().y() ;
 		float w = go.getSize().x();
 		float h = go.getSize().y();
 		float l = go.getLayer();

@@ -10,7 +10,7 @@ import com.capthed.abyss.math.Vec2;
 
 import static org.lwjgl.glfw.GLFW.*;
 
-public class Mouse {
+public abstract class Mouse {
 
 	private static int size = 12;
 	

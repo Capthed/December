@@ -195,6 +195,7 @@ public class GameLoop implements Runnable {
 	
 	private static void update() {
 		Input.pollEvents();
+		Input.update();
 		
 		MapManager.getCurrent().update();
 		

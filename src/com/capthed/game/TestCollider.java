@@ -5,6 +5,7 @@ import com.capthed.abyss.component.Entity;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
+import com.capthed.abyss.input.Controller;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.math.Vec2;
@@ -35,7 +36,16 @@ public class TestCollider extends Entity {
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_S))
 			tryMove (new Vec2(0, -speed));
 		
-		
+		if (Controller.isButtonDown(Keys.BUTTON_LEFTANALOG))
+			speed = (float) (400 * Timer.getDelta());
+		if (Controller.getAxis(0) >= 0.2f)
+			tryMove (new Vec2(speed, 0));
+		if (Controller.getAxis(0) <= -0.2f)
+			tryMove (new Vec2(-speed, 0));
+		if (Controller.getAxis(1) >= 0.2f)
+			tryMove (new Vec2(0, -speed));
+		if (Controller.getAxis(1) <= -0.2f)
+			tryMove (new Vec2(0, speed));
 		
 		if (!v.equals(pos)) {
 			animation = TestRun.anim;

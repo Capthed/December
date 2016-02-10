@@ -16,11 +16,11 @@ public class Camera {
 	}
 	
 	public Camera init() {
-		glTranslatef(-pos.x(), -pos.y(), 0);
+		glTranslatef(-pos.x(),-pos.y(), 0);
 		
 		return this;
 	}
-	
+
 	public void move(Vec2 delta) {
 		if (current == this)
 			glTranslatef(-delta.x(), -delta.y(), 0);

@@ -7,6 +7,11 @@ public abstract class Input {
 	public static void init() {
 		Keyboard.init();
 		Mouse.init();
+		Controller.init();
+	}
+	
+	public static void update() {
+		Controller.update();
 	}
 	
 	public static void postProcess() {
