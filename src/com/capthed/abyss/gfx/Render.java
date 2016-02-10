@@ -42,6 +42,7 @@ public abstract class Render {
 		GameLoop.addTex();
 	}
 	
+	/** Renders a CharElement texture. */
 	public static void charTex(Vec2 pos, Vec2 size, CharElement ce) {
 		float x = pos.x();
 		float y = pos.y();
@@ -53,7 +54,7 @@ public abstract class Render {
 		float eu = ce.getUVSize().x();
 		float ev = ce.getUVSize().y();
 		
-		float l = RenderUtil.layerLimit(); // TODO:
+		float l = RenderUtil.layerLimit();
 		
 		ce.getFont().getTex().bind();
 		glBegin(GL_QUADS);

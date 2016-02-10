@@ -132,6 +132,7 @@ public class GUISlider extends GameObject {
 		return value;
 	}
 	
+	/** The ammount of pixels that is allowed to be between the slider and mouse before it registers it as a move. */
 	public float getMarginOfError() {
 		return marginOfError;
 	}

@@ -2,6 +2,7 @@ package com.capthed.abyss;
 
 import java.util.HashMap;
 
+import com.capthed.abyss.afx.SoundUtil;
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.NullComponent;
 import com.capthed.abyss.font.CharElement;
@@ -197,6 +198,7 @@ public class GameLoop implements Runnable {
 		Input.pollEvents();
 		Input.update();
 		
+		SoundUtil.update();
 		MapManager.getCurrent().update();
 		
 		Abyss.getGame().constUpdate();
@@ -226,6 +228,8 @@ public class GameLoop implements Runnable {
 		RenderUtil.setClearColor(0f, 0f, 0f, 1);	
 		
 		Display.show();
+		
+		SoundUtil.initOpenAL();
 		
 		initDebug();
 		

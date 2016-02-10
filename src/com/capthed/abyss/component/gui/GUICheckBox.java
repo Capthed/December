@@ -79,6 +79,7 @@ public class GUICheckBox extends GameObject{
 		this.offTex = offTex;
 	}
 
+	/** @return True if it is on, false otherwise. */
 	public boolean getState() {
 		return state;
 	}

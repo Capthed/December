@@ -35,6 +35,7 @@ public abstract class GameComponent {
 	/** The identificator of every component. */
 	public int getID() { return id; }
 	
+	/** The id that the next created component will get. */
 	public static int getCurrID() { return currId; }
 	
 	/** All logic will be called only if this is true. */

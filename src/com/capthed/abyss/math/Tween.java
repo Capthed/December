@@ -12,6 +12,7 @@ public class Tween {
 	private boolean finished = false;
 	private float value = 0;
 	
+	/** Types of appending the value. */
 	public enum Type {
 		LINEAR, EXPONENTIAL_UP, EXPONENTIAL_DOWN;
 	}

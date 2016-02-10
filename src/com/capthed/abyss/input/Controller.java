@@ -57,16 +57,22 @@ public abstract class Controller {
 		}
 	}
 	
+	/** @return True if the button is held down. */
 	public static boolean isButtonDown(int b) {
 		if (!has) return false;
 		return buttons[b] == 0 ? false : true;
 	}
 	
+	/** 
+	 * @return True if the button is pressed. Returns true just the frame that the button was clicked and false until
+	 * it is released and clicked again.
+	 */
 	public static boolean isButtonPressed(int b) {
 		if (!has) return false;
 		return buttons[b] == 1 ? true : false;
 	}
 	
+	/** @return The value of the axis requested (between -1 and 1)*/
 	public static float getAxis(int id) {
 		if (!has) return 0;
 		return axis[id];
@@ -74,6 +80,7 @@ public abstract class Controller {
 	
 	public static String getContName() { return contName; }
 
+	/** @return True if a controller is connected, false otherwise. */
 	public static boolean isHas() {
 		return has;
 	}

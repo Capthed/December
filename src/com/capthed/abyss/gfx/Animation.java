@@ -23,7 +23,7 @@ public class Animation {
 		ONCE, LOOP, BOUNCE_LOOP;
 	}
 	
-	// time in ms
+	/** @param dTime The time in ms between each iteration. */
 	public Animation(Texture[] texs, long dTime, Type t) {
 		this.t = t;
 		this.texs = texs;

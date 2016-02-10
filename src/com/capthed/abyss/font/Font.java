@@ -25,6 +25,7 @@ public class Font {
 		space.setUVSize(new Vec2(0, 0));
 	}
 	
+	/**@param The exact layout of the characters on the font bitmap. */
 	public HashMap<Character, CharElement> loadLex(String[] chars) {
 		lex = new HashMap<Character, CharElement>();
 		
@@ -39,6 +40,7 @@ public class Font {
 		return lex;
 	}
 	
+	/** @return HashMap of chars and CharElements. Must be called after loadTex(String[])*/
 	public HashMap<Character, CharElement> getLex() {
 		return lex;
 	}

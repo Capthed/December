@@ -109,6 +109,7 @@ public abstract class RenderDebug {
 		RenderUtil.setColor(1, 1, 1, 1);
 	}
 	
+	/** Renders a box outline. */
 	public static void box(Vec2 pos, Vec2 size, float layer) {
 		if (!Debug.isDebug()) return;
 		

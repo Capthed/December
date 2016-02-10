@@ -23,7 +23,6 @@ import com.capthed.util.Debug;
 public class DebugPrompt {
 
 	private static GUITextField field;
-	
 	private static DebugPrompt dp = new DebugPrompt();
 	
 	private DebugPrompt() {}
@@ -68,6 +67,11 @@ public class DebugPrompt {
 				Debug.setDebug(true);
 			else if (var0.equals("off"))
 				Debug.setDebug(false);
+			
+			else if (var0.equals("show"))
+				GameLoop.setDebugRender(true);
+			else if (var0.equals("hide"))
+				GameLoop.setDebugRender(false);
 		}
 		
 		else if (first.equals("create")) {

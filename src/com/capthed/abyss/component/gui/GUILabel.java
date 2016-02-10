@@ -16,7 +16,7 @@ public class GUILabel extends GameObject {
 	
 	private ArrayList<Text> texts = new ArrayList<Text>();
 	
-	public GUILabel(Vec2 pos, Vec2 size, Texture tex, String txt,  Vec2 charSize, Font font) {
+	public GUILabel(Vec2 pos, Vec2 size, Texture tex, String txt, Vec2 charSize, Font font) {
 		super(pos, size, tex);
 		
 		this.txt = txt;
