@@ -8,6 +8,8 @@ import com.capthed.util.Debug;
 
 public abstract class Entity extends GameObject {
 
+	protected Vec2 delta;
+	
 	public Entity(Vec2 pos, Vec2 size) {
 		super(pos, size);
 	}
@@ -30,6 +32,7 @@ public abstract class Entity extends GameObject {
 	
 	/** Moves the entity regardless of physics for delta. */
 	public void move(Vec2 delta) {
+		this.delta = delta;
 		this.pos.add(delta);
 		
 		if (collider != null) {
@@ -72,5 +75,10 @@ public abstract class Entity extends GameObject {
 		
 		if (col)
 			move(Vec2.mult(Vec2.REV, delta));
+	}
+
+	/** @return The current speed. */
+	public Vec2 getDelta() {
+		return delta;
 	}
 }

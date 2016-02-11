@@ -81,6 +81,19 @@ public abstract class GameObject extends GameComponent {
 	public void collided(GameObject go) {
 		
 	}
+	
+	public void destroy() {
+		super.destroy();
+		
+		if (collider != null)  collider.detroy();
+	}
+	
+	public static void destroy(int id) {
+		GameObject go = (GameObject) GameComponent.getByID(id);
+		
+		if (go.isCollidable()) go.getCollider().detroy();
+		GameComponent.destroy(id);
+	}
 
 	public Vec2 getSize() {
 		return size;

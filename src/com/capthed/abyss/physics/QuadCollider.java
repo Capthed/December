@@ -115,4 +115,10 @@ public class QuadCollider implements Collider {
 		
 		center = Vec2.add(pos, Vec2.div(size, new Vec2(2, 2)));
 	}
+
+	@Override
+	public void detroy() {
+		pos = new Vec2(-1, -1);
+		size = new Vec2(-1, -1);
+	}
 }

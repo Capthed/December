@@ -13,4 +13,6 @@ public interface Collider {
 	public boolean intersects(Collider c);
 	
 	public void move(Vec2 delta);
+	
+	public void detroy();
 }

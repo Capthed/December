@@ -79,4 +79,10 @@ public class CircleCollider implements Collider {
 		
 		return new Vec2(v1.x() + v2.x() / 2, v1.y() + v2.y() / 2);
 	}
+
+	@Override
+	public void detroy() {
+		pos = new Vec2(-1, -1);
+		r = -1;
+	}
 }
