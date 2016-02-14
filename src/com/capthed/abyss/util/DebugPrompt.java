@@ -37,7 +37,7 @@ public class DebugPrompt {
 		
 		Font font = GameLoop.getDebugFont();
 		Text txt = new Text(new Vec2(0, Display.getHeight() - 35), new Vec2(20, 32), ">:", font.getLex());
-		txt.setColor(0.83f, 0.88f, 0.23f, 1);
+		txt.setColor(0.83f, 0.88f, 0.23f, 1).setLayer(RenderUtil.debugLayer());;
 		field = (GUITextField) new GUITextField(txt, new Vec2(Display.getWidth(), 32), tex, new GUITextFieldListener() {
 			public void onKeyEnetered(int k) {
 				if (k == Keys.GLFW_KEY_ENTER) {
@@ -47,7 +47,7 @@ public class DebugPrompt {
 					field.setText(">:");
 				}
 			}
-		}).setLayer(RenderUtil.layerLimit() - 1);
+		}).setLayer(RenderUtil.debugLayer() - 1);
 		field.setImmutable(2);
 	}
 	

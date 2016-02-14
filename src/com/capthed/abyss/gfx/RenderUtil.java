@@ -7,6 +7,7 @@ import org.lwjgl.opengl.GL;
 public abstract class RenderUtil {
 
 	private static final int LAYER = 100;
+	private static final int DEBUG_LAYER = 5;
 	
 	/** Initializes all of OpenGL used for 2D graphics. */
 	public static void init2DGL(int w, int h) {
@@ -16,7 +17,7 @@ public abstract class RenderUtil {
 			
 		glMatrixMode(GL_PROJECTION);
 		glLoadIdentity();
-		glOrtho(0, w, 0, h, -LAYER, LAYER);
+		glOrtho(0, w, 0, h, -(LAYER + DEBUG_LAYER), (LAYER + DEBUG_LAYER));
 		
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_DEPTH_TEST); // Because we use depth as priority rendering
@@ -44,6 +45,14 @@ public abstract class RenderUtil {
 	
 	/** @return The highest (and lowest - negative) value of a layer. */
 	public static int layerLimit() { return LAYER; }
+	
+	/** @return The highest (and lowest - negative) value of debug layer. */
+	public static int debugLayer() { return LAYER + DEBUG_LAYER; }
+	
+	/** Sets the render color to 1, 1, 1, 1 */
+	public static void resetColor() {
+		glColor4f(1, 1, 1, 1);
+	}
 	
 	public static String getGLVersionUse() { return "1.1"; }
 }

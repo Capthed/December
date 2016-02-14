@@ -2,6 +2,7 @@ package com.capthed.abyss.component.gui;
 
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.gfx.RenderDebug;
+import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Keys;
 import com.capthed.abyss.input.Mouse;
@@ -22,6 +23,14 @@ public class GUICheckBox extends GameObject{
 		this.tex = state ? onTex : offTex;
 		this.onTex = onTex;
 		this.offTex = offTex;
+		this.handler = handler;
+	}
+	
+	public GUICheckBox(Vec2 pos, Vec2 size, Texture tex, boolean startState, GUICheckBoxListener handler) {
+		super(pos, size, tex);
+		
+		this.state = startState;
+		this.tex = tex;
 		this.handler = handler;
 	}
 
@@ -55,7 +64,18 @@ public class GUICheckBox extends GameObject{
 	}
 	
 	public void render() {
-		super.render();
+		if (onTex == null) {
+			if (state)
+				super.render();
+			else {
+				RenderUtil.setColor(0.2f, 0.2f, 0.2f, 1);
+				super.render();
+				RenderUtil.resetColor();
+			}
+		}
+		else 
+			super.render();
+		
 		renderCollisionBox();
 	}
 	
@@ -77,6 +97,10 @@ public class GUICheckBox extends GameObject{
 
 	public void setOffTex(Texture offTex) {
 		this.offTex = offTex;
+	}
+	
+	public void setState(boolean state) {
+		this.state = state;
 	}
 
 	/** @return True if it is on, false otherwise. */

@@ -8,7 +8,7 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.Collider;
 
-public abstract class GameObject extends GameComponent {
+public class GameObject extends GameComponent {
 
 	protected Vec2 pos;
 	protected Vec2 size;

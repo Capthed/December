@@ -14,6 +14,8 @@ public class Text {
 	private String txt;
 	private HashMap<Character, CharElement> lex;
 	private float r = 1, g = 1, b = 1, a = 1;
+	private int layer = 30;
+	private boolean enabled = true;
 	
 	public Text(Vec2 pos, Vec2 charSize, String txt, HashMap<Character, CharElement> lex) {
 		this.pos = pos;
@@ -23,6 +25,7 @@ public class Text {
 	}
 	
 	public void render() {
+		if (!enabled) return;
 		for (int i = 0; i < txt.length(); i++) {
 			CharElement ce = null;
 			ce = lex.get(txt.charAt(i));
@@ -32,17 +35,19 @@ public class Text {
 			}
 			else {
 				RenderUtil.setColor(r, g, b, a);
-				Render.charTex(Vec2.add(pos, new Vec2(charSize.x() * i, charSize.y())), charSize, ce);
+				Render.charTex(Vec2.add(pos, new Vec2(charSize.x() * i, charSize.y())), charSize, ce, layer);
 				RenderUtil.setColor(1, 1, 1, 1);
 			}
 		}
 	}
 	
-	public void setColor(float r, float g, float b , float a) {
+	public Text setColor(float r, float g, float b , float a) {
 		this.r = r;
 		this.g = g;
 		this.b = b;
 		this.a = a;
+		
+		return this;
 	}
 	
 	public Vec2 getPos() {
@@ -64,4 +69,22 @@ public class Text {
 	public String getText() { return txt; }
 	
 	public void setText(String txt) { this.txt = txt; }
+
+	public int getLayer() {
+		return layer;
+	}
+
+	public Text setLayer(int layer) {
+		this.layer = layer;
+		
+		return this;
+	}
+
+	public boolean isEnabled() {
+		return enabled;
+	}
+
+	public void setEnabled(boolean enabled) {
+		this.enabled = enabled;
+	}
 }

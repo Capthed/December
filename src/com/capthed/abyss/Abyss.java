@@ -54,6 +54,7 @@ public abstract class Abyss {
 		GameLoop.setAlive(false);
 		Debug.print("Closed", "");
 		Display.destroy();
+		game.closed();
 	}
 	
 	/** Must be called before Abyss.start(). Set to -1 for unlimited fps. */

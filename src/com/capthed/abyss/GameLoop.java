@@ -122,7 +122,7 @@ public class GameLoop implements Runnable {
 				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
 				runningTxt.setText("Running for " + Timer.getTimeRunning() + " s");
 				Debug.print("GameComponents created: ", GameComponent.getGcs().size() + 1 + "");
-				compTxt.setText("GameComponents created: " + GameComponent.getGcs().size() + 1);
+				compTxt.setText("GameComponents created: " + (GameComponent.getGcs().size() + 1));
 				Debug.print("NullComponents: ", NullComponent.numNulls+ "");
 				nullTxt.setText("NullComponents: " + NullComponent.numNulls);
 				Debug.print("Textures active: ", texNum + "");
@@ -233,9 +233,9 @@ public class GameLoop implements Runnable {
 		
 		initDebug();
 		
-		Abyss.getGame().init();
-		
 		Input.init();
+		
+		Abyss.getGame().init();
 	}
 
 	/** @return True if the game loop is running. */

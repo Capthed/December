@@ -17,6 +17,9 @@ public interface Game {
 	/** Called every frame. Used to render non map-based GameComponents. */
 	public void constRender();
 	
-	/** Called just before the game loop is about to close. */
+	/** Called just before the window is about to close. */
 	public void closing();
+	
+	/** Called when the loop is closed. */
+	public void closed();
 }

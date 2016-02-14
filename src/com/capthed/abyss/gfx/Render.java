@@ -43,7 +43,7 @@ public abstract class Render {
 	}
 	
 	/** Renders a CharElement texture. */
-	public static void charTex(Vec2 pos, Vec2 size, CharElement ce) {
+	public static void charTex(Vec2 pos, Vec2 size, CharElement ce, int layer) {
 		float x = pos.x();
 		float y = pos.y();
 		float w = size.x();
@@ -54,7 +54,7 @@ public abstract class Render {
 		float eu = ce.getUVSize().x();
 		float ev = ce.getUVSize().y();
 		
-		float l = RenderUtil.layerLimit();
+		float l = layer;
 		
 		ce.getFont().getTex().bind();
 		glBegin(GL_QUADS);
