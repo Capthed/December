@@ -131,6 +131,11 @@ public class DebugPrompt {
 	}
 	
 	public void openAgain() {
+		if (field.isNull()) {
+			initPrompt();
+			openPrompt();
+			return;
+		}
 		field.setEnabled(true);
 		field.setFocus(true);
 	}

@@ -2,6 +2,7 @@ package com.capthed.abyss.util;
 
 import javax.swing.JOptionPane;
 
+import com.capthed.abyss.Abyss;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
 
@@ -23,11 +24,13 @@ public abstract class Util {
 		}
 	}
 	
-	public static void info() {
-		showMsg("Esc - Close the game\n"
-				   + "F1 - Render debug info\n" 
-				   + "F2 - Debug prompt\n"
-				   + "Left Click - Destroy the selected object\n"
-				   + "Middle click - Show the selected object's id\n");
+	public static void info(String addition) {
+		showMsg("Abyss " + Abyss.getVersion() + "\n"+
+				"debug -on/off\n             -show/hide\n" + 
+				"create XxY WxH A|T id(A|T) layer\n" + 
+				"remove id\n"+
+				"mouse -on/off\n"+
+				"controller -on/off\n" + addition
+				);
 	}
 }
