@@ -12,6 +12,7 @@ import com.capthed.abyss.font.Font;
 import com.capthed.abyss.font.Text;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Controller;
@@ -125,7 +126,11 @@ public class DebugPrompt {
 			}
 			else if (var0.equals("off"))
 				Controller.setHas(false);
-		} else {
+		} 
+		else if (first.equals("church")) {
+			RenderDebug.church();
+		}
+		else {
 			Abyss.getGame().process(p);
 		}
 	}

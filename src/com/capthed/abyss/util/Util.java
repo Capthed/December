@@ -26,6 +26,7 @@ public abstract class Util {
 	
 	public static void info(String addition) {
 		showMsg("Abyss " + Abyss.getVersion() + "\n"+
+				"church\n"+
 				"debug -on/off\n             -show/hide\n" + 
 				"create XxY WxH A|T id(A|T) layer\n" + 
 				"remove id\n"+

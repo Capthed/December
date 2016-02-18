@@ -10,7 +10,7 @@ import com.capthed.util.Debug;
 
 public abstract class RenderDebug {
 	
-	private static int layer = RenderUtil.layerLimit();
+	private static int layer = RenderUtil.debugLayer() - 2;
 	
 	/** Draws a quad on the screen with the start coordinates and the width and height */
 	public static void quad(float x, float y, float w, float h) {
