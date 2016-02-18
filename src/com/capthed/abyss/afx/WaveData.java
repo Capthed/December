@@ -1,4 +1,5 @@
 package com.capthed.abyss.afx;
+
 /* 
  * Copyright (c) 2002-2008 LWJGL Project
  * All rights reserved.

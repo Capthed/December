@@ -107,7 +107,7 @@ public class DebugPrompt {
 		
 		else if (first.equals("remove")) {
 			int id = Integer.valueOf(token.nextToken());
-			if (id < GameComponent.getGcs().size())
+			if (id < GameComponent.getGcs().size() && id != 0)
 				GameComponent.getByID(id).destroy();
 		}
 		
@@ -125,6 +125,8 @@ public class DebugPrompt {
 			}
 			else if (var0.equals("off"))
 				Controller.setHas(false);
+		} else {
+			Abyss.getGame().process(p);
 		}
 	}
 	

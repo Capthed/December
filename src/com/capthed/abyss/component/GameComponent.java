@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public abstract class GameComponent {
 
 	private static int currId = 0;
-	protected boolean nullised = false; // boli me kurac za glupo ime
+	protected boolean nullified = false; // boli me kurac za glupo ime
 	
 	protected static ArrayList<GameComponent> gcs = new ArrayList<GameComponent>();
 	
@@ -48,7 +48,7 @@ public abstract class GameComponent {
 	}
 	
 	/** @return True if it is an instance of NullComponent. */
-	public boolean isNull() { return nullised; }
+	public boolean isNull() { return nullified; }
 
 	/** Calls GameComponent.destroy(int) with thw current id. */
 	public void destroy() {
@@ -66,7 +66,7 @@ public abstract class GameComponent {
 		else
 			getByID(exid).setEnabled(false);
 		
-		getByID(exid).nullised = true;
+		getByID(exid).nullified = true;
 		
 		nc.setID(exid);
 		

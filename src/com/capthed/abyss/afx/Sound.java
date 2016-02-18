@@ -51,6 +51,8 @@ public class Sound {
 	}
 	
 	/**
+	 * Wav compression is recomended for large files.
+	 * 
 	 * @param path The location of the wav file 
 	 * @param length Duration of the file in seconds.
 	 */
@@ -86,7 +88,6 @@ public class Sound {
 	public void update() {
 		currTime = (Timer.getTime() - startTime) / Timer.SECOND;
 		if (currTime >= length) {
-			System.out.println("uslo");
 			startTime = Timer.getTime();
 			currTime = 0;
 			

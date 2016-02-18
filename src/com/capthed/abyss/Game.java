@@ -22,4 +22,10 @@ public interface Game {
 	
 	/** Called when the loop is closed. */
 	public void closed();
+	
+	/**
+	 * Called from the debug prompt.
+	 * @args input The command from the prompt. 
+	 */
+	public void process(String input);
 }

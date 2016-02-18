@@ -147,6 +147,8 @@ public class Texture {
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	
+	public String getPath() { return path; }
 
 	public int getId() {
 		return id;
