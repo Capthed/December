@@ -10,6 +10,7 @@ import com.capthed.abyss.font.Font;
 import com.capthed.abyss.font.Text;
 import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Display;
+import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Input;
@@ -42,6 +43,7 @@ public class GameLoop implements Runnable {
 	private static Text collTxt;
 	private static Font debugFont;
 	private static HashMap<Character, CharElement> lex;
+	private static boolean church = false;
 	
 	public GameLoop(int w, int h) {
 		GameLoop.w = w;
@@ -50,10 +52,9 @@ public class GameLoop implements Runnable {
 	
 	/** The main game loop. */
 	public void run() {
+		debugRender = Debug.isDebug();
 		
 		initSubsystems();
-		
-		debugRender = Debug.isDebug();
 		
 		Debug.print("", "");
 		Debug.print("Using Abyss ", Abyss.getVersion() + "");
@@ -216,7 +217,9 @@ public class GameLoop implements Runnable {
 		debugRender();
 		
 		Abyss.getGame().constRender();
-				
+			
+		if (church) RenderDebug.church();
+		
 		Display.swap();
 	}
 	
@@ -234,6 +237,8 @@ public class GameLoop implements Runnable {
 		initDebug();
 		
 		Input.init();
+		
+		DebugPrompt.get().init();
 		
 		Abyss.getGame().init();
 	}
@@ -300,5 +305,9 @@ public class GameLoop implements Runnable {
 
 	public static Font getDebugFont() {
 		return debugFont;
+	}
+	
+	public static void church() {
+		church = !church;
 	}
 }

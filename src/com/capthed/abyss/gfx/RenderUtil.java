@@ -19,6 +19,7 @@ public abstract class RenderUtil {
 		glLoadIdentity();
 		glOrtho(0, w, 0, h, -(LAYER + DEBUG_LAYER), (LAYER + DEBUG_LAYER));
 		
+		
 		glMatrixMode(GL_MODELVIEW);
 		glEnable(GL_DEPTH_TEST); // Because we use depth as priority rendering
 		

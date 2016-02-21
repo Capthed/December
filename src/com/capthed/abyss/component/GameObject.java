@@ -17,6 +17,7 @@ public class GameObject extends GameComponent {
 	protected Collider collider = null;
 	protected boolean collidable = false;
 	protected Animation animation;
+	protected boolean blend = false;
 	
 	/** Used only with Tile prototypes. */
 	public GameObject() {
@@ -151,5 +152,17 @@ public class GameObject extends GameComponent {
 
 	public void setAnimation(Animation animation) {
 		this.animation = animation;
+	}
+
+	public boolean isBlend() {
+		return blend;
+	}
+
+	/** 
+	 * If blend is enabled then render priority goes by place in render row, not depth for this object. 
+	 * Advice: don't fuck around with this if not needed.
+	 */
+	public void setBlend(boolean blend) {
+		this.blend = blend;
 	}
 }

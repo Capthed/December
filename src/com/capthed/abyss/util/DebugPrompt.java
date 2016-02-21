@@ -12,7 +12,6 @@ import com.capthed.abyss.font.Font;
 import com.capthed.abyss.font.Text;
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.Display;
-import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Controller;
@@ -23,19 +22,21 @@ import com.capthed.util.Debug;
 
 public class DebugPrompt {
 
+	private static Texture tex = new Texture("res/debugPrompt.png");
 	private static GUITextField field;
 	private static DebugPrompt dp = new DebugPrompt();
 	
 	private DebugPrompt() {}
+	
+	public void init() {
+		tex.loadTex();
+	}
 	
 	public void move(Vec2 delta) {
 		field.setPos(Vec2.add(field.getPos(), delta));
 	}
 	
 	public void initPrompt() {
-		Texture tex = new Texture("res/debugPrompt.png");
-		tex.loadTex();
-		
 		Font font = GameLoop.getDebugFont();
 		Text txt = new Text(new Vec2(0, Display.getHeight() - 35), new Vec2(20, 32), ">:", font.getLex());
 		txt.setColor(0.83f, 0.88f, 0.23f, 1).setLayer(RenderUtil.debugLayer());;
@@ -128,7 +129,7 @@ public class DebugPrompt {
 				Controller.setHas(false);
 		} 
 		else if (first.equals("church")) {
-			RenderDebug.church();
+			GameLoop.church();
 		}
 		else {
 			Abyss.getGame().process(p);
@@ -152,6 +153,14 @@ public class DebugPrompt {
 		field.setFocus(true);
 	}
 	
+	public static Texture getTex() {
+		return tex;
+	}
+
+	public static void setTex(Texture tex) {
+		DebugPrompt.tex = tex;
+	}
+
 	private class DummyObject extends GameObject {
 		
 		public DummyObject(Vec2 pos, Vec2 size, Texture tex) {

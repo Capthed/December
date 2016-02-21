@@ -4,6 +4,7 @@ import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.font.CharElement;
 import com.capthed.abyss.math.Vec2;
+import com.capthed.util.Debug;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -13,31 +14,10 @@ public abstract class Render {
 	public static void quadTex(GameObject go) {
 		if (!checkBoundaries(go)) return;
 		
-		float x = go.getPos().x();
-		float y = go.getPos().y() ;
-		float w = go.getSize().x();
-		float h = go.getSize().y();
-		float l = go.getLayer();
-		
-		go.getTex().bind();
-		glBegin(GL_QUADS);
-		
-		{
-			glTexCoord2f(0, 1f);
-	        glVertex3f(x, y, l);
-	 
-	        glTexCoord2f(1f, 1f);
-	        glVertex3f(x + w, y, l);
-	 
-	        glTexCoord2f(1f, 0);
-	        glVertex3f(x + w, y + h, l);
-	 
-	        glTexCoord2f(0, 0);
-	        glVertex3f(x, y + h, l);
-		}
-		
-		glEnd();
-		Texture.unbind();
+		if (go.isBlend())
+			texBlended(go.getPos(), go.getSize(), go.getTex(), go.getLayer());
+		else
+			tex(go.getPos(), go.getSize(), go.getTex(), go.getLayer());
 		
 		GameLoop.addTex();
 	}
@@ -78,6 +58,72 @@ public abstract class Render {
 		Texture.unbind();
 		
 		GameLoop.addTex();
+	}
+	
+
+	/** Renders a texture to the screen with the position and size as arguments. */
+	public static void texBlended(Vec2 pos, Vec2 size, Texture tex, int layer) {
+		float x = pos.x();
+		float y = pos.y();
+		float w = size.x();
+		float h = size.y();
+		
+		if (!Debug.isDebug()) return;
+				
+			tex.bind();
+			glEnable( GL_BLEND );
+			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+			glDepthMask(false);
+			
+			glBegin(GL_QUADS);
+			
+			{
+				glTexCoord2f(0, 1f);
+		        glVertex3f(x, y, layer);
+		 
+		        glTexCoord2f(1f, 1f);
+		        glVertex3f(x + w, y, layer);
+		 
+		        glTexCoord2f(1f, 0);
+		        glVertex3f(x + w, y + h, layer);
+		 
+		        glTexCoord2f(0, 0);
+		        glVertex3f(x, y + h, layer);
+			}
+			glEnd();
+			glDepthMask(true);
+			glDisable(GL_BLEND);
+			Texture.unbind();
+	}
+	
+	/** Renders a texture to the screen with the position and size as arguments. */
+	public static void tex(Vec2 pos, Vec2 size, Texture tex, int layer) {
+		float x = pos.x();
+		float y = pos.y();
+		float w = size.x();
+		float h = size.y();
+		
+		if (!Debug.isDebug()) return;
+				
+			tex.bind();
+			glBegin(GL_QUADS);
+			
+			{
+				glTexCoord2f(0, 1f);
+		        glVertex3f(x, y, layer);
+		 
+		        glTexCoord2f(1f, 1f);
+		        glVertex3f(x + w, y, layer);
+		 
+		        glTexCoord2f(1f, 0);
+		        glVertex3f(x + w, y + h, layer);
+		 
+		        glTexCoord2f(0, 0);
+		        glVertex3f(x, y + h, layer);
+			}
+			glEnd();
+			glAlphaFunc(GL_GREATER, 0);
+			Texture.unbind();
 	}
 	
 	private static boolean checkBoundaries(GameObject go) {

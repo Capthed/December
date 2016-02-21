@@ -126,12 +126,26 @@ public class Vec2 {
 		return false;
 	}
 	
+	/** @return True if the difference between the vectors is <= the set error margin. */
+	public boolean equals(Vec2 v, float err) {
+		if (Math.abs(this.x - v.x()) <= err && Math.abs(this.y - v.y()) <= err)
+			return true;
+		
+		return false;
+	}
+	
 	public boolean intersects(Vec2 pos, Vec2 size) {
 		return Vec2.intersects(this, pos, size);
 	}
 	
 	public static boolean intersects(Vec2 point, Vec2 pos, Vec2 size) {
 		Vec2 add = Vec2.add(pos, size);
+		if (!new Vec2(size).abs().equals(size)) {
+			if (point.x <= pos.x() && point.x >= add.x() && point.y <= pos.y() && point.y >= add.y())
+				return true;
+			else
+				return false;
+		}
 		if (point.x >= pos.x() && point.x <= add.x() && point.y >= pos.y() && point.y <= add.y())
 			return true;
 		else 

@@ -6,6 +6,7 @@ import java.io.ObjectOutputStream;
 import java.util.HashMap;
 
 import com.capthed.abyss.gfx.Animation;
+import com.capthed.abyss.gfx.RenderUtil;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.math.Vec2;
@@ -28,6 +29,7 @@ public abstract class Tile extends GameObject {
 		this.color = color;
 		this.aort = false;
 		
+		layer = -RenderUtil.layerLimit() + 5;
 		saveData();
 		
 		tiles.put(color, this);
@@ -41,6 +43,7 @@ public abstract class Tile extends GameObject {
 		this.color = color;
 		this.aort = true;
 		
+		layer = -RenderUtil.layerLimit() + 5;
 		saveData();
 		
 		tiles.put(color, this);
