@@ -68,10 +68,10 @@ public class GameObject extends GameComponent {
 	public void render() {
 		if (animation != null) {
 			tex = animation.getTexure();
-			Render.quadTex(this);
+			Render.object(this);
 		} 
 		else if (tex != null) {
-			Render.quadTex(this);
+			Render.object(this);
 		}
 		else {
 			RenderDebug.quad(pos.x(), pos.y(), size.x(), size.y());

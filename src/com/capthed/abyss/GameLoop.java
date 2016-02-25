@@ -146,14 +146,14 @@ public class GameLoop implements Runnable {
 		Vec2 pos = new Vec2(30, Display.getHeight() - 30);
 		Vec2 size = new Vec2(16, 16);
 		
-		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "Loading...", lex);
-		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60)), size, "Loading...", lex);
-		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90)), size, "Loading...", lex);
-		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120)), size, "Loading...", lex);
-		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150)), size, "Loading...", lex);
-		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180)), size, "Loading...", lex);
-		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210)), size, "Loading...", lex);
-		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240)), size, "Loading...", lex);
+		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
 		
 		DebugPrompt.get().initPrompt();
 	}

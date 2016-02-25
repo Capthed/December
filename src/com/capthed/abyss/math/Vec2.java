@@ -140,13 +140,27 @@ public class Vec2 {
 	
 	public static boolean intersects(Vec2 point, Vec2 pos, Vec2 size) {
 		Vec2 add = Vec2.add(pos, size);
-		if (!new Vec2(size).abs().equals(size)) {
+		if (size.x() <= 0 && size.y() <= 0) {
 			if (point.x <= pos.x() && point.x >= add.x() && point.y <= pos.y() && point.y >= add.y())
 				return true;
 			else
 				return false;
 		}
-		if (point.x >= pos.x() && point.x <= add.x() && point.y >= pos.y() && point.y <= add.y())
+		else if (size.x() <= 0 && size.y() > 0) {
+			if (point.x <= pos.x() && point.x >= add.x() && point.y >= pos.y() && point.y <= add.y()) {
+				return true;
+			}
+			else
+				return false;
+		}
+		else if (size.x() > 0 && size.y() <= 0) {
+			if (point.x >= pos.x() && point.x <= add.x() && point.y <= pos.y() && point.y >= add.y()) {
+				return true;
+			}
+			else
+				return false;
+		}
+		else if (point.x >= pos.x() && point.x <= add.x() && point.y >= pos.y() && point.y <= add.y())
 			return true;
 		else 
 			return false;

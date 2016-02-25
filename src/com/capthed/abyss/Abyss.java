@@ -8,13 +8,13 @@ import com.capthed.util.Debug;
 
 public abstract class Abyss {
 
-	private static final String VERSION = "v1.0.a4";
+	private static final String VERSION = "v1.0.a5";
 
 	private static Thread mainGameLoop;
 	private static Game game = null;
 	private static int w, h;
 	
-	/** Creates the engine (temporary). */
+	/** Creates the engine */
 	public static void create(int w, int h, Game game) {
 		Abyss.game = game;
 		Abyss.w = w;
@@ -66,7 +66,7 @@ public abstract class Abyss {
 	
 	/** @return Information about this version of the engine. */
 	public static String getInfo() {
-		return "Developmental version of Abyss designed for top-down 2D games."
+		return "Alpha version of Abyss designed for top-down 2D games."
 				+ "\nUsing OpenGL " + RenderUtil.getGLVersionUse() 
 				+ "\nCurrently supporting around 2,500 textured components on screen"
 				+ "\nand 300,000 non-textured components at 60 FPS.";

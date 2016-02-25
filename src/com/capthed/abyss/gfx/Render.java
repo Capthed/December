@@ -10,8 +10,8 @@ import static org.lwjgl.opengl.GL11.*;
 
 public abstract class Render {
 	
-	/** Renders a quaternion texture. */
-	public static void quadTex(GameObject go) {
+	/** Renders a GameObject. */
+	public static void object(GameObject go) {
 		if (!checkBoundaries(go)) return;
 		
 		if (go.isBlend())
