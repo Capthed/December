@@ -12,7 +12,7 @@ public abstract class Render {
 	
 	/** Renders a GameObject. */
 	public static void object(GameObject go) {
-		if (!checkBoundaries(go)) return;
+		if (!Camera.getCurrent().checkBoundaries(go.getPos(), go.getSize())) return;
 		
 		if (go.isBlend())
 			texBlended(go.getPos(), go.getSize(), go.getTex(), go.getLayer());
@@ -63,6 +63,7 @@ public abstract class Render {
 
 	/** Renders a texture to the screen with the position and size as arguments. */
 	public static void texBlended(Vec2 pos, Vec2 size, Texture tex, int layer) {
+		if (!Camera.getCurrent().checkBoundaries(pos, size)) return;
 		float x = pos.x();
 		float y = pos.y();
 		float w = size.x();
@@ -98,6 +99,7 @@ public abstract class Render {
 	
 	/** Renders a texture to the screen with the position and size as arguments. */
 	public static void tex(Vec2 pos, Vec2 size, Texture tex, int layer) {
+		if (!Camera.getCurrent().checkBoundaries(pos, size)) return;
 		float x = pos.x();
 		float y = pos.y();
 		float w = size.x();
@@ -124,9 +126,5 @@ public abstract class Render {
 			glEnd();
 			glAlphaFunc(GL_GREATER, 0);
 			Texture.unbind();
-	}
-	
-	private static boolean checkBoundaries(GameObject go) {
-		return Camera.getCurrent().checkBoundaries(go.getPos(), go.getSize());
 	}
 }

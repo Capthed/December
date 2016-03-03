@@ -2,6 +2,7 @@ package com.capthed.abyss.gfx;
 
 import static org.lwjgl.opengl.GL11.glTranslatef;
 
+import com.capthed.abyss.Abyss;
 import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.math.Vec2;
 
@@ -13,6 +14,9 @@ public class Camera {
 	
 	public Camera(Vec2 pos) {
 		this.pos = pos;;
+		
+		if (Abyss.created)
+			init();
 	}
 	
 	public Camera init() {

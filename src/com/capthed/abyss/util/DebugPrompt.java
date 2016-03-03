@@ -29,7 +29,7 @@ public class DebugPrompt {
 	private DebugPrompt() {}
 	
 	public void init() {
-		tex.loadTex();
+		tex.load();
 	}
 	
 	public void move(Vec2 delta) {
@@ -43,20 +43,21 @@ public class DebugPrompt {
 		field = (GUITextField) new GUITextField(txt, new Vec2(Display.getWidth(), 32), tex, new GUITextFieldListener() {
 			public void onKeyEnetered(int k) {
 				if (k == Keys.GLFW_KEY_ENTER) {
-					process(field.getText().replace(">:", ""));
-					field.setFocus(false);
-					field.setEnabled(false);
-					field.setText(">:");
+					if (process(field.getText().replace(">:", ""))) {
+						field.setFocus(false);
+						field.setEnabled(false);
+						field.setText(">:");
+					}
 				}
 			}
 		}).setLayer(RenderUtil.debugLayer() - 1);
 		field.setImmutable(2);
 	}
 	
-	private void process(String p) {
+	private boolean process(String p) {
 		StringTokenizer token = new StringTokenizer(p, " ");
 		
-		if (p == null || p.trim().equals("")) return;
+		if (p == null || p.trim().equals("")) return true;
 		
 		String first = token.nextToken();
 		
@@ -131,9 +132,18 @@ public class DebugPrompt {
 		else if (first.equals("church")) {
 			GameLoop.church();
 		}
-		else {
-			Abyss.getGame().process(p);
+		else if (first.equals("version")) {
+			field.setText(">:" + Abyss.getVersion());
+			return false;
 		}
+		else if (p.equals("help og")) {
+			Util.info("");
+		}
+		else {
+			return Abyss.getGame().process(p);
+		}
+		
+		return true;
 	}
 	
 	public void openAgain() {

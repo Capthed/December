@@ -32,6 +32,7 @@ public class GameLoop implements Runnable {
 	private static int currFps, currUps;
 	private static long msRenderPerSecond = 1000 / fps;
 	
+	// the variables used for debuging
 	private static boolean debugRender;
 	private static Text fpsTxt;
 	private static Text upsTxt;
@@ -137,7 +138,7 @@ public class GameLoop implements Runnable {
 	
 	private static void initDebug() {
 		Texture t = new Texture("res/debugFont_alpha.png");
-		t.loadTex();
+		t.load();
 		
 		debugFont = new Font(t, .0625f, .125f, 0, 0);
 		lex = debugFont.loadLex(new String[] {"", "", "!\"#$%&'()*+,-./0", "123456789:;<=>?@", "ABCDEFGHIJKLMNOP", 
@@ -185,7 +186,7 @@ public class GameLoop implements Runnable {
 		texTxt.render();
 		collTxt.render();
 		
-		RenderUtil.setColor(1, 1, 1, 1);
+		RenderUtil.resetColor();
 	}
 
 	/** Calls the init methods of GameComponents*/

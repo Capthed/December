@@ -44,7 +44,7 @@ public class Texture {
 	}
 	
 	/** Loads the texture into the memory. */
-	public Texture loadTex() {	
+	public Texture load() {	
 		ByteBuffer imageBuffer;
 		try {
 			imageBuffer = ioResourceToByteBuffer(path, 8 * 1024);
@@ -81,6 +81,13 @@ public class Texture {
 		ids.add(this);
 		
 		return this;
+	}
+	
+	/** Loads all instanciated textures. */
+	public static void loadAll() {
+		for (int i = 0; i < ids.size(); i++) {
+			getByID(i).load();
+		}
 	}
 	
 	/** Binds the texture to OpenGL. */

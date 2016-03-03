@@ -8,11 +8,13 @@ import com.capthed.util.Debug;
 
 public abstract class Abyss {
 
-	private static final String VERSION = "v1.0.a5";
+	private static final String VERSION = "v1.0.0";
 
 	private static Thread mainGameLoop;
 	private static Game game = null;
 	private static int w, h;
+	
+	public static boolean created = false;
 	
 	/** Creates the engine */
 	public static void create(int w, int h, Game game) {
@@ -26,6 +28,8 @@ public abstract class Abyss {
 		mainGameLoop = new Thread(new GameLoop(w, h));
 
 		Timer.start();
+		
+		created = true;
 	}
 	
 	/** Called from the Game.initDisplay() method. */
@@ -52,7 +56,7 @@ public abstract class Abyss {
 	public static void stop() {
 		game.closing();
 		GameLoop.setAlive(false);
-		Debug.print("Closed", "");
+		Debug.print("Destroying");
 		Display.destroy();
 		game.closed();
 	}
@@ -66,7 +70,7 @@ public abstract class Abyss {
 	
 	/** @return Information about this version of the engine. */
 	public static String getInfo() {
-		return "Alpha version of Abyss designed for top-down 2D games."
+		return "Abyss " + VERSION + " designed for top-down 2D games."
 				+ "\nUsing OpenGL " + RenderUtil.getGLVersionUse() 
 				+ "\nCurrently supporting around 2,500 textured components on screen"
 				+ "\nand 300,000 non-textured components at 60 FPS.";
