@@ -35,6 +35,10 @@ public class Animation {
 		maxTex = texs.length;
 	}
 
+	public Animation(Animation anim) {
+		this(anim.getTexs(), anim.getdTime(), anim.getType());
+	}
+
 	public Texture getTexure() {
 		if (lastTime == -1) lastTime = Timer.getTime();
 		
@@ -62,8 +66,12 @@ public class Animation {
 		return texs[currTex];
 	}
 	
-	public float getdTime() {
+	public long getdTime() {
 		return dTime;
+	}
+	
+	public void setdTime(long t) {
+		this.dTime = t;
 	}
 
 	public Type getType() {

@@ -47,7 +47,7 @@ public class GameObject extends GameComponent {
 		
 		this.pos = pos;
 		this.size = size;
-		this.animation = anim;
+		this.animation = new Animation(anim);
 	}
 	
 	public GameObject setCollider(Collider c) {

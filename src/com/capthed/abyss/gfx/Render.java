@@ -69,32 +69,30 @@ public abstract class Render {
 		float w = size.x();
 		float h = size.y();
 		
-		if (!Debug.isDebug()) return;
-				
-			tex.bind();
-			glEnable( GL_BLEND );
-			glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-			glDepthMask(false);
-			
-			glBegin(GL_QUADS);
-			
-			{
-				glTexCoord2f(0, 1f);
-		        glVertex3f(x, y, layer);
-		 
-		        glTexCoord2f(1f, 1f);
-		        glVertex3f(x + w, y, layer);
-		 
-		        glTexCoord2f(1f, 0);
-		        glVertex3f(x + w, y + h, layer);
-		 
-		        glTexCoord2f(0, 0);
-		        glVertex3f(x, y + h, layer);
-			}
-			glEnd();
-			glDepthMask(true);
-			glDisable(GL_BLEND);
-			Texture.unbind();
+		tex.bind();
+		glEnable( GL_BLEND );
+		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+		glDepthMask(false);
+		
+		glBegin(GL_QUADS);
+		
+		{
+			glTexCoord2f(0, 1f);
+	        glVertex3f(x, y, layer);
+	 
+	        glTexCoord2f(1f, 1f);
+	        glVertex3f(x + w, y, layer);
+	 
+	        glTexCoord2f(1f, 0);
+	        glVertex3f(x + w, y + h, layer);
+	 
+	        glTexCoord2f(0, 0);
+	        glVertex3f(x, y + h, layer);
+		}
+		glEnd();
+		glDepthMask(true);
+		glDisable(GL_BLEND);
+		Texture.unbind();
 	}
 	
 	/** Renders a texture to the screen with the position and size as arguments. */
@@ -105,26 +103,24 @@ public abstract class Render {
 		float w = size.x();
 		float h = size.y();
 		
-		if (!Debug.isDebug()) return;
-				
-			tex.bind();
-			glBegin(GL_QUADS);
-			
-			{
-				glTexCoord2f(0, 1f);
-		        glVertex3f(x, y, layer);
-		 
-		        glTexCoord2f(1f, 1f);
-		        glVertex3f(x + w, y, layer);
-		 
-		        glTexCoord2f(1f, 0);
-		        glVertex3f(x + w, y + h, layer);
-		 
-		        glTexCoord2f(0, 0);
-		        glVertex3f(x, y + h, layer);
-			}
-			glEnd();
-			glAlphaFunc(GL_GREATER, 0);
-			Texture.unbind();
+		tex.bind();
+		glBegin(GL_QUADS);
+		
+		{
+			glTexCoord2f(0, 1f);
+	        glVertex3f(x, y, layer);
+	 
+	        glTexCoord2f(1f, 1f);
+	        glVertex3f(x + w, y, layer);
+	 
+	        glTexCoord2f(1f, 0);
+	        glVertex3f(x + w, y + h, layer);
+	 
+	        glTexCoord2f(0, 0);
+	        glVertex3f(x, y + h, layer);
+		}
+		glEnd();
+		glAlphaFunc(GL_GREATER, 0);
+		Texture.unbind();
 	}
 }

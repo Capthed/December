@@ -38,9 +38,13 @@ public class Texture {
 	private int w, h, comp;
 	private int texID;
 	private int id;
+	private boolean loaded = false;
 
 	public Texture(String path) {
 		this.path = path;
+		
+		id = currId++;
+		ids.add(this);
 	}
 	
 	/** Loads the texture into the memory. */
@@ -77,16 +81,21 @@ public class Texture {
 		
 		unbind();
 		
-		id = currId++;
-		ids.add(this);
+		loaded = true;
 		
 		return this;
 	}
 	
+	public boolean isLoaded() {
+		return loaded;
+	}
+
 	/** Loads all instanciated textures. */
 	public static void loadAll() {
-		for (int i = 0; i < ids.size(); i++) {
-			getByID(i).load();
+		int temp = ids.size();
+		for (int i = 0; i < temp; i++) {
+			if (!getByID(i).isLoaded())
+				getByID(i).load();
 		}
 	}
 	

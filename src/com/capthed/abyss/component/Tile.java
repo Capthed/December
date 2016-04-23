@@ -84,6 +84,12 @@ public abstract class Tile extends GameObject {
 		
 		MapManager.getCurrent().add(this);
 	}
+	
+	public Tile(Vec2 pos, Vec2 size, Animation anim) {
+		super(pos, size, anim);
+		
+		MapManager.getCurrent().add(this);
+	}
 
 	/** @return The tile based position of the tile. */
 	public Vec2 getMapPos() {

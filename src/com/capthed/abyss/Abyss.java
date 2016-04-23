@@ -8,7 +8,7 @@ import com.capthed.util.Debug;
 
 public abstract class Abyss {
 
-	private static final String VERSION = "v1.0.0";
+	private static final String VERSION = "v1.0.1";
 
 	private static Thread mainGameLoop;
 	private static Game game = null;
