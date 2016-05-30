@@ -126,4 +126,8 @@ public abstract class Tile extends GameObject {
 	public static void setSavePath(String savePath) {
 		Tile.savePath = savePath;
 	}
+	
+	public String toString() {
+		return super.toString().replace("GO", "T") + " > " + "\"" + name + "\"";
+	}
 }

@@ -85,5 +85,5 @@ public abstract class GameComponent {
 		return gcs.get(var0);
 	}
 
-	public String toString() { return "GameComponent " + id; }
+	public String toString() { return "GC " + id; }
 }

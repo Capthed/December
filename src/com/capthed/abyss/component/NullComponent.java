@@ -15,5 +15,5 @@ public class NullComponent extends GameComponent {
 	
 	public void setID(int newid) { id = newid; }
 	
-	public String toString() { return "NullComponent " + id; }
+	public String toString() { return super.toString() + " > (NC)"; }
 }

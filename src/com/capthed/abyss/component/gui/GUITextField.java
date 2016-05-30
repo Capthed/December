@@ -14,10 +14,11 @@ public class GUITextField extends GameObject {
 	private boolean focus = false;
 	private GUITextFieldListener handler;
 	private int immutable;
+	private boolean writeble = true;
 	
 	public GUITextField(Text txt, Vec2 size, Texture tex, GUITextFieldListener handler) {
 		super(txt.getPos(), size, tex);
-		
+
 		this.handler = handler;
 		this.tex = tex;
 		this.txt = txt;
@@ -33,6 +34,7 @@ public class GUITextField extends GameObject {
 	public String getText() { return txt.getText(); }
 	
 	public void append(char c) {
+		if (!writeble) return;
 		String var0 = String.valueOf(c);
 		setText(getText() + var0);
 	}
@@ -82,6 +84,17 @@ public class GUITextField extends GameObject {
 		
 			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_ENTER))
 				handler.onKeyEnetered(Keys.GLFW_KEY_ENTER);
+			
+			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_ESCAPE))
+				handler.onKeyEnetered(Keys.GLFW_KEY_ESCAPE);
+			
+			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_UP)) {
+				handler.onKeyEnetered(Keys.GLFW_KEY_UP);
+			}
+			
+			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_DOWN)) {
+				handler.onKeyEnetered(Keys.GLFW_KEY_DOWN);
+			}
 			
 			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_BACKSPACE)) {
 				String temp = getText();
@@ -138,5 +151,13 @@ public class GUITextField extends GameObject {
 
 	public void setImmutable(int i) {
 		immutable = i;
+	}
+
+	public boolean isWriteble() {
+		return writeble;
+	}
+
+	public void setWriteble(boolean writeble) {
+		this.writeble = writeble;
 	}
 }

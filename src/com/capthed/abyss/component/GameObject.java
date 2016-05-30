@@ -165,4 +165,8 @@ public class GameObject extends GameComponent {
 	public void setBlend(boolean blend) {
 		this.blend = blend;
 	}
+	
+	public String toString() {
+		return super.toString() + " > " + pos.toString() + " > (GO)";
+	}
 }

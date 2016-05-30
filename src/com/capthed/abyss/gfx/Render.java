@@ -4,7 +4,6 @@ import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.component.GameObject;
 import com.capthed.abyss.font.CharElement;
 import com.capthed.abyss.math.Vec2;
-import com.capthed.util.Debug;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -60,8 +59,10 @@ public abstract class Render {
 		GameLoop.addTex();
 	}
 	
-
-	/** Renders a texture to the screen with the position and size as arguments. */
+	/** 
+	 * Renders a texture to the screen with the position and size as arguments. Unstable and should be used rarely. 
+	 * Allows blend rendering.
+	 */
 	public static void texBlended(Vec2 pos, Vec2 size, Texture tex, int layer) {
 		if (!Camera.getCurrent().checkBoundaries(pos, size)) return;
 		float x = pos.x();

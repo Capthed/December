@@ -16,7 +16,6 @@ import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Input;
 import com.capthed.abyss.map.MapManager;
 import com.capthed.abyss.math.Vec2;
-import com.capthed.abyss.util.DebugPrompt;
 import com.capthed.util.Debug;
 
 public class GameLoop implements Runnable {
@@ -33,7 +32,7 @@ public class GameLoop implements Runnable {
 	private static long msRenderPerSecond = 1000 / fps;
 	
 	// the variables used for debuging
-	private static boolean debugRender;
+	private static boolean debugRender = Debug.isDebug();
 	private static Text fpsTxt;
 	private static Text upsTxt;
 	private static Text nullTxt;
@@ -53,8 +52,6 @@ public class GameLoop implements Runnable {
 	
 	/** The main game loop. */
 	public void run() {
-		debugRender = Debug.isDebug();
-		
 		initSubsystems();
 		
 		Debug.print("", "");
@@ -143,18 +140,20 @@ public class GameLoop implements Runnable {
 		debugFont = new Font(t, .0625f, .125f, 0, 0);
 		lex = debugFont.loadLex(new String[] {"", "", "!\"#$%&'()*+,-./0", "123456789:;<=>?@", "ABCDEFGHIJKLMNOP", 
 				"QRSTUVWXYZ[\\]{_", "{abcdefghijklmno", "pqrstuvwxyz"});
+
+		float factor = 1.2f;
 		
 		Vec2 pos = new Vec2(30, Display.getHeight() - 30);
-		Vec2 size = new Vec2(16, 16);
+		Vec2 size = new Vec2(16 / factor , 16 / factor);
 		
-		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
-		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		fpsTxt = new Text(Vec2.sub(pos, new Vec2(0, 30/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		upsTxt = new Text(Vec2.sub(pos, new Vec2(0, 60/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		deltaTxt = new Text(Vec2.sub(pos, new Vec2(0, 90/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		runningTxt = new Text(Vec2.sub(pos, new Vec2(0, 120/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		compTxt = new Text(Vec2.sub(pos, new Vec2(0, 150/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		nullTxt =  new Text(Vec2.sub(pos, new Vec2(0, 180/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		texTxt = new Text(Vec2.sub(pos, new Vec2(0, 210/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
+		collTxt = new Text(Vec2.sub(pos, new Vec2(0, 240/ factor)), size, "Loading...", lex).setLayer(RenderUtil.debugLayer() - 3);
 		
 		DebugPrompt.get().initPrompt();
 	}
@@ -278,12 +277,11 @@ public class GameLoop implements Runnable {
 		return UPS;
 	}
 
-	public static void setW(int w) {
-		GameLoop.w = w;
-	}
-
-	public static void setH(int h) {
-		GameLoop.h = h;
+	public static void setDimension(Vec2 dim) {
+		w = (int) dim.x();
+		h = (int) dim.y();
+		
+		initDebug();
 	}
 	
 	// true to add, false to subtract

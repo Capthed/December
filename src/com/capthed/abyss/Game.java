@@ -27,7 +27,7 @@ public interface Game {
 	 * Called from the debug prompt.
 	 * @args input The command from the prompt. 
 	 * 
-	 * @return True if the prompt closes after ENTER is hit, flase otherwise.
+	 * @return True if the command exists, false otherwise.
 	 */
 	public boolean process(String input);
 }

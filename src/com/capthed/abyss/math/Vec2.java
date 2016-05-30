@@ -64,6 +64,13 @@ public class Vec2 {
 		return this;
 	}
 	
+	public Vec2 mult(float s) {
+		this.x *= s;
+		this.y *= s;
+		
+		return this;
+	}
+	
 	public static Vec2 mult(Vec2 v1, Vec2 v2) {
 		return new Vec2(v1.x() * v2.x(), v1.y() * v2.y());
 	}
@@ -71,6 +78,13 @@ public class Vec2 {
 	public Vec2 div(Vec2 v) {
 		this.x /= v.x();
 		this.y /= v.y();
+		
+		return this;
+	}
+	
+	public Vec2 div(float s) {
+		this.x /= s;
+		this.y /= s;
 		
 		return this;
 	}
@@ -166,5 +180,5 @@ public class Vec2 {
 			return false;
 	}
 	
-	public String toString() { return "x: " + x + ", y: " + y; }
+	public String toString() { return "(x: " + x + ", y: " + y + ")"; }
 }

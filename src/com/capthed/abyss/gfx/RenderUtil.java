@@ -13,6 +13,7 @@ public abstract class RenderUtil {
 	public static void init2DGL(int w, int h) {
 		GL.createCapabilities();
 		
+		glDisable(GL_TEXTURE_2D);
 		glEnable(GL_TEXTURE_2D);
 			
 		glMatrixMode(GL_PROJECTION);

@@ -8,6 +8,7 @@ import org.lwjgl.glfw.GLFWVidMode;
 
 import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.input.Keyboard;
+import com.capthed.abyss.math.Vec2;
 import com.capthed.util.Debug;
 
 public abstract class Display {
@@ -35,8 +36,7 @@ public abstract class Display {
 			width = w = vidmode.width();
 			height = h = vidmode.height();
 			
-			GameLoop.setW(width);
-			GameLoop.setH(height);
+			GameLoop.setDimension(new Vec2(width, height));
 		}
 		
 		glfwWindowHint(GLFW_DECORATED, decorated ? GLFW_TRUE : GLFW_FALSE);
@@ -65,7 +65,7 @@ public abstract class Display {
 				h1 = tempy;
 				
 			} catch(IndexOutOfBoundsException e) {
-				Debug.err("Javore picko imas samo jedan monitor, vidi kod za display");
+				Debug.err("No 2nd monitor found");
 				vidmodeTemp = glfwGetVideoMode(b.get(0));
 			}
 		}
@@ -80,7 +80,11 @@ public abstract class Display {
 		glfwSetInputMode(display, GLFW_CURSOR, showMouse ? GLFW_CURSOR_NORMAL: GLFW_CURSOR_HIDDEN);
 	}
 	
-	public static void fullscreen(boolean fs) { fullscreen = fs; }
+	public static void fullscreen(boolean fs) {
+		fullscreen = fs; 
+	}
+	
+	public static boolean isFullscreen() { return fullscreen; }
 	
 	public static void show() {	
 		glfwShowWindow(display);
