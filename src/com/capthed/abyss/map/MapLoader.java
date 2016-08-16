@@ -56,10 +56,12 @@ public abstract class MapLoader {
 		for (int i = 0; i < pixels.length; i++) {
 			for (int i2 = 0; i2 < colors.size(); i2++) {
 				if (pixels[i] == colors.get(i2)) {
+					
 					Vec2 pos = new Vec2((i % w) * map.getTileSize(), (i / w) * map.getTileSize());
 					Vec2 mapPos = new Vec2(i, i / w);
 					
-					Tile.getTiles().get(colors.get(i2)).build(pos, new Vec2(map.getTileSize(), map.getTileSize())).setMapPos(mapPos);
+					Tile temp = Tile.getTiles().get(colors.get(i2));
+					temp.build(pos, new Vec2(map.getTileSize(), map.getTileSize())).setName(temp.getName()).setMapPos(mapPos);;
 					
 					continue;
 				} 

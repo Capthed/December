@@ -43,7 +43,7 @@ public abstract class Display {
 		
 		display = glfwCreateWindow(w, h, title, NULL, NULL);
 		if (display == NULL)
-			Debug.print("Display not created", "");
+			Debug.print("Display not created");
 
 		keyboard = new Keyboard();
 		glfwSetKeyCallback(display, keyboard);

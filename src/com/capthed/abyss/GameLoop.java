@@ -3,6 +3,7 @@ package com.capthed.abyss;
 import java.util.HashMap;
 
 import com.capthed.abyss.afx.SoundUtil;
+import com.capthed.abyss.component.Entity;
 import com.capthed.abyss.component.GameComponent;
 import com.capthed.abyss.component.NullComponent;
 import com.capthed.abyss.font.CharElement;
@@ -44,6 +45,8 @@ public class GameLoop implements Runnable {
 	private static Font debugFont;
 	private static HashMap<Character, CharElement> lex;
 	private static boolean church = false;
+	private static Texture t;
+	private static boolean printEF = true; // if true, prints the fps, ups etc. info every frame if debug is true
 	
 	public GameLoop(int w, int h) {
 		GameLoop.w = w;
@@ -112,31 +115,30 @@ public class GameLoop implements Runnable {
 				ups = 0;
 				fpsCount = 0;
 				
-				Debug.print ("FPS: " + currFps, "");
-				fpsTxt.setText("FPS: " + currFps);
-				Debug.print ("UPS: " + currUps, "");
-				upsTxt.setText("UPS: " + currUps);
-				Debug.print(Timer.getDelta(), " delta");
-				deltaTxt.setText(Timer.getDelta() + " delta");
-				Debug.print("Running for " + Timer.getTimeRunning(), " s");		
-				runningTxt.setText("Running for " + Timer.getTimeRunning() + " s");
-				Debug.print("GameComponents created: ", GameComponent.getGcs().size() + 1 + "");
-				compTxt.setText("GameComponents created: " + (GameComponent.getGcs().size() + 1));
-				Debug.print("NullComponents: ", NullComponent.numNulls+ "");
-				nullTxt.setText("NullComponents: " + NullComponent.numNulls);
-				Debug.print("Textures active: ", texNum + "");
-				texTxt.setText("Textures active: " + texNum);
-				Debug.print("Colliders active: ", colNum + "");
-				collTxt.setText("Colliders active: " + colNum );
-				Debug.print("", "");
+				if (printEF) {
+					Debug.print ("FPS: " + currFps, "");
+					fpsTxt.setText("FPS: " + currFps);
+					Debug.print ("UPS: " + currUps, "");
+					upsTxt.setText("UPS: " + currUps);
+					Debug.print(Timer.getDelta(), " delta");
+					deltaTxt.setText(Timer.getDelta() + " delta");
+					Debug.print("Running for " + Timer.getTimeRunning(), " s");		
+					runningTxt.setText("Running for " + Timer.getTimeRunning() + " s");
+					Debug.print("GameComponents created: ", GameComponent.getGcs().size() + 1 + "");
+					compTxt.setText("GameComponents created: " + (GameComponent.getGcs().size() + 1));
+					Debug.print("NullComponents: ", NullComponent.numNulls+ "");
+					nullTxt.setText("NullComponents: " + NullComponent.numNulls);
+					Debug.print("Textures active: ", texNum + "");
+					texTxt.setText("Textures active: " + texNum);
+					Debug.print("Colliders active: ", colNum + "");
+					collTxt.setText("Colliders active: " + colNum );
+					Debug.print("", "");
+				}
 			}
 		}
 	}
 	
 	private static void initDebug() {
-		Texture t = new Texture("res/debugFont_alpha.png");
-		t.load();
-		
 		debugFont = new Font(t, .0625f, .125f, 0, 0);
 		lex = debugFont.loadLex(new String[] {"", "", "!\"#$%&'()*+,-./0", "123456789:;<=>?@", "ABCDEFGHIJKLMNOP", 
 				"QRSTUVWXYZ[\\]{_", "{abcdefghijklmno", "pqrstuvwxyz"});
@@ -234,6 +236,7 @@ public class GameLoop implements Runnable {
 		
 		SoundUtil.initOpenAL();
 		
+		initTex();
 		initDebug();
 		
 		Input.init();
@@ -241,6 +244,13 @@ public class GameLoop implements Runnable {
 		DebugPrompt.get().init();
 		
 		Abyss.getGame().init();
+	}
+
+	private static void initTex() {
+		t = new Texture("res/debugFont_alpha.png");
+		t.load();
+		
+		Entity.def.load();
 	}
 
 	/** @return True if the game loop is running. */
@@ -308,5 +318,14 @@ public class GameLoop implements Runnable {
 	
 	public static void church() {
 		church = !church;
+	}
+
+	public static boolean isPrintEF() {
+		return printEF;
+	}
+
+	/** True if you want fps, ups and other info to be printed out every second when debug is true. */
+	public static void setPrintEF(boolean printEF) {
+		GameLoop.printEF = printEF;
 	}
 }

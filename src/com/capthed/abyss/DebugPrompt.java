@@ -38,6 +38,8 @@ public class DebugPrompt {
 	
 	public void move(Vec2 delta) {
 		field.setPos(Vec2.add(field.getPos(), delta));
+		field2.setPos(Vec2.add(field2.getPos(), delta));
+		field3.setPos(Vec2.add(field3.getPos(), delta));
 	}
 	
 	public void initPrompt() {
@@ -140,6 +142,29 @@ public class DebugPrompt {
 				field2.setText("Invalid command");
 			}
 		}
+		
+		else if (first.equals("snap")) {
+			String temp = token.nextToken();
+			
+			int x = -1;
+			try {
+				x = Integer.valueOf(temp);
+			} catch(Exception e) {
+				field2.setText("Invalid command");
+				return false;
+			}
+			
+			if (x < GameComponent.getGcs().size()) {
+				GameComponent gc = GameComponent.getByID(x);
+				if (gc instanceof GameObject) 
+					((GameObject)gc).snapCamera();
+				else
+					field2.setText("Given GC is not a GO");
+			} else {
+				field2.setText("Index out of bounds");
+			}
+		}
+		
 		else if (first.equals("echo")) {
 			String temp = token.nextToken();
 			

@@ -97,6 +97,7 @@ public class GUITextField extends GameObject {
 			}
 			
 			if (Keyboard.isKeyPressed(Keys.GLFW_KEY_BACKSPACE)) {
+				if (!writeble) return;
 				String temp = getText();
 				String isus = "";
 				for (int i = 0; i < immutable ; i++)

@@ -2,13 +2,15 @@ package com.capthed.abyss.component;
 
 import com.capthed.abyss.GameLoop;
 import com.capthed.abyss.gfx.Animation;
+import com.capthed.abyss.gfx.Camera;
+import com.capthed.abyss.gfx.Display;
 import com.capthed.abyss.gfx.Render;
 import com.capthed.abyss.gfx.RenderDebug;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.math.Vec2;
 import com.capthed.abyss.physics.Collider;
 
-public class GameObject extends GameComponent {
+public abstract class GameObject extends GameComponent {
 
 	protected Vec2 pos;
 	protected Vec2 size;
@@ -18,6 +20,8 @@ public class GameObject extends GameComponent {
 	protected boolean collidable = false;
 	protected Animation animation;
 	protected boolean blend = false;
+	
+	public static Texture def = new Texture("res/default.png");
 	
 	/** Used only with Tile prototypes. */
 	public GameObject() {
@@ -32,6 +36,7 @@ public class GameObject extends GameComponent {
 		
 		this.pos = pos;
 		this.size = size;
+		this.tex = def;
 	}
 	
 	public GameObject(Vec2 pos, Vec2 size, Texture tex) {
@@ -145,7 +150,7 @@ public class GameObject extends GameComponent {
 	public Vec2 getCenter() {
 		return new Vec2(pos.x() + size.x() / 2, pos.y() + size.y() / 2);
 	}
-
+	
 	public Animation getAnimation() {
 		return animation;
 	}
@@ -164,6 +169,14 @@ public class GameObject extends GameComponent {
 	 */
 	public void setBlend(boolean blend) {
 		this.blend = blend;
+	}
+	
+	/** Adjusts the camera so that it centers the GameObject. */
+	public void snapCamera() {
+		float w = pos.x() - Display.getWidth() / 2 + size.x() / 2;
+		float h = pos.y() - Display.getHeight() / 2 + size.y() / 2;
+		
+		Camera.getCurrent().setPos(new Vec2(w, h));
 	}
 	
 	public String toString() {

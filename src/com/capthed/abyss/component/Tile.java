@@ -4,6 +4,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.HashMap;
+import java.util.Random;
 
 import com.capthed.abyss.gfx.Animation;
 import com.capthed.abyss.gfx.RenderUtil;
@@ -20,6 +21,8 @@ public abstract class Tile extends GameObject {
 	protected int color;
 	protected String name;
 	private boolean aort; // animation = 1, texture = 0
+	protected Float[] chance;
+	protected Texture[] texs;
 	
 	/** The prototype constructor. Called only once in the code. */
 	public Tile(String name, int color, Texture tex) {
@@ -28,6 +31,41 @@ public abstract class Tile extends GameObject {
 		this.name = name;
 		this.color = color;
 		this.aort = false;
+		
+		layer = -RenderUtil.layerLimit() + 5;
+		saveData();
+		
+		tiles.put(color, this);
+	}
+	
+	/** 
+	 * The prototype constructor that assigns the texture to the tile by chance. The 
+	 * chance for every Texture in the array should be positioned in the same index in 
+	 * the chance array (float 0 - 1).
+	 * 
+	 * Call <code>getRandomTex() in the build method to get a radnom texture from the array.</code>
+	 */
+	public Tile(String name, int color, Texture[] texs, Float[] chance) {
+		super();
+		this.name = name;
+		this.color = color;
+		this.aort = false;
+		this.chance = chance;
+		this.texs = texs;
+		
+		for (int i = 0; i < chance.length; i++) {
+			Random r = new Random();
+			
+			float temp = r.nextFloat();
+			temp -= (int)temp;
+			
+			if (temp <= chance[i]) {
+				this.tex = texs[i];
+				break;
+			}
+		}
+		
+		if (tex == null) tex = texs[0];
 		
 		layer = -RenderUtil.layerLimit() + 5;
 		saveData();
@@ -49,6 +87,23 @@ public abstract class Tile extends GameObject {
 		tiles.put(color, this);
 	}
 	
+	/** @return A texture from the texture array. */
+	public Texture getRandomTex() {
+		for (int i = 0; i < chance.length; i++) {
+			Random r = new Random();
+			
+			float temp = r.nextFloat();
+			temp -= (int)temp;
+			
+			if (temp <= chance[i]) {
+				this.tex = texs[i];
+				return tex;
+			}
+		}
+		
+		return texs[0];
+	}
+	
 	// saves the tile info to a file so it can be used in the editor
 	private void saveData() {
 		try {
@@ -61,8 +116,9 @@ public abstract class Tile extends GameObject {
 			
 			if (aort) {
 				oos.writeUTF(animation.getTexs()[0].getPath());
-			} else
+			} else {
 				oos.writeUTF(tex.getPath());
+			}
 			
 			oos.flush();
 			oos.close();
@@ -71,12 +127,6 @@ public abstract class Tile extends GameObject {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public Tile(Vec2 pos, Vec2 size) {
-		super(pos, size);
-		
-		MapManager.getCurrent().add(this);
 	}
 	
 	public Tile(Vec2 pos, Vec2 size, Texture tex) {
@@ -129,5 +179,10 @@ public abstract class Tile extends GameObject {
 	
 	public String toString() {
 		return super.toString().replace("GO", "T") + " > " + "\"" + name + "\"";
+	}
+
+	public Tile setName(String name2) {
+		name = name2;
+		return this;
 	}
 }

@@ -14,19 +14,13 @@ import com.capthed.util.Debug;
 
 public class Abyss {
 
-	private static final String VERSION = "v1.0.2";
+	private static final String VERSION = "v1.0.3";
 
 	private static Thread mainGameLoop;
 	private static Game game = null;
 	private static int w, h;
 	
 	public static boolean created = false;
-	
-	public static void main(String[] args) {
-		Debug.setDebug(true);
-		GameLoop.setDebugRender(false);
-		Abyss.openTestDisplay(900, 720, "Test");
-	}
 	
 	/** Creates the engine */
 	public static void create(int w, int h, Game game) {
@@ -74,10 +68,12 @@ public class Abyss {
 		game.closed();
 	}
 	
-	/** Inializes the camera and map. */
+	/** 
+	 * Inializes the camera and map. 
+	 * @return The initialized Map.
+	 */
 	public static Map fastInit() {
 		Camera cam = new Camera(new Vec2(0, 0));
-		cam.init();
 		Camera.setCurrent(cam);
 		
 		Map m = new Map("FastInit map");
@@ -130,7 +126,6 @@ public class Abyss {
 		@Override
 		public void init() {
 			Camera cam = new Camera(new Vec2(0, 0));
-			cam.init();
 			Camera.setCurrent(cam);
 			
 			Map m = new Map("Test map");

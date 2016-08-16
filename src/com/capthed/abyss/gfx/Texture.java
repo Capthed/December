@@ -27,11 +27,15 @@ import java.util.ArrayList;
 
 import org.lwjgl.BufferUtils;
 
+import com.capthed.util.Debug;
+
 public class Texture {
 	
 	private static ArrayList<Texture> ids = new ArrayList<Texture>();
 	
 	private static int currId = 0;
+	
+	private static boolean print = false;
 	
 	private ByteBuffer image;
 	private String path;
@@ -82,6 +86,8 @@ public class Texture {
 		unbind();
 		
 		loaded = true;
+		
+		if (print) Debug.print("Loaded " + path);
 		
 		return this;
 	}
@@ -163,6 +169,11 @@ public class Texture {
 	public static void unbind() {
 		glBindTexture(GL_TEXTURE_2D, 0);
 	}
+	
+	/** If true, all Textures that have loaded will send a message to the log. */
+	public static void setLoadLog(boolean b) { print = b; }
+	
+	public static boolean isLoadLog() { return print; }
 	
 	public String getPath() { return path; }
 

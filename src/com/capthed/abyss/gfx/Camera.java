@@ -18,13 +18,15 @@ public class Camera {
 		if (Abyss.created)
 			init();
 	}
-	
+
 	public Camera init() {
 		glTranslatef(-pos.x(),-pos.y(), 0);
 		
+		GameLoop.moveDebug(pos);
+		
 		return this;
 	}
-
+	
 	public void move(Vec2 delta) {
 		if (current == this)
 			glTranslatef(-delta.x(), -delta.y(), 0);
@@ -48,6 +50,10 @@ public class Camera {
 		return b;
 	}
 
+	public void setPos(Vec2 pos) {
+		move(Vec2.sub(pos, this.pos));
+	}
+	
 	public Vec2 getPos() {
 		return pos;
 	}

@@ -1,6 +1,7 @@
 package com.capthed.abyss.component;
 
 import com.capthed.abyss.gfx.Animation;
+import com.capthed.abyss.gfx.Camera;
 import com.capthed.abyss.gfx.Texture;
 import com.capthed.abyss.input.Keyboard;
 import com.capthed.abyss.input.Keys;
@@ -11,6 +12,7 @@ import com.capthed.util.Debug;
 public abstract class Entity extends GameObject {
 
 	protected Vec2 delta = new Vec2(0, 0);
+	protected boolean hasCamera = false;
 	
 	public Entity(Vec2 pos, Vec2 size) {
 		super(pos, size);
@@ -37,6 +39,8 @@ public abstract class Entity extends GameObject {
 		this.delta = delta;
 		this.pos.add(delta);
 		
+		if (hasCamera)
+			Camera.getCurrent().move(delta);
 		if (collider != null) {
 			collider.move(delta);
 		}
@@ -83,8 +87,9 @@ public abstract class Entity extends GameObject {
 			}
 		}
 		
-		if (col)
+		if (col) {
 			move(Vec2.mult(Vec2.REV, delta));
+		}
 	}
 	
 	/** 
@@ -103,12 +108,20 @@ public abstract class Entity extends GameObject {
 			tryMove(new Vec2(sX), true);
 		if (Keyboard.isKeyDown(Keys.GLFW_KEY_S))
 			tryMove(new Vec2(sY).mult(new Vec2(-1, -1)), true);
-			
 	}
 
 	/** @return The current speed. */
 	public Vec2 getDelta() {
 		return delta;
+	}
+	
+	public boolean hasCamera() {
+		return hasCamera;
+	}
+
+	/** True if the camera should follow the player. */
+	public void setCamera(boolean hasCamera) {
+		this.hasCamera = hasCamera;
 	}
 	
 	public String toString() {
