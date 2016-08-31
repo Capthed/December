@@ -9,5 +9,6 @@
 	</classpathentry>
 	<classpathentry kind="lib" path="res"/>
 	<classpathentry kind="lib" path="libs/debug.jar"/>
+	<classpathentry kind="lib" path="sound"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

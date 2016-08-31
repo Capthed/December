@@ -22,6 +22,11 @@ public class Abyss {
 	
 	public static boolean created = false;
 	
+	public static void main(String[] args) {
+		//openTestDisplay(700, 700, "isus");
+		new ExtDebugPrompt();
+	}
+	
 	/** Creates the engine */
 	public static void create(int w, int h, Game game) {
 		Abyss.game = game;

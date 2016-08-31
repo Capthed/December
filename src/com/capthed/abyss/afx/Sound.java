@@ -45,19 +45,19 @@ public class Sound {
 	FloatBuffer listenerOri = (FloatBuffer) BufferUtils.createFloatBuffer(6)
 			.put(new float[] { 0.0f, 0.0f, -1.0f, 0.0f, 1.0f, 0.0f }).rewind();
 	
-	/** @param path The location of the wav file */
+	/** @param path The location of the wav file MUST be in the sound fodler.*/
 	public Sound(String path) {
-		this.path = path;
+		this.path = "sound/" + path;
 	}
 	
 	/**
 	 * Wav compression is recomended for large files.
 	 * 
-	 * @param path The location of the wav file 
+	 * @param path The location of the wav file MUST be in the sound folder.
 	 * @param length Duration of the file in seconds.
 	 */
 	public Sound(String path, float length) {
-		this.path = path;
+		this.path = "sound/" + path;
 		this.length = length;
 	}
 
